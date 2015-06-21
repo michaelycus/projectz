@@ -1,0 +1,48 @@
+img.user-list  {
+  border-radius: 45px;
+  display: inline-block;
+  height: 35px;
+  margin: -2px 0 0 0;
+  width: 35px;
+}
+
+.stat-panel > .video-item{
+	height: 100%;
+	background: green;
+}
+
+.video-detail-image {
+  padding: 6px;
+  display: inline-block;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+.video-detail-image img {
+  display: block;
+  max-width: 100%;
+  border-radius: 5px;
+}
+img.thumbnail_video {
+   width: 120px;
+}
+img.detail_video_img {
+   width: 150px;
+}
+img.logo_videos {
+   width: 100px;
+}
+img.official_logo {
+   width: 200px;
+}
+img.official_icon {
+   width: 40px;
+}
+
+.btn-none {
+    background:none;
+    border:none;
+    box-shadow:none;
+    text-decoration: none;
+    color: #aaa;
+    padding: 0px;
+}
