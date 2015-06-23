@@ -1,17 +1,11 @@
 <?php
 
-Route::get('/', function () {
-    return redirect('auth/login');
-});
-
-Route::get('home', 'HomeController@index');
-
 Route::resource('comments', 'CommentController');
 Route::resource('articles', 'ArticleController');
 Route::resource('videos', 'VideoController');
+Route::resource('profiles', 'ProfileController');
 
 Route::get('dashboard', 'DashboardController@index');
-
 
 Route::get('logout', function()
 {

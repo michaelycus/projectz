@@ -20,7 +20,6 @@ use App\Http\Requests\ArticleRequest;
  */
 class ArticleController extends Controller
 {
-
 	/**
 	 * Display a listing of the resource.
 	 *
