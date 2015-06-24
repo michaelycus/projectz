@@ -58,8 +58,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function hasPermission($permission)
     {
         foreach($this->permissions as $p){
-            if ($p->permission == $permission){
+            if ($p->type == $permission){
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public function getPermissionByType($type)
+    {
+        foreach($this->permissions as $p){
+            if (substr( $p->type, 0, 5 ) === $type){
+                return $p->type;
             }
         }
         return false;
@@ -72,7 +82,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         foreach($request->all() as $key => $r){
             if (substr( $key, 0, 2 ) === "p_"){
                 DB::table('permissions')->insert(
-                    ['user_id' => $user->id, 'type' => $key]
+                    ['user_id' => $user->id, 'type' => $r]
                 );
             }
         }

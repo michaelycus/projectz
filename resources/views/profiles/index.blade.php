@@ -14,6 +14,7 @@
                     <th>#</th>
                     <th>Nome</th>
                     <th>E-mail</th>
+                    <th>Admin</th>
                     <th>Vídeos</th>
                     <th>Artigos</th>
                     <th>Posts</th>
@@ -30,17 +31,40 @@
                         &nbsp;&nbsp;<a href="#" title="">{{ $user->name }}</a>
                     </td>
                     <td>{{ $user->email }}</td>
-                    <td>{!! $user->hasPermission(PERMISSION_VIDEO_EXECUTE) ? PERMISSION_YES : PERMISSION_NO !!}
-                        {!! $user->hasPermission(PERMISSION_VIDEO_CREATE)  ? PERMISSION_YES : PERMISSION_NO !!}
-                        {!! $user->hasPermission(PERMISSION_VIDEO_MANAGE)  ? PERMISSION_YES : PERMISSION_NO !!}
+                    <td>{!! $user->hasPermission(PERMISSION_SYSTEM_MANAGER) ? PERMISSION_YES : PERMISSION_NO !!}</td>
+
+                    <td>
+                        @if ($user->hasPermission(PERMISSION_VIDEO_MANAGE))
+                        Gerenciar
+                        @elseif($user->hasPermission(PERMISSION_VIDEO_CREATE))
+                        Criar
+                        @elseif($user->hasPermission(PERMISSION_VIDEO_EXECUTE))
+                        Executar
+                        @else
+                        Sem permissão
+                        @endif
                     </td>
-                    <td>{!! $user->hasPermission(PERMISSION_ARTICLE_EXECUTE) ? PERMISSION_YES : PERMISSION_NO !!}
-                        {!! $user->hasPermission(PERMISSION_ARTICLE_CREATE)  ? PERMISSION_YES : PERMISSION_NO !!}
-                        {!! $user->hasPermission(PERMISSION_ARTICLE_MANAGE)  ? PERMISSION_YES : PERMISSION_NO !!}
+                    <td>
+                        @if ($user->hasPermission(PERMISSION_ARTICLE_MANAGE))
+                        Gerenciar
+                        @elseif($user->hasPermission(PERMISSION_ARTICLE_CREATE))
+                        Criar
+                        @elseif($user->hasPermission(PERMISSION_ARTICLE_EXECUTE))
+                        Executar
+                        @else
+                        Sem permissão
+                        @endif
                     </td>
-                    <td>{!! $user->hasPermission(PERMISSION_POST_EXECUTE) ? PERMISSION_YES : PERMISSION_NO !!}
-                        {!! $user->hasPermission(PERMISSION_POST_CREATE)  ? PERMISSION_YES : PERMISSION_NO !!}
-                        {!! $user->hasPermission(PERMISSION_POST_MANAGE)  ? PERMISSION_YES : PERMISSION_NO !!}
+                    <td>
+                        @if ($user->hasPermission(PERMISSION_POST_MANAGE))
+                        Gerenciar
+                        @elseif($user->hasPermission(PERMISSION_POST_CREATE))
+                        Criar
+                        @elseif($user->hasPermission(PERMISSION_POST_EXECUTE))
+                        Executar
+                        @else
+                        Sem permissão
+                        @endif
                     </td>
                     <th><a href="{{ url('profiles/'.$user->id.'/edit') }}">Editar permissões</a></th>
                 </tr>
