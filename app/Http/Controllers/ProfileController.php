@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkPermission:p_system_manager');
+    }
+
     /**
      * Display a listing of the resource.
      *

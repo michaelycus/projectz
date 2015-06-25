@@ -2,7 +2,7 @@
 class Helpers {
 
 	/*
-	| Returns the an estimated time elapsed 
+	| Returns the an estimated time elapsed - NOT WORKING
 	*/
     public static function time_elapsed_string($datetime, $full = false) 
 	{
@@ -10,7 +10,7 @@ class Helpers {
 	    $ago = new DateTime($datetime);
 	    $diff = $now->diff($ago);
 
-	    $diff->w = floor($diff->d / 7);
+	    //$diff->w = floor($diff->d / 7);
 	    $diff->d -= $diff->w * 7;
 
 	    $string = array(
