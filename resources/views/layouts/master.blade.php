@@ -64,11 +64,11 @@
 
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-										<img src="//graph.facebook.com/{{ Auth::user()->facebook_user_id }}/picture">
+										<img src="{{ Auth::user()->getAvatar() }}">
 										<span>{{ Auth::user()->first_name }}</span>
 									</a>
-									<ul class="dropdown-menu"> 
-										<!-- <li><a href="">Profile</a></li> -->										
+									<ul class="dropdown-menu">
+										<li><a href="{{ url('profiles') }}"><i class="dropdown-icon fa fa-users"></i>&nbsp;&nbsp;Gerenciar usuários</a></li>
 										<li class="divider"></li>
 										<li><a href="logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
 									</ul>
@@ -92,7 +92,7 @@
 						
 						<div class="text-bg"><span class="text-slim">Olá,</span> <span class="text-semibold">{{ Auth::user()->first_name }}</span></div>
 
-						<img src="//graph.facebook.com/{{ Auth::user()->facebook_user_id }}/picture">
+						<img src="{{ Auth::user()->getAvatar() }}">
 						<div class="btn-group">						
 							<a href="" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
 							<!-- <a rhef="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a> -->
@@ -139,7 +139,7 @@
 
 		<div id="content-wrapper">
 			@include('flash::message')			
-			
+
 			@yield('content')
 
 		</div> <!-- / #content-wrapper -->

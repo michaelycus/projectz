@@ -46,12 +46,12 @@
 				</div>
 
 				<div class="form-group w-icon">
-					<input type="text" name="signin_username" id="username_id" class="form-control input-lg" placeholder="Email">
+					<input type="text" name="email" id="email" class="form-control input-lg" placeholder="Email">
 					<span class="fa fa-user signin-form-icon"></span>
 				</div>
 
 				<div class="form-group w-icon">
-					<input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password">
+					<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
 					<span class="fa fa-lock signin-form-icon"></span>
 				</div>
 
@@ -60,6 +60,8 @@
 					{{--<a href="#" class="forgot-password" id="forgot-password-link">Forgot your password?</a>--}}
 				</div>
 			</form>
+
+			@include('errors.list')
 			<!-- / Form -->
 
 			<!-- "Sign In with" block -->

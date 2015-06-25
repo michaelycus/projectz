@@ -1,0 +1,2 @@
+25/06 - Colocar as permissões certas nos controlles e também nas views.
+

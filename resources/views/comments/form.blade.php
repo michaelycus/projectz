@@ -1,4 +1,4 @@
-<div class="col-md-6">	
+<div class="col-md-6">
 
 	<div class="panel widget-comments">
 		<div class="panel-heading">
@@ -34,12 +34,10 @@
 						{{ $comment->body }}
 					</div>
 					<div class="comment-actions">
-						<!-- <a href="#" onClick="edit_comment( $comment->id )"><i class="fa fa-pencil"></i>Edit</a> -->
-						<!-- <a href="javascript:delete_comment('{{ $comment->id }}');"><i class="fa fa-times"></i>Remove</a> -->
 						{!! Form::open(array('class' => 'delete', 'method' => 'DELETE', 'route' => array('comments.destroy', $comment->id))) !!}            
-				            {!! Html::decode(Form::button('<i class="fa fa-times"></i>Remove</a>', array('class' => 'btn btn-xs btn-none', 'type' => 'submit'))) !!}            
+				            {!! Html::decode(Form::button('<i class="fa fa-times"></i>Remover</a>', array('class' => 'btn btn-xs btn-none', 'type' => 'submit'))) !!}
 				        {!! Form::close() !!}
-						<span class="pull-right"> {!! Helpers::time_elapsed_string($comment->created_at) !!}</span>
+						<span class="pull-right"> {{-- Helpers::time_elapsed_string($comment->created_at) --}}</span>
 					</div>
 				</div> <!-- / .comment-body -->
 			</div>
@@ -49,9 +47,7 @@
 	</div> <!-- / .panel -->
 </div>
 
-
-<script>	
-
+<script>
 	function delete_comment(id) {
 	    if (confirm('Delete this user?')) {
 	        $.ajax({
@@ -65,37 +61,6 @@
 	        });
 	    }
 	}
-
-	// not working
-	function edit_comment(comment_id)
-	{
-		var url = '<?php echo URL::to('/'); ?>' + '/comments/' + comment_id + '/edit';
-		$.get(url, function(data) {
-           var content = '<textarea class="form-control expanding-input-target" rows="3" cols="50">'+data+
-           '</textarea><div class="comment-actions"><a id="a_'+comment_id+'" class="btn btn-primary btn-xs pull-right" data-token="{{ csrf_token() }}" onClick="store_comment('+comment_id+
-           	')">Comentar</a> <a class="btn btn-default btn-xs pull-right" onClick="cancel_edit('+comment_id+')">Cancelar</a></div><br/>';
-           $("#comment_"+comment_id).html(content);
-	    });	
-	}
-
-	function store_comment(comment_id)
-	{
-		var article = 'ok';
-
-		alert('okkkey');
-		
-		$.ajax({
-		    type: "POST",
-		    url: '<?php echo URL::to('/'); ?>' + '/comments/'+comment_id,
-		    data: article,
-		    dataType: 'json',
-		    contentType: 'application/json',
-		    success: function(data){
-		        alert(data);
-		    }
-		});		 	
-	}
-
 
 	function cancel_edit(comment_id)
 	{
