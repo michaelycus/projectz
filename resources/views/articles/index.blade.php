@@ -8,11 +8,13 @@
 <div class="page-header">	
 	<h1><span class="text-light-gray">Artigos /</span> Em edição</h1>
 
+    @if (Auth::user->hasPermission(PERMISSION_ARTICLE_CREATE))
 	<div class="pull-right col-xs-12 col-sm-auto">
 		<a href="articles/create" class="btn btn-primary btn-labeled" style="width: 100%;">
 			<span class="btn-label icon fa fa-plus"></span>Criar artigo
 		</a>
 	</div>
+	@endif
 
 </div> <!-- / .page-header -->
 

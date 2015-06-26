@@ -107,22 +107,22 @@ class PermissionTableSeeder extends Seeder
     {
         DB::table('permissions')->insert([
             'user_id' => '1',
-            'type'    => 'p_video_execute'
+            'type'    => 'p_sys_1'
         ]);
 
         DB::table('permissions')->insert([
             'user_id' => '1',
-            'type'    => 'p_video_create'
+            'type'    => 'p_vid_2'
         ]);
 
         DB::table('permissions')->insert([
             'user_id' => '1',
-            'type'    => 'p_article_execute'
+            'type'    => 'p_art_1'
         ]);
 
         DB::table('permissions')->insert([
             'user_id' => '1',
-            'type'    => 'p_post_execute'
+            'type'    => 'p_pos_1'
         ]);
     }
 }

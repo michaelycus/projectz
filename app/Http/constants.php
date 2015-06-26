@@ -17,21 +17,21 @@ define('VIDEO_STATUS_SCHEDULED',  		'4');
 define('VIDEO_STATUS_PUBLISHED',  		'5');
 
 define('PERMISSION_TYPE_VIDEO',	        'p_vid');
-define('PERMISSION_VIDEO_EXECUTE',	    'p_video_execute');
-define('PERMISSION_VIDEO_CREATE',	    'p_video_create');
-define('PERMISSION_VIDEO_MANAGE',	    'p_video_manage');
+define('PERMISSION_VIDEO_EXECUTE',	    'p_vid_1');
+define('PERMISSION_VIDEO_CREATE',	    'p_vid_2');
+define('PERMISSION_VIDEO_MANAGE',	    'p_vid_3');
 
 define('PERMISSION_TYPE_ARTICLE',       'p_art');
-define('PERMISSION_ARTICLE_EXECUTE',	'p_article_execute');
-define('PERMISSION_ARTICLE_CREATE', 	'p_article_create');
-define('PERMISSION_ARTICLE_MANAGE',	    'p_article_manage');
+define('PERMISSION_ARTICLE_EXECUTE',	'p_art_1');
+define('PERMISSION_ARTICLE_CREATE', 	'p_art_2');
+define('PERMISSION_ARTICLE_MANAGE',	    'p_art_3');
 
 define('PERMISSION_TYPE_POST',	        'p_pos');
-define('PERMISSION_POST_EXECUTE',	    'p_post_execute');
-define('PERMISSION_POST_CREATE',	    'p_post_create');
-define('PERMISSION_POST_MANAGE',	    'p_post_manage');
+define('PERMISSION_POST_EXECUTE',	    'p_pos_1');
+define('PERMISSION_POST_CREATE',	    'p_pos_2');
+define('PERMISSION_POST_MANAGE',	    'p_pos_3');
 
-define('PERMISSION_SYSTEM_MANAGER',     'p_system_manager');
+define('PERMISSION_SYSTEM_MANAGER',     'p_sys_1');
 
 define('PERMISSION_YES', '<i class="fa fa-check text-success"></i>');
 define('PERMISSION_NO', '<i class="fa fa-times text-danger"></i>');

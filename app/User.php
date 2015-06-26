@@ -58,8 +58,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function hasPermission($permission)
     {
         foreach($this->permissions as $p){
-            if ($p->type == $permission){
-                return true;
+            if (substr( $p->type, 0, 6 ) === substr( $permission, 0, 6 )){
+                if ( intval(substr( $p->type, 6, 1 )) >= intval(substr( $permission, 6, 1 ))) {
+                    return true;
+                }
             }
         }
         return false;
