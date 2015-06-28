@@ -2,23 +2,26 @@
 
 @section('content')
 
-<!-- Em transcrição -->
+
 
 <div class="page-header">	
 	<h1><span class="text-light-gray">Vídeos / </span>Em transcrição</h1>
 
+    @if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
 	<div class="pull-right col-xs-12 col-sm-auto">
 		<a href="videos/create" class="btn btn-primary btn-labeled" style="width: 100%;">
 			<span class="btn-label icon fa fa-plus"></span>Criar video
 		</a>
 	</div>
-</div> <!-- / .page-header -->
+	@endif
+</div>
 
+
+<!-- Em transcrição -->
+<div class="row">
 @foreach ($videos as $video)
 @if ($video->status == VIDEO_STATUS_TRANSCRIPTION)
-
-<div class="row" data-panel-id="{{ $video->id }}">
-	<div class="col-md-12">
+	<div class="col-lg-6 col-md-12 col-xs-12">
 		<div class="panel colourable">
 			<div class="panel-heading">
 				<span class="panel-title"><a href="{!! URL::to('videos', $video->id) !!}">{{ $video->title }}</a></span>				
@@ -32,7 +35,7 @@
 					{!! '<img src="' . $video->thumbnail . '" class="thumbnail_video">' !!}
 				</div>					
 
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<ul class="list-group no-margin">
 						<!-- Without left and right borders, extra small horizontal padding -->
 						<li class="list-group-item no-border padding-xs-hr">
@@ -49,21 +52,23 @@
 					</ul>					
 				</div>	
 
-				<div class="col-md-4 text-center">					
-					<p><a href="{{ $video->original_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo original</a></p>
-					<p><a href="{{ $video->working_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>					
+				<div class="col-md-3 text-center">
+					<p><a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo</a></p>
+					<p><a href="{{ $video->project_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>
 				</div>				
 
-				<div class="col-md-1 text-center text-lg">					
+				<div class="col-md-1 text-center text-lg">
+				    @if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
 					<a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+					@endif
 				</div>
 
 			</div>
 		</div>
 	</div>
-</div>
 @endif
-@endforeach 
+@endforeach
+ </div>
 
 <!-- Em sincronização -->
 
@@ -107,12 +112,14 @@
 				</div>	
 
 				<div class="col-md-4 text-center">					
-					<p><a href="{{ $video->original_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo original</a></p>
-					<p><a href="{{ $video->working_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>					
+					<p><a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo</a></p>
+                    <p><a href="{{ $video->project_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>
 				</div>				
 
-				<div class="col-md-1 text-center text-lg">					
-					<a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+				<div class="col-md-1 text-center text-lg">
+					@if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
+                    <a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                    @endif
 				</div>
 
 			</div>
@@ -164,12 +171,14 @@
 				</div>	
 
 				<div class="col-md-4 text-center">					
-					<p><a href="{{ $video->original_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo original</a></p>
-					<p><a href="{{ $video->working_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>					
+					<p><a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo</a></p>
+                    <p><a href="{{ $video->project_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>
 				</div>				
 
 				<div class="col-md-1 text-center text-lg">					
-					<a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+					@if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
+                    <a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                    @endif
 				</div>
 
 			</div>
@@ -221,12 +230,14 @@
 				</div>	
 
 				<div class="col-md-4 text-center">					
-					<p><a href="{{ $video->original_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo original</a></p>
-					<p><a href="{{ $video->working_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>					
+					<p><a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo</a></p>
+                    <p><a href="{{ $video->project_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>
 				</div>				
 
 				<div class="col-md-1 text-center text-lg">					
-					<a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+					@if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
+                    <a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                    @endif
 				</div>
 
 			</div>
@@ -278,13 +289,15 @@
 				</div>	
 
 				<div class="col-md-4 text-center">					
-					<p><a href="{{ $video->original_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo original</a></p>
-					<p><a href="{{ $video->working_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>					
+					<p><a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo</a></p>
+   					<p><a href="{{ $video->project_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>
 				</div>				
 
 				<div class="col-md-1 text-center text-lg">					
-					<a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
-				</div>
+                    @if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
+                    <a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                    @endif
+                </div>
 
 			</div>
 		</div>
@@ -335,13 +348,15 @@
 				</div>	
 
 				<div class="col-md-4 text-center">					
-					<p><a href="{{ $video->original_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo original</a></p>
-					<p><a href="{{ $video->working_link }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>					
+					<p><a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger"><span class="btn-label icon fa fa-youtube-play"></span>Vídeo</a></p>
+                    <p><a href="{{ $video->project_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-warning"><span class="btn-label icon fa fa-rocket"></span>Traduzir</a></p>
 				</div>				
 
 				<div class="col-md-1 text-center text-lg">					
-					<a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
-				</div>
+                    @if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
+                                          <a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                                          @endif
+                                      </div>
 
 			</div>
 		</div>

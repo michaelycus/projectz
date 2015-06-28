@@ -3,7 +3,9 @@
 Route::resource('comments', 'CommentController');
 Route::resource('articles', 'ArticleController');
 Route::resource('videos', 'VideoController');
+Route::resource('posts', 'PostController');
 Route::resource('profiles', 'ProfileController');
+
 
 Route::get('dashboard', 'DashboardController@index');
 

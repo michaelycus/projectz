@@ -1,16 +1,20 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
-use App\Video;
 use App\User;
+use App\Video;
 use App\Comment;
-
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
 
 class VideoController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('checkPermission:'.PERMISSION_VIDEO_EXECUTE,['except' => ['index']]);
+        $this->middleware('checkPermission:'.PERMISSION_VIDEO_CREATE,['only' => ['create','store','edit','update']]);
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -105,5 +109,4 @@ class VideoController extends Controller {
 		
 		return redirect('videos');
 	}
-
 }

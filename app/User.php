@@ -63,6 +63,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                     return true;
                 }
             }
+            if ($p->type == PERMISSION_SYSTEM_MANAGER){
+                return true;
+            }
         }
         return false;
     }
@@ -88,5 +91,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 );
             }
         }
+    }
+
+    public function isOwner($user_id)
+    {
+        return ($this->id == $user_id) || $this->isAdmin();
+    }
+
+    public function isVideoManager()
+    {
+        return $this->isAdmin() || $this->hasPermission(PERMISSION_VIDEO_MANAGE);
+    }
+
+    public function isArticleManager()
+    {
+        return $this->isAdmin() || $this->hasPermission(PERMISSION_ARTICLE_MANAGE);
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasPermission(PERMISSION_SYSTEM_MANAGER);
     }
 }

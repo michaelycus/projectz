@@ -127,15 +127,14 @@ class PermissionTableSeeder extends Seeder
     }
 }
 
-
-
 class VideoTableSeeder extends Seeder {
 
     public function run()
     {
         $video = Video::create(array(
-            'title' => 'Chomsky & Krauss: An Origins Project Dialogue ',
-            'source_url' => 'https://www.youtube.com/watch?v=Ml1G919Bts0',
+            'title' => 'Freeman Dyson on the Global Warming Hysteria April, 2015',
+            'thumbnail' => 'https://i.ytimg.com/vi/BiKfWdXXfIs/hqdefault.jpg',
+            'source_url' => 'https://www.youtube.com/watch?v=BiKfWdXXfIs',
             'status' => 1
         ));
     }

@@ -33,12 +33,14 @@
 					<div id="comment_{{ $comment->id }}" class="comment-text">
 						{{ $comment->body }}
 					</div>
+					@if(Auth::user()->isOwner($comment->user_id))
 					<div class="comment-actions">
 						{!! Form::open(array('class' => 'delete', 'method' => 'DELETE', 'route' => array('comments.destroy', $comment->id))) !!}            
 				            {!! Html::decode(Form::button('<i class="fa fa-times"></i>Remover</a>', array('class' => 'btn btn-xs btn-none', 'type' => 'submit'))) !!}
 				        {!! Form::close() !!}
 						<span class="pull-right"> {{-- Helpers::time_elapsed_string($comment->created_at) --}}</span>
 					</div>
+					@endif
 				</div> <!-- / .comment-body -->
 			</div>
 			@endforeach

@@ -88,10 +88,12 @@
 			</div>
 
 			<div class="panel-footer">
+				@if (Auth::user()->isOwner($article->user_id)  || Auth::user()->isArticleManager())
 				<a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i>Editar</a>
-				{!! Form::open(array('class' => 'pull-right delete', 'method' => 'DELETE', 'route' => array('articles.destroy', $article->id))) !!}            
-		            {!! Html::decode(Form::button('<i class="fa fa-trash-o"></i> Remover', array('class' => 'btn btn-xs btn-danger', 'type' => 'submit'))) !!}
-		        {!! Form::close() !!}
+                {!! Form::open(array('class' => 'pull-right delete', 'method' => 'DELETE', 'route' => array('articles.destroy', $article->id))) !!}
+                    {!! Html::decode(Form::button('<i class="fa fa-trash-o"></i> Remover', array('class' => 'btn btn-xs btn-danger', 'type' => 'submit'))) !!}
+                {!! Form::close() !!}
+		        @endif
 			</div>
 		</div>
 	</div>

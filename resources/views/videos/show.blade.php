@@ -98,6 +98,7 @@
 					}
 					?>
 
+                    @if(Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
 					<div class="col-xs-4">
 						@if ($back != '')
 						{!! Form::model($video, ['method' => 'PATCH', 'action' => ['VideoController@update', $video->id]]) !!}				
@@ -123,14 +124,17 @@
 						{!! Form::close() !!}						
 						@endif
 					</div>
+					@endif
 				</div>	
 			</div>
 
 			<div class="panel-footer">
+				@if (Auth::user()->isOwner($video->user_id)  || Auth::user()->isVideoManager())
 				<a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i>Editar</a>
-				{!! Form::open(array('class' => 'pull-right delete', 'method' => 'DELETE', 'route' => array('videos.destroy', $video->id))) !!}            
-		            {!! Html::decode(Form::button('<i class="fa fa-trash-o"></i> Remover', array('class' => 'btn btn-xs btn-danger', 'type' => 'submit'))) !!}            
-		        {!! Form::close() !!}
+                {!! Form::open(array('class' => 'pull-right delete', 'method' => 'DELETE', 'route' => array('videos.destroy', $video->id))) !!}
+                    {!! Html::decode(Form::button('<i class="fa fa-trash-o"></i> Remover', array('class' => 'btn btn-xs btn-danger', 'type' => 'submit'))) !!}
+                {!! Form::close() !!}
+		        @endif
 			</div>
 		</div>
 	</div>

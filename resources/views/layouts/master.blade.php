@@ -128,6 +128,12 @@
 						<a href="{{-- URL::route('home) --}}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
 					</li> 
 					-->
+					<li>
+                        <a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-facebook"></i><span class="mm-text">Posts</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ URL::to('posts') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Todos</span></a>
+                    </li>
 					
 				</ul> <!-- / .navigation -->
 
@@ -154,6 +160,8 @@
 <!--[if lte IE 9]>
 	<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
 <![endif]-->
+
+    <script src="http://cdn.embed.ly/jquery.embedly-3.1.1.min.js" type="text/javascript"></script>
 
 
 

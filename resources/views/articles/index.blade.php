@@ -8,7 +8,7 @@
 <div class="page-header">	
 	<h1><span class="text-light-gray">Artigos /</span> Em edição</h1>
 
-    @if (Auth::user->hasPermission(PERMISSION_ARTICLE_CREATE))
+    @if (Auth::user()->hasPermission(PERMISSION_ARTICLE_CREATE))
 	<div class="pull-right col-xs-12 col-sm-auto">
 		<a href="articles/create" class="btn btn-primary btn-labeled" style="width: 100%;">
 			<span class="btn-label icon fa fa-plus"></span>Criar artigo
@@ -26,8 +26,7 @@
 				<tr>
 					<th>Criado por</th>
 					<th>Links</th>
-					<th>Título</th>						
-					<!-- <th style="text-align: right">Revisado por</th> -->
+					<th>Título</th>
 					<th style="text-align: right"></th>						
 				</tr>
 			</thead>
@@ -50,11 +49,13 @@
 
 					<td>
 						<span class="pull-right">
-							<a href="#" onclick="changeArticleId({{ $article->id }})" ng-click="reload({{ $article->id }})" data-toggle="modal" data-target="#commentModal">
+							<a href="{{ URL::to('articles/' . $article->id . '') }}">
 								<small>{{ count($article->comments) }} <span class="btn-label icon fa fa-comment"></small>
 							</a>
 							&nbsp;&nbsp;
+							@if (Auth::user()->isArticleManager())
 							<a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+							@endif
 						</span>
 					</td>
 				</tr>
@@ -103,11 +104,13 @@
 
 					<td>
 						<span class="pull-right">
-							<a href="#" onclick="changeArticleId({{ $article->id }})" ng-click="reload({{ $article->id }})" data-toggle="modal" data-target="#commentModal">
+							<a href="{{ URL::to('articles/' . $article->id . '') }}">
 								<small>{{ count($article->comments) }} <span class="btn-label icon fa fa-comment"></small>
 							</a>
 							&nbsp;&nbsp;
-							<a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+							@if (Auth::user()->isArticleManager())
+                            <a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                            @endif
 						</span>
 					</td>
 				</tr>
@@ -156,11 +159,13 @@
 
 					<td>
 						<span class="pull-right">
-							<a href="#" onclick="changeArticleId({{ $article->id }})" ng-click="reload({{ $article->id }})" data-toggle="modal" data-target="#commentModal">
+							<a href="{{ URL::to('articles/' . $article->id . '') }}">
 								<small>{{ count($article->comments) }} <span class="btn-label icon fa fa-comment"></small>
 							</a>
 							&nbsp;&nbsp;
-							<a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+							@if (Auth::user()->isArticleManager())
+                            <a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                            @endif
 						</span>
 					</td>
 				</tr>
@@ -209,11 +214,13 @@
 
 					<td>
 						<span class="pull-right">
-							<a href="#" onclick="changeArticleId({{ $article->id }})" ng-click="reload({{ $article->id }})" data-toggle="modal" data-target="#commentModal">
+							<a href="{{ URL::to('articles/' . $article->id . '') }}">
 								<small>{{ count($article->comments) }} <span class="btn-label icon fa fa-comment"></small>
 							</a>
 							&nbsp;&nbsp;
-							<a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+							@if (Auth::user()->isArticleManager())
+                            <a class="btn btn-xs btn-primary" href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                            @endif
 						</span>
 					</td>
 				</tr>							
@@ -224,84 +231,4 @@
 	</div>
 </div>
 
-
-
-@stop
-
-@section('script')
-
-<script type="text/javascript">
-
- 	function changeArticleId(id)
- 	{
- 		article_id = id;
- 	}	
-
- 	function refresh_articles()
-	{
-		$('div.tasks-panel').empty();
-
-		$('div.tasks-panel').each(function(index, value){
-		    var article_id = $(this).attr('id');
-		    //var current_status = ;
-		    var url = '<?php echo URL::to('/'); ?>' + '/articles/tasks/' + article_id;
-			var div = $(this);
-
-		    $.get(url, function(data) {	                   	    	
-	           div.append(data);
-	        });	 
-		});
-	}
-
-	function setAdjust(article_id)
-	{		
-		var url = '<?php echo URL::to('/'); ?>' + '/articles/adjust/' + article_id;
-		$.get(url, function(data) {
-           refresh_articles();
-	    });			
-	}
-
-	function setApproved(article_id)
-	{		
-		var url = '<?php echo URL::to('/'); ?>' + '/articles/approved/' + article_id;
-		$.get(url, function(data) {
-           refresh_articles();
-	    });			
-	}
-
-	function remove_article(article_id)
-	{
-		bootbox.confirm({
-			message: "Remover esse artigo?",
-			callback: function(result) {
-				if (result)
-				{
-					var url = '<?php echo URL::to('/'); ?>' + '/articles/remove/' + article_id;
-					$.get(url, function(data) {					
-					   $.growl.notice({ title: "Ok!", message: "The video was removed!" });
-			           $("tr[data-row-id='"+article_id+"']").slideUp("slow");
-				    });	
-				}							
-			},
-			className: "bootbox-sm"
-		});
-	}
-
-	init.push(function () {		
-
-		$("#leave-comment-form").expandingInput({
-			target: 'textarea',
-			hidden_content: '> div',
-			placeholder: 'Escreva um comentário',
-			onAfterExpand: function () {
-				$('#leave-comment-form textarea').attr('rows', '3').autosize();
-			}
-		});
-	})	
-
-	refresh_articles();
-		
-	window.PixelAdmin.start(init);
-</script>
-			
-@stop
+@endsection

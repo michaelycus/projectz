@@ -9,11 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 
 
-// TODO - Utilizar scopes: https://laracasts.com/series/laravel-5-fundamentals/episodes/11
-
-// TODO - Implementar update: https://laracasts.com/series/laravel-5-fundamentals/episodes/13
-
-
 /**
  * Class ArticleController
  * @package App\Http\Controllers
@@ -22,7 +17,8 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('checkPermission:p_article-index');
+        $this->middleware('checkPermission:'.PERMISSION_ARTICLE_EXECUTE,['except' => ['index']]);
+        $this->middleware('checkPermission:'.PERMISSION_ARTICLE_CREATE,['only' => ['create','store','edit','update']]);
     }
 
 	/**

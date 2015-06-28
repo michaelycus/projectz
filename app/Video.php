@@ -72,7 +72,6 @@ class Video extends Model {
     	
     }
 
-
     private function convertISO8601DurationToSeconds($iso8601DurationStr)
     {
         $interval = new \DateInterval($iso8601DurationStr);
@@ -89,5 +88,4 @@ class Video extends Model {
 
         return (int) $seconds;
     }
-
 }

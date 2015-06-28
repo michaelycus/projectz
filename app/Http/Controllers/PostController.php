@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Http\Requests\ProfileRequest;
+use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 
-class ProfileController extends Controller
+class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkPermission:'.PERMISSION_SYSTEM_MANAGER);
+        $this->middleware('checkPermission:'.PERMISSION_POST_EXECUTE,['except' => ['index']]);
+        $this->middleware('checkPermission:'.PERMISSION_POST_CREATE,['only' => ['create','store','edit','update']]);
     }
 
     /**
@@ -22,9 +23,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $posts = Post::latest()->get();
 
-        return view('profiles.index', compact('users'));
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -34,7 +35,9 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        $users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+
+        return view('posts.create', compact('users'));
     }
 
     /**
@@ -42,9 +45,13 @@ class ProfileController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(PostRequest $request)
     {
-        //
+        Post::create($request->all());
+
+        flash()->success('O post foi criado!')->important();
+
+        return redirect('posts');
     }
 
     /**
@@ -64,9 +71,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('profiles.edit', compact('user'));
+        //
     }
 
     /**
@@ -75,11 +82,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(User $user, ProfileRequest $request)
+    public function update($id)
     {
-        $user->setPermissions($user, $request);
-
-        return redirect('profiles');
+        //
     }
 
     /**
