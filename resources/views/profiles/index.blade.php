@@ -3,11 +3,12 @@
 
 @section('content')
 
+<div class="page-header">
+	<h1><span class="text-light-gray">Usuários cadastrados</span></h1>
+</div>
+
 <div class="col-md-12">
     <div class="panel panel-dark panel-light-blue">
-        <div class="panel-heading">
-            <span class="panel-title"><i class="panel-title-icon fa fa-user"></i>Membros registrados </span>
-        </div> <!-- / .panel-heading -->
         <table class="table">
             <thead>
                 <tr>

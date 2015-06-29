@@ -47,7 +47,10 @@
 						</li> <!-- / .list-group-item -->
 						<!-- Without left and right borders, without bottom border, extra small horizontal padding -->
 						<li class="list-group-item no-border-hr no-border-b padding-xs-hr">
-							{{ $video->comments()->count() }}  comments <i class="fa  fa-comment pull-right"></i>
+						    <a href="{!! URL::to('videos', $video->id) !!}">
+						        {{ $video->comments()->count() }}  comentários <i class="fa  fa-comment pull-right"></i>
+                            </a>
+
 						</li> <!-- / .list-group-item -->
 					</ul>					
 				</div>	
@@ -354,9 +357,9 @@
 
 				<div class="col-md-1 text-center text-lg">					
                     @if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
-                                          <a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
-                                          @endif
-                                      </div>
+                    <a class="btn btn-xs btn-primary" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
+                    @endif
+                </div>
 
 			</div>
 		</div>

@@ -87,7 +87,7 @@ class UserTableSeeder extends Seeder {
             'name' 			=> 'Graciela Kunrath Lima',
             'first_name' 	=> 'Graciela',
             'last_name' 	=> 'Kunrath Lima',
-            'email' 		=> 'graci@graci.com',
+            'email' 		=> 'graciela@graciela.com',
             'password'      => bcrypt('secret')
         ));
         $user = User::create(array(
@@ -132,10 +132,28 @@ class VideoTableSeeder extends Seeder {
     public function run()
     {
         $video = Video::create(array(
-            'title' => 'Freeman Dyson on the Global Warming Hysteria April, 2015',
-            'thumbnail' => 'https://i.ytimg.com/vi/BiKfWdXXfIs/hqdefault.jpg',
-            'source_url' => 'https://www.youtube.com/watch?v=BiKfWdXXfIs',
-            'status' => 1
+            'title'         => 'Freeman Dyson on the Global Warming Hysteria April, 2015',
+            'thumbnail'     => 'https://i.ytimg.com/vi/BiKfWdXXfIs/hqdefault.jpg',
+            'source_url'    => 'https://www.youtube.com/watch?v=BiKfWdXXfIs',
+            'project_url'   => 'https://www.youtube.com/watch?v=BiKfWdXXfIs',
+            'status'        => 0,
+            'duration'      => 1367
+        ));
+        $video = Video::create(array(
+            'title'         => '6 Fallout Vaults That Drove Everyone Super Crazy, Surprise',
+            'thumbnail'     => 'https://i.ytimg.com/vi/bv40L5FaMcs/hqdefault.jpg',
+            'source_url'    => 'https://www.youtube.com/watch?v=bv40L5FaMcs',
+            'project_url'   => 'https://www.youtube.com/watch?v=bv40L5FaMcs',
+            'status'        => 1,
+            'duration'      => 455
+        ));
+        $video = Video::create(array(
+            'title'         => 'Brené Brown on Empathy',
+            'thumbnail'     => 'https://i.ytimg.com/vi/1Evwgu369Jw/hqdefault.jpg',
+            'source_url'    => 'https://www.youtube.com/watch?v=1Evwgu369Jw',
+            'project_url'   => 'https://www.youtube.com/watch?v=1Evwgu369Jw',
+            'status'        => 1,
+            'duration'      => 174
         ));
     }
 }
