@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call('ArticleTableSeeder');
         $this->call('UserTableSeeder');
         $this->call('PermissionTableSeeder');
+        $this->call('VideoTableSeeder');
 
         Model::reguard();
     }
@@ -36,28 +37,28 @@ class ArticleTableSeeder extends Seeder {
             'source_url' 	=> '',
             'project_url' 	=> 'https://blog.movimentozeitgeist.com.br/wp-admin/post.php?post=1497&action=edit',
             'user_id' 		=> '4',
-            'status' 		=> 0
+            'status' 		=> ARTICLE_STATUS_EDITING
         ));
         $article = Article::create(array(
             'title' 		=> 'Estudo confirma que a humanidade está na zona de perigo existencial',
             'source_url'    => '',
             'project_url'   => 'https://blog.movimentozeitgeist.com.br/wp-admin/post.php?post=1532&action=edit',
             'user_id'       => '1',
-            'status' 		=> 1
+            'status' 		=> ARTICLE_STATUS_EDITING
         ));
         $article = Article::create(array(
             'title' 		=> 'Automatização está substituindo terceirização',
             'source_url'    => '',
             'project_url'   => 'https://blog.movimentozeitgeist.com.br/wp-admin/post.php?post=1090&action=edit',
             'user_id' 		=> '2',
-            'status' 		=> 2
+            'status' 		=> ARTICLE_STATUS_PROOFREADING
         ));
         $article = Article::create(array(
             'title' 		=> 'Sobre o conceito "Zeitgeist" (Autor - Eduardo Cormanich)',
             'source_url'    => 'https://blog.movimentozeitgeist.com.br/wp-admin/post.php?post=1457&action=edit',
             'project_url'   => 'https://docs.google.com/document/d/1aju9A1e3igf-FfWD6nTj62tdk2h-eD2ecuLag070GSY/edit?usp=sharing',
             'user_id'       => '3',
-            'status'        => 3
+            'status'        => ARTICLE_STATUS_PUBLISHED
         ));
     }
 }
@@ -136,7 +137,8 @@ class VideoTableSeeder extends Seeder {
             'thumbnail'     => 'https://i.ytimg.com/vi/BiKfWdXXfIs/hqdefault.jpg',
             'source_url'    => 'https://www.youtube.com/watch?v=BiKfWdXXfIs',
             'project_url'   => 'https://www.youtube.com/watch?v=BiKfWdXXfIs',
-            'status'        => 0,
+            'status'        => VIDEO_STATUS_TRANSCRIPTION,
+            'user_id'       => 1,
             'duration'      => 1367
         ));
         $video = Video::create(array(
@@ -144,7 +146,8 @@ class VideoTableSeeder extends Seeder {
             'thumbnail'     => 'https://i.ytimg.com/vi/bv40L5FaMcs/hqdefault.jpg',
             'source_url'    => 'https://www.youtube.com/watch?v=bv40L5FaMcs',
             'project_url'   => 'https://www.youtube.com/watch?v=bv40L5FaMcs',
-            'status'        => 1,
+            'status'        => VIDEO_STATUS_TRANSCRIPTION,
+            'user_id'       => 2,
             'duration'      => 455
         ));
         $video = Video::create(array(
@@ -152,7 +155,8 @@ class VideoTableSeeder extends Seeder {
             'thumbnail'     => 'https://i.ytimg.com/vi/1Evwgu369Jw/hqdefault.jpg',
             'source_url'    => 'https://www.youtube.com/watch?v=1Evwgu369Jw',
             'project_url'   => 'https://www.youtube.com/watch?v=1Evwgu369Jw',
-            'status'        => 1,
+            'status'        => VIDEO_STATUS_SYNCHRONIZATION,
+            'user_id'       => 3,
             'duration'      => 174
         ));
     }

@@ -4,17 +4,17 @@
 // or if you want a specific one
 //Config::get('constants.langs.en');
 
-define('ARTICLE_STATUS_EDITING',  		'0');
-define('ARTICLE_STATUS_PROOFREADING',  	'1');
-define('ARTICLE_STATUS_SCHEDULED',  	'2');
-define('ARTICLE_STATUS_PUBLISHED',  	'3');
+define('ARTICLE_STATUS_EDITING',  		'editing');
+define('ARTICLE_STATUS_PROOFREADING',  	'proofreading');
+define('ARTICLE_STATUS_SCHEDULED',  	'scheduled');
+define('ARTICLE_STATUS_PUBLISHED',  	'published');
 
-define('VIDEO_STATUS_TRANSCRIPTION',  	'0');
-define('VIDEO_STATUS_SYNCHRONIZATION',  '1');
-define('VIDEO_STATUS_TRANSLATION',  	'2');
-define('VIDEO_STATUS_PROOFREADING',  	'3');
-define('VIDEO_STATUS_SCHEDULED',  		'4');
-define('VIDEO_STATUS_PUBLISHED',  		'5');
+define('VIDEO_STATUS_TRANSCRIPTION',  	'transcription');
+define('VIDEO_STATUS_SYNCHRONIZATION',  'sync');
+define('VIDEO_STATUS_TRANSLATION',  	'translation');
+define('VIDEO_STATUS_PROOFREADING',  	'proofreading');
+define('VIDEO_STATUS_SCHEDULED',  		'scheduled');
+define('VIDEO_STATUS_PUBLISHED',  		'published');
 
 define('PERMISSION_TYPE_VIDEO',	        'p_vid');
 define('PERMISSION_VIDEO_EXECUTE',	    'p_vid_1');

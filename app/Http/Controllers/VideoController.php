@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
+use Input;
 
 class VideoController extends Controller {
 
@@ -23,7 +24,11 @@ class VideoController extends Controller {
 	 */
 	public function index()
 	{
-		$videos = Video::latest()->unpublished()->get();
+        if (Input::get('status')){
+            $videos = Video::where('status', Input::get('status'))->get();
+        }else{
+            $videos = Video::latest()->unpublished()->get();
+        }
 
         return view('videos.index', compact('videos'));
 	}
@@ -46,7 +51,7 @@ class VideoController extends Controller {
 	 * @return Response
 	 */
 	public function store(VideoRequest $request)
-	{		
+	{
 		Video::create(with(new Video)->handle($request->all()));
 
 		flash()->success('O vídeo foi criado!')->important();

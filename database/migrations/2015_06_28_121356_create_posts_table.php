@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             $table->string('title', 255);
             $table->text('description');
             $table->string('source_url', 255);
+            $table->string('status', 32);
             $table->integer('user_id')->unsigned();
-            $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();
         });

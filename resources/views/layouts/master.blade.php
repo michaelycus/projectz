@@ -58,6 +58,44 @@
 				<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
 					<div>
 
+					    <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-film"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ URL::to('videos?status=transcription') }}">Em transcrição</a></li>
+                                    <li><a href="{{ URL::to('videos?status=sync') }}">Em sincronização</a></li>
+                                    <li><a href="{{ URL::to('videos?status=translation') }}">Em tradução</a></li>
+                                    <li><a href="{{ URL::to('videos?status=proofreading') }}">Em revisão</a></li>
+                                    <li><a href="{{ URL::to('videos?status=scheduled') }}">Agendados</a></li>
+                                    <li><a href="{{ URL::to('videos?status=published') }}">Publicados</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Estatísticas</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-wordpress"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ URL::to('articles?status=editing') }}">Em edição</a></li>
+                                    <li><a href="{{ URL::to('articles?status=proofreading') }}">Em revisão</a></li>
+                                    <li><a href="{{ URL::to('articles?status=scheduled') }}">Agendados</a></li>
+                                    <li><a href="{{ URL::to('articles?status=published') }}">Publicados</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Estatísticas</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-facebook"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ URL::to('videos?status=editing') }}">Em edição</a></li>
+                                    <li><a href="{{ URL::to('videos?status=proofreading') }}">Em revisão</a></li>
+                                    <li><a href="{{ URL::to('videos?status=scheduled') }}">Agendados</a></li>
+                                    <li><a href="{{ URL::to('videos?status=published') }}">Publicados</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Estatísticas</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
 						<div class="right clearfix">
 							<ul class="nav navbar-nav pull-right right-navbar-nav">
 								<!-- /3. $END_NAVBAR_ICON_BUTTONS -->

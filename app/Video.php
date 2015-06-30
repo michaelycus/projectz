@@ -31,6 +31,11 @@ class Video extends Model {
         $query->where('status', '=', VIDEO_STATUS_PUBLISHED);
     }
 
+    public function getByState($state)
+    {
+        return Video::where('state', $state)->get();
+    }
+
     public function handle($data)
     {
     	if (array_key_exists('source_url', $data))

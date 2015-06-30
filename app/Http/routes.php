@@ -1,9 +1,16 @@
 <?php
 
-Route::resource('comments', 'CommentController');
-Route::resource('articles', 'ArticleController');
+
+//Route::get('videos/state/{?state}', [
+//    'as' => 'profile', 'uses' => 'UserController@showProfile'
+//]);
+
 Route::resource('videos', 'VideoController');
+//Route::get('videos/state/{state}', 'VideoController@getByState');
+
+Route::resource('articles', 'ArticleController');
 Route::resource('posts', 'PostController');
+Route::resource('comments', 'CommentController');
 Route::resource('profiles', 'ProfileController');
 
 

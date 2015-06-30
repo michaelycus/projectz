@@ -21,7 +21,7 @@ class CreateVideosTable extends Migration
             $table->string('source_url', 255);
             $table->string('project_url', 255);
             $table->string('publish_url', 255);
-            $table->tinyInteger('status');
+            $table->string('status', 32);
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
