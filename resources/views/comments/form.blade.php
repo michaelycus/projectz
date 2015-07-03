@@ -1,36 +1,36 @@
-<div class="col-md-6">
-	<div class="panel widget-article-comments">
-		<div class="panel-heading">
-			<span class="panel-title"><i class="panel-title-icon fa fa-comment-o"></i>Comentários</span>
-		</div> <!-- / .panel-heading -->
-		<div class="panel-body">				
 
-			<div class="comment">
-				<img src="//graph.facebook.com/{{ Auth::user()->facebook_user_id }}/picture" alt="" class="comment-avatar">
-				<div class="comment-body">
-					{!! Form::open(['url' => 'comments', 'id' => 'leave-comment-form', 'class' => 'comment-text no-padding no-border']) !!}
-						{!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '1']) !!}
-						{!! Form::hidden('user_id', Auth::user()->id ) !!}
-						{!! Form::hidden('commentable_id', $resource_id ) !!}
-						{!! Form::hidden('commentable_type', $model ) !!}
-						<div class="expanding-input-hidden" style="margin-top: 10px;">																
-							{!! Form::submit('Comentar', ['class' => 'btn btn-primary pull-right']) !!}
-						</div>
-					{!! Form::close() !!}
-				</div> <!-- / .comment-body -->
-			</div>
+<div class="panel widget-article-comments">
+    <div class="panel-heading">
+        <span class="panel-title"><i class="panel-title-icon fa fa-comment-o"></i>Comentários</span>
+    </div> <!-- / .panel-heading -->
+    <div class="panel-body">
 
-			<hr class="no-panel-padding-h panel-wide">
+        <div class="comment">
+            <img src="//graph.facebook.com/{{ Auth::user()->facebook_user_id }}/picture" alt="" class="comment-avatar">
+            <div class="comment-body">
+                {!! Form::open(['url' => 'comments', 'id' => 'leave-comment-form', 'class' => 'comment-text no-padding no-border']) !!}
+                    {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '1']) !!}
+                    {!! Form::hidden('user_id', Auth::user()->id ) !!}
+                    {!! Form::hidden('commentable_id', $resource_id ) !!}
+                    {!! Form::hidden('commentable_type', $model ) !!}
+                    <div class="expanding-input-hidden" style="margin-top: 10px;">
+                        {!! Form::submit('Comentar', ['class' => 'btn btn-primary pull-right']) !!}
+                    </div>
+                {!! Form::close() !!}
+            </div> <!-- / .comment-body -->
+        </div>
 
-			@foreach ($comments as $comment)
+        <hr class="no-panel-padding-h panel-wide">
 
-			    @include('comments.reply', ['comment' => $comment])
+        @foreach ($comments as $comment)
 
-			@endforeach
+            @include('comments.reply', ['comment' => $comment])
 
-		</div> <!-- / .panel-body -->
-	</div> <!-- / .panel -->
-</div>
+        @endforeach
+
+    </div> <!-- / .panel-body -->
+</div> <!-- / .panel -->
+
 
 
 @section('script')

@@ -139,7 +139,24 @@
 		</div>
 	</div>
 
-	@include('comments.form', ['resource_id' => $video->id, 'model' => 'App\Video', 'comments' => $video->comments])
+	<div class="col-md-6">
+
+	    <div class="panel widget-article-comments">
+            <div class="panel-heading">
+                <span class="panel-title"><i class="panel-title-icon fa fa-check-square-o"></i>Revisão</span>
+            </div>
+            <div class="panel-body">
+
+
+
+            </div>
+        </div>
+
+
+        @include('comments.form', ['resource_id' => $video->id, 'model' => 'App\Video', 'comments' => $video->comments])
+	</div>
+
+
 
 </div>
 
