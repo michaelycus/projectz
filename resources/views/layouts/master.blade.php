@@ -13,8 +13,7 @@
 	<link rel="icon" href="{!! URL::asset('images/favicon.png') !!}" />
 
 	<!-- Open Sans font from Google CDN -->
-	<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css"> -->
-	<link href="{{ URL::asset('temp/css.css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin') }}" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
 	
 	<!-- Font Awesome-->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -60,7 +59,7 @@
 
 					    <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-film"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-film"></i> Vídeos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ URL::to('videos?status=transcription') }}">Em transcrição</a></li>
                                     <li><a href="{{ URL::to('videos?status=sync') }}">Em sincronização</a></li>
@@ -73,7 +72,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-wordpress"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-wordpress"></i> Artigos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ URL::to('articles?status=editing') }}">Em edição</a></li>
                                     <li><a href="{{ URL::to('articles?status=proofreading') }}">Em revisão</a></li>
@@ -84,7 +83,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-facebook"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-facebook"></i> Posts</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ URL::to('videos?status=editing') }}">Em edição</a></li>
                                     <li><a href="{{ URL::to('videos?status=proofreading') }}">Em revisão</a></li>
@@ -121,7 +120,7 @@
 
 	<div id="main-menu" role="navigation">
 			<div id="main-menu-inner">
-				<div class="menu-content top" id="menu-content-demo">
+				<div class="menu-content top colapse" id="menu-content-demo">
 					<!-- Menu custom content demo
 						 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
 						 Javascript: html/assets/demo/demo.js
@@ -140,39 +139,19 @@
 					</div>
 				</div>
 				<ul class="navigation">
-					<!-- <li>
-						<a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
-					</li> -->
+
 					<li>
-						<a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-film"></i><span class="mm-text">Vídeos</span></a>
+						<a href="{{ URL::to('videos') }}"><i class="menu-icon fa fa-film"></i><span class="mm-text">Vídeos</span></a>
 					</li>
 
 					<li>
-						<a href="{{ URL::to('videos') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Todos</span></a>
+						<a href="{{ URL::to('articles') }}"><i class="menu-icon fa fa-wordpress"></i><span class="mm-text">Artigos</span></a>
 					</li>
-					<!--
+
 					<li>
-						<a href="{{-- URL::route('home') --}}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
-					</li>
-					-->
-					<li>
-						<a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-wordpress"></i><span class="mm-text">Artigos</span></a>
-					</li>
-					<li>
-						<a href="{{ URL::to('articles') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Todos</span></a>
-					</li>
-					<!--
-					<li>
-						<a href="{{-- URL::route('home) --}}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Publicados</span></a>
-					</li> 
-					-->
-					<li>
-                        <a href="{{-- URL::route('home') --}}"><i class="menu-icon fa fa-facebook"></i><span class="mm-text">Posts</span></a>
+                        <a href="{{ URL::to('posts') }}"><i class="menu-icon fa fa-facebook"></i><span class="mm-text">Posts</span></a>
                     </li>
-                    <li>
-                        <a href="{{ URL::to('posts') }}">&nbsp;&nbsp;&nbsp;&nbsp;<i class="menu-icon fa fa-angle-right"></i><span class="mm-text">Todos</span></a>
-                    </li>
-					
+
 				</ul> <!-- / .navigation -->
 
 			</div> <!-- / #main-menu-inner -->
@@ -200,8 +179,6 @@
 <![endif]-->
 
     <script src="http://cdn.embed.ly/jquery.embedly-3.1.1.min.js" type="text/javascript"></script>
-
-
 
 
 <!-- Pixel Admin's javascripts -->

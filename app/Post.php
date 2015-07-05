@@ -13,11 +13,6 @@ class Post extends Model
         return $this->morphMany('App\Comment', 'commentable');
     }
 
-    public function checks()
-    {
-        return $this->morphMany('App\Check', 'checkable');
-    }
-
     public function actions()
     {
         return $this->morphMany('App\Action', 'actionable');

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChecksTable extends Migration
+class CreateReviewTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class CreateChecksTable extends Migration
      */
     public function up()
     {
-        Schema::create('checks', function(Blueprint $table)
-        {
+        Schema::create('reviews', function(Blueprint $table){
             $table->increments('id');
-            $table->string('title', 255);
             $table->integer('user_id');
-            $table->boolean('checked');
-            $table->tinyInteger('order');
-            $table->integer('checkable_id');
-            $table->string('checkable_type');
+            $table->text('body');
+            $table->text('reply');
+            $table->integer('reviewable_id');
+            $table->string('reviewable_type');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateChecksTable extends Migration
      */
     public function down()
     {
-        Schemma::drop('checks');
+        Schema::drop('reviews');
     }
 }

@@ -98,7 +98,12 @@
 		</div>
 	</div>
 
-	@include('comments.form', ['resource_id' => $article->id, 'model' => 'App\Article', 'comments' => $article->comments])
+	<div class="col-md-6">
+
+        @include('reviews.form_article', ['resource_id' => $article->id, 'model' => 'App\Article', 'comments' => $article->comments])
+
+        @include('comments.form', ['resource_id' => $article->id, 'model' => 'App\Article', 'comments' => $article->comments])
+    </div>
 
 </div>
 

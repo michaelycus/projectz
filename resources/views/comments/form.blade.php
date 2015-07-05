@@ -32,7 +32,6 @@
 </div> <!-- / .panel -->
 
 
-
 @section('script')
 
 <script type="text/javascript">
@@ -43,14 +42,6 @@
 
         $("#reply_body_"+id).focus();
 
-//        $("[id^=reply_form_]").expandingInput({
-//            target: 'textarea',
-//            hidden_content: '> div',
-//            placeholder: 'Responder...',
-//            onAfterExpand: function () {
-//                $('#leave-comment-form textarea').attr('rows', '3').autosize();
-//            }
-//        });
     }
 	init.push(function () {
 
@@ -63,14 +54,6 @@
 			}
 		});
 
-		$("[id^=AAA_][id$=_BBB]").expandingInput({
-            target: 'textarea',
-            hidden_content: '> div',
-            placeholder: 'O que você acha?',
-            onAfterExpand: function () {
-                $('#leave-comment-form textarea').attr('rows', '3').autosize();
-            }
-        });
 	})
 	window.PixelAdmin.start(init);
 </script>

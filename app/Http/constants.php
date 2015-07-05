@@ -4,6 +4,12 @@
 // or if you want a specific one
 //Config::get('constants.langs.en');
 
+define ('ARTICLE_REVIEW_STATUS', serialize(array(
+    '1' => "Precisa ainda de vários ajustes",
+    '2' => "Poucos detalhes precisam ser melhorados",
+    '3' => "Está pronto para ser lançado"
+)));
+
 define('ARTICLE_STATUS_EDITING',  		'editing');
 define('ARTICLE_STATUS_PROOFREADING',  	'proofreading');
 define('ARTICLE_STATUS_SCHEDULED',  	'scheduled');
@@ -70,8 +76,8 @@ return [
 			'back-to-translate'     => '42',
 			'back-to-synchronize' 	=> '43',
 			'back-to-proofread'   	=> '44',
-			'back-to-schelude'    	=> '45',			
-		]		
+			'back-to-schelude'    	=> '45',
+		]
 	],
 	'article' => [
 		'status' => [
@@ -98,11 +104,11 @@ return [
 			'back-to-editing'     	=> '41',
 			'back-to-proofread'   	=> '42',
 			'back-to-schelude'    	=> '43',
-		]		
+		]
 	],
 	'auth' => [
 		'unauthorized'	=> '0',
 		'operator'		=> '1',
-		'admin'			=> '2',	
+		'admin'			=> '2',
 	]
 ];

@@ -15,9 +15,9 @@ class Article extends Model {
         return $this->morphMany('App\Comment', 'commentable');
     }
 
-    public function checks()
+    public function reviews()
     {
-        return $this->morphMany('App\Check', 'checkable');
+        return $this->morphMany('App\Review', 'reviewable');
     }
 
     public function actions()

@@ -20,7 +20,7 @@
 	<link href="{{ URL::asset('css/pixel-admin.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ URL::asset('css/pages.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ URL::asset('css/rtl.min.css') }}" rel="stylesheet" type="text/css">
-	<link href="{{ URL::asset('css/themes.min.css') }}" rel="stylesheet" type="text/css">
+	{{--<link href="{{ URL::asset('css/themes.min.css') }}" rel="stylesheet" type="text/css">--}}
 	<link href="{{ URL::asset('css/custom.css') }}" rel="stylesheet" type="text/css">
 
 	<!--[if lt IE 9]>
