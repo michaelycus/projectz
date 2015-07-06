@@ -73,9 +73,13 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Review $review, ReviewRequest $request)
     {
-        //
+        $review->update($request->all());
+
+        flash()->success('A revisão foi editada!');
+
+        return redirect()->back();
     }
 
     /**

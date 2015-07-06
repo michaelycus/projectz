@@ -11,7 +11,7 @@
 	<div class="col-md-6">
 		<div class="panel">
 			<div class="panel-heading">		
-				<span class="panel-title">{{ $article->title }}</span>		
+				<span class="panel-title"><i class="fa fa-wordpress"></i> {{ $article->title }}</span>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -29,62 +29,44 @@
 						<span class="panel-title">{!! $article->user->name !!}</span>
 					</div>
 				</div>
-				<hr>
+
 				<div class="row">
-					<?php
-					// it can be improved
-					if ($article->status == ARTICLE_STATUS_EDITING)
-					{
-						$back = '';
-						$status = 'Em Edição';
-						$forward = 'Revisar <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($article->status == ARTICLE_STATUS_PROOFREADING)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Editar';
-						$status = 'Em Revisão';
-						$forward = 'Agendar <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($article->status == ARTICLE_STATUS_SCHEDULED)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Revisar';
-						$status = 'Agendado';
-						$forward = 'Publicar <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($article->status == ARTICLE_STATUS_PUBLISHED)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Agendar';
-						$status = 'Publicado';
-						$forward = '';
-					}
-					?>
+				    <div class="stat-panel">
+                        <div class="stat-row">
+                            <div class="stat-counters no-border text-center">
+                                <div class="stat-cell col-xs-12 padding-sm no-padding-hr">
+                                    Situação atual:
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <div class="stat-counters bordered text-center">
 
-					<div class="col-xs-4">
-						@if ($back != '')
-						{!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}				
-							
-								{!! Form::hidden('status', $article->status - 1 ) !!}
-								
-								{!! Html::decode(Form::button($back, array('class' => 'btn btn-sm btn-default btn-labeled btn-block confirm-move', 'type' => 'submit'))) !!}							
+                                <div class="stat-cell col-xs-4 padding-sm no-padding-hr {{$article->status == ARTICLE_STATUS_EDITING ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Edição</span>
+                                </div>
+                                <div class="stat-cell col-xs-4 padding-sm no-padding-hr {{$article->status == ARTICLE_STATUS_PROOFREADING ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Revisão</span>
+                                </div>
+                                <div class="stat-cell col-xs-4 padding-sm no-padding-hr {{$article->status == ARTICLE_STATUS_SCHEDULED ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Agendado</span>
+                                </div>
+                                <div class="stat-cell col-xs-4 padding-sm no-padding-hr {{$article->status == ARTICLE_STATUS_PUBLISHED ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Publicado</span>
+                                </div>
+                            </div> <!-- /.stat-counters -->
+                        </div> <!-- /.stat-row -->
+                    </div> <!-- /.stat-panel -->
+				</div>
+				<div class="row text-center text-xlg">
 
-						{!! Form::close() !!}						
-						@endif
-					</div>
-					<div class="col-xs-4 text-center">
-						<a href="#" class="label label-info">{!! $status !!}</a>
-					</div>
-					<div class="col-xs-4">
-						@if ($forward != '')
-						{!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}				
-							
-								{!! Form::hidden('status', $article->status + 1 ) !!}
-								
-								{!! Html::decode(Form::button($forward, array('class' => 'btn btn-sm btn-default btn-labeled btn-block confirm-move', 'type' => 'submit'))) !!}							
-
-						{!! Form::close() !!}						
-						@endif
-					</div>
-				</div>	
+                    {!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}
+                        @if ($article->status == ARTICLE_STATUS_EDITING)
+                            {!! Form::hidden('status', 'proofreading' ) !!}
+                            {!! Html::decode(Form::button('Revisar <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @endif
+                    {!! Form::close() !!}
+				</div>
 			</div>
 
 			<div class="panel-footer">
@@ -100,21 +82,27 @@
 
 	<div class="col-md-6">
 
-        @include('reviews.form_article', ['resource_id' => $article->id, 'model' => 'App\Article', 'reviews' => $article->reviews])
+        @include('reviews.panel', ['resource_id' => $article->id,
+                                   'model' => 'App\Article',
+                                   'reviews' => $article->reviews,
+                                   'items' => unserialize(ARTICLE_REVIEW_ITEMS)])
 
         @include('comments.form', ['resource_id' => $article->id, 'model' => 'App\Article', 'comments' => $article->comments])
     </div>
 
 </div>
 
-
 @stop
-
 
 @section('script')
 
+    @include('comments.scripts')
 
-
+    <script>
+    $(".alert-info").fadeTo(5000, 500).slideUp(5000, function(){
+        $(".alert-info").alert('close');
+    });
+    </script>
 
 @stop
 

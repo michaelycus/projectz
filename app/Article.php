@@ -2,15 +2,15 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model {
-
-	protected $fillable = array('title', 'source_url', 'project_url', 'publish_url', 'user_id', 'status');
-
+class Article extends Model
+{
     protected $attributes = array(
-        'status' => 0,
+        'status' => ARTICLE_STATUS_EDITING,
     );
 
-	public function comments()
+    protected $fillable = array('title', 'source_url', 'project_url', 'publish_url', 'user_id', 'status');
+
+    public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
@@ -27,7 +27,7 @@ class Article extends Model {
 
     public function user()
     {
-        return $this->belongsTo('App\User','user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function scopeUnpublished($query)
