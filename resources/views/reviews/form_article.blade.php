@@ -128,6 +128,11 @@
                         Certo! Obrigado por sua contribuição.<br><br>
 
                         <a class="btn wizard-prev-step-btn">Anterior</a>
+
+                        {!! Form::hidden('reviewable_id', $resource_id) !!}
+                        {!! Form::hidden('reviewable_type', $model) !!}
+                        {!! Form::hidden('user_id', Auth::id()) !!}
+
                         {!! Form::submit('Finalizar', ['class' => 'btn btn-primary']) !!}
                     </div> <!-- / .wizard-pane -->
                     {!! Form::close() !!}
@@ -145,46 +150,32 @@
     <div class="panel-body">
 
         <div class="panel-group" id="accordion-review">
-            <div class="panel">
-                <div class="panel-heading">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-review" href="#collapseOne">
-                        <img src="http://graph.facebook.com/100002775557112/picture" alt="Juliana" class="user-tiny"> <i class="fa fa-caret-right"></i> Revisão de Juliana
-                    </a>
-                </div> <!-- / .panel-heading -->
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div> <!-- / .panel-body -->
-                </div> <!-- / .collapse -->
-            </div> <!-- / .panel -->
 
-            <div class="panel">
-                <div class="panel-heading">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-review" href="#collapseTwo">
-                        <img src="http://graph.facebook.com/10206432895324665/picture" alt="Juliana" class="user-tiny"> <i class="fa fa-caret-right"></i>  Revisão de Michael
-                    </a>
-                </div> <!-- / .panel-heading -->
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div> <!-- / .panel-body -->
-                </div> <!-- / .collapse -->
-            </div> <!-- / .panel -->
+            @if (count($reviews) == 0)
+                <div class="alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    Não existem revisões para esse artigo!
+                </div>
+            @else
+                @foreach($reviews as $review)
+                <div class="panel">
+                    <div class="panel-heading">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-review" href="#collapse_{{ $review->id }}">
+                            <img src="http://graph.facebook.com/{{ $review->user->facebook_user_id }}/picture"
+                                 alt="{{  $review->user->first_name }}" class="user-tiny"> <i class="fa fa-caret-right"></i> Revisão de {{  $review->user->first_name }}
+                        </a>
+                    </div> <!-- / .panel-heading -->
+                    <div id="collapse_{{ $review->id }}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>{{  $review->body }}</p>
+                            <p>Avaliado como: <strong>{{ unserialize(ARTICLE_REVIEW_STATUS)[$review->status]  }}</strong></p>
+                        </div> <!-- / .panel-body -->
+                    </div> <!-- / .collapse -->
+                </div> <!-- / .panel -->
+                @endforeach
+            @endif
 
-            <div class="panel">
-                <div class="panel-heading">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-review" href="#collapseThree">
-                        <img src="http://graph.facebook.com/100000096065425/picture" alt="Juliana" class="user-tiny"> <i class="fa fa-caret-right"></i>  Revisão de Graciela
-                    </a>
-                </div> <!-- / .panel-heading -->
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div> <!-- / .panel-body -->
-                </div> <!-- / .collapse -->
-            </div> <!-- / .panel -->
-        </div> <!-- / .panel-group -->
-
+        </div>
 
         <div class="panel-body">
             <button class="btn btn-info" data-toggle="modal" data-target="#ui-wizard-modal">Iniciar revisão <i class="fa fa-arrow-circle-right"></i></button>
@@ -193,5 +184,11 @@
     </div>
 </div>
 
-
+@section('script')
+<script>
+$(".alert-info").fadeTo(5000, 500).slideUp(1500, function(){
+    $(".alert-info").alert('close');
+});
+</script>
+@endsection
 

@@ -42,7 +42,7 @@ class ReviewController extends Controller
 
         flash()->success('Sua revisão foi salva!')->important();
 
-        return redirect('articles');
+        return redirect()->back();
     }
 
     /**

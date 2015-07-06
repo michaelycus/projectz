@@ -100,7 +100,7 @@
 
 	<div class="col-md-6">
 
-        @include('reviews.form_article', ['resource_id' => $article->id, 'model' => 'App\Article', 'comments' => $article->comments])
+        @include('reviews.form_article', ['resource_id' => $article->id, 'model' => 'App\Article', 'reviews' => $article->reviews])
 
         @include('comments.form', ['resource_id' => $article->id, 'model' => 'App\Article', 'comments' => $article->comments])
     </div>
