@@ -4,11 +4,28 @@
 // or if you want a specific one
 //Config::get('constants.langs.en');
 
-define ('ARTICLE_REVIEW_STATUS', serialize(array(
-    '1' => "Precisa ainda de vários ajustes",
-    '2' => "Poucos detalhes precisam ser melhorados",
-    '3' => "Está pronto para ser lançado"
+define('REVIEW_DANGER',  '1');
+define('REVIEW_WARNING', '2');
+define('REVIEW_SUCCESS', '3');
+
+define ('REVIEW_STATUS', serialize(array(
+    REVIEW_DANGER  => "Precisa ainda de vários ajustes.",
+    REVIEW_WARNING => "Poucos detalhes precisam ser melhorados.",
+    REVIEW_SUCCESS => "Está pronto para ser lançado!"
 )));
+
+define ('ARTICLE_REVIEW_ITEMS', serialize(array(
+    "Conteúdo dentro do escopo",
+    "Ortografia",
+    "Formatação",
+    "Imagem Destacada (min 1280x720 16:9)",
+    "Categorias",
+    "Open Graph Data",
+    "Links",
+    "Tags",
+)));
+
+
 
 define('ARTICLE_STATUS_EDITING',  		'editing');
 define('ARTICLE_STATUS_PROOFREADING',  	'proofreading');

@@ -46,6 +46,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Permission');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
     public function getAvatar()
     {
         if ($this->facebook_user_id == 0){
@@ -54,6 +59,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return 'http://graph.facebook.com/'. $this->facebook_user_id . '/picture';
         }
     }
+
+    /* Reviews */
+    public function hasReview($reviews)
+    {
+        foreach($reviews as $review){
+            $matchThese = ['id' => $review->id, 'user_id' => Auth::id()];
+
+            if (DB::table('reviews')->where($matchThese)->get()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* Permitions */
 
     public function hasPermission($permission)
     {
