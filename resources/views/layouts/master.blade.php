@@ -180,19 +180,17 @@
 
     <script src="http://cdn.embed.ly/jquery.embedly-3.1.1.min.js" type="text/javascript"></script>
 
-
 <!-- Pixel Admin's javascripts -->
 <script src="{{ URL::asset('javascripts/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('javascripts/pixel-admin.min.js') }}"></script>
 <script src="{{ URL::asset('javascripts/custom.js') }}"></script>
 
 
-
 @yield('script')
 
 <script>
 	// $('#flash-overlay-modal').modal();
-	 $('div.alert').not('.alert-important').delay(3000).slideUp(300);
+	 $('div.alert').not('.alert-important').delay(5000).slideUp(500);
 </script>
 
 </body>

@@ -22,9 +22,16 @@
                     </div> <!-- / .panel-heading -->
                     <div id="collapse_{{ $review->id }}" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <h3>Avaliação do revisor:</h3>
                             <p>{{  $review->body }}</p>
                             <p>Avaliado como: <strong>{{ unserialize(REVIEW_STATUS)[$review->status] }}</strong></p>
+
+                            <h3>Resposta do editor:</h3>
+                            <p>{{  $review->reply }}</p>
                         </div> <!-- / .panel-body -->
+
+                        @if (Auth::id() == $resource->user_id)
+                        <hr/>
                         <div class="panel-footer">
                             {!! Form::model($review, ['method' => 'PATCH', 'action' => ['ReviewController@update', $review->id]]) !!}
 
@@ -32,12 +39,13 @@
                                     {!! Form::label('reply', 'Resposta:', ['class' => 'control-control']) !!}
                                     {!! Form::textarea('reply', null, ['class' => 'form-control', 'size' => '30x5']) !!}
                                 </div>
-                                <div class="pull-right">
+                                <div class="padding-sm pull-right">
                                     {!! Form::submit('Responder', ['class' => 'btn btn-xs btn-primary pull-right']) !!}
                                 </div>
 
                             {!! Form::close() !!}
                         </div>
+                        @endif
                     </div> <!-- / .collapse -->
                 </div> <!-- / .panel -->
                 @endforeach

@@ -25,12 +25,28 @@ define ('ARTICLE_REVIEW_ITEMS', serialize(array(
     "Tags",
 )));
 
-
+define ('VIDEO_REVIEW_ITEMS', serialize(array(
+    "Conteúdo dentro do escopo",
+    "Ortografia",
+    "Formatação",
+    "Imagem Destacada (min 1280x720 16:9)",
+    "Categorias",
+    "Open Graph Data",
+    "Links",
+    "Tags",
+)));
 
 define('ARTICLE_STATUS_EDITING',  		'editing');
 define('ARTICLE_STATUS_PROOFREADING',  	'proofreading');
 define('ARTICLE_STATUS_SCHEDULED',  	'scheduled');
 define('ARTICLE_STATUS_PUBLISHED',  	'published');
+
+define ('ARTICLE_STATUS_LABELS', serialize(array(
+    ARTICLE_STATUS_EDITING      => "Em edição",
+    ARTICLE_STATUS_PROOFREADING => "Em revisão",
+    ARTICLE_STATUS_SCHEDULED    => "Agendados",
+    ARTICLE_STATUS_PUBLISHED    => "Publicados"
+)));
 
 define('VIDEO_STATUS_TRANSCRIPTION',  	'transcription');
 define('VIDEO_STATUS_SYNCHRONIZATION',  'sync');
@@ -38,6 +54,15 @@ define('VIDEO_STATUS_TRANSLATION',  	'translation');
 define('VIDEO_STATUS_PROOFREADING',  	'proofreading');
 define('VIDEO_STATUS_SCHEDULED',  		'scheduled');
 define('VIDEO_STATUS_PUBLISHED',  		'published');
+
+define ('VIDEO_STATUS_LABELS', serialize(array(
+    VIDEO_STATUS_TRANSCRIPTION   => "Em trancrição",
+    VIDEO_STATUS_SYNCHRONIZATION => "Em Sincronização",
+    VIDEO_STATUS_TRANSLATION     => "Em tradução",
+    VIDEO_STATUS_PROOFREADING    => "Em revisão",
+    VIDEO_STATUS_SCHEDULED       => "Agendados",
+    VIDEO_STATUS_PUBLISHED       => "Publicados"
+)));
 
 define('PERMISSION_TYPE_VIDEO',	        'p_vid');
 define('PERMISSION_VIDEO_EXECUTE',	    'p_vid_1');

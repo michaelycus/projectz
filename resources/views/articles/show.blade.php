@@ -24,9 +24,21 @@
 						@endif
 					</div>
 					<div class="col-xs-6 text-center">
-						<img src="http://graph.facebook.com/{{ $article->user->facebook_user_id }}/picture" alt="{{  $article->user->first_name }}" class="user-list pull-right">
-						
-						<span class="panel-title">{!! $article->user->name !!}</span>
+					    <div class="row">
+                            <div class="col-xs-12 text-center text-slim">
+                                Sugerido por:
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-center padding-sm">
+                                <img src="http://graph.facebook.com/{{ $article->user->facebook_user_id }}/picture" alt="{{  $article->user->first_name }}" class="user-list">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <span class="panel-title">{!! $article->user->name !!}</span>
+                            </div>
+                        </div>
 					</div>
 				</div>
 
@@ -62,14 +74,14 @@
 
                     {!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}
                         @if ($article->status == ARTICLE_STATUS_EDITING)
-                            {!! Form::hidden('status', 'proofreading' ) !!}
-                            {!! Html::decode(Form::button('Revisar <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                            {!! Form::hidden('status', ARTICLE_STATUS_PROOFREADING ) !!}
+                            {!! Html::decode(Form::button('Avançar para revisão <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
                         @elseif ($article->status == ARTICLE_STATUS_PROOFREADING)
-                            {!! Form::hidden('status', 'scheduled' ) !!}
-                            {!! Html::decode(Form::button('Revisar <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                            {!! Form::hidden('status', ARTICLE_STATUS_SCHEDULED ) !!}
+                            {!! Html::decode(Form::button('Agendar lançamento <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
                         @elseif ($article->status == ARTICLE_STATUS_SCHEDULED)
-                            {!! Form::hidden('status', 'published' ) !!}
-                            {!! Html::decode(Form::button('Revisar <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                            {!! Form::hidden('status', ARTICLE_STATUS_PUBLISHED ) !!}
+                            {!! Html::decode(Form::button('Marcar como publicado <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
                         @endif
                     {!! Form::close() !!}
 				</div>
@@ -88,10 +100,12 @@
 
 	<div class="col-md-6">
 
+        @if ($article->status != ARTICLE_STATUS_EDITING)
         @include('reviews.panel', ['resource' => $article,
                                    'model' => 'App\Article',
                                    'reviews' => $article->reviews,
                                    'items' => unserialize(ARTICLE_REVIEW_ITEMS)])
+        @endif
 
         @include('comments.form', ['resource_id' => $article->id, 'model' => 'App\Article', 'comments' => $article->comments])
     </div>

@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use Input;
 use App\Article;
 use App\User;
 use App\Comment;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
@@ -28,7 +28,11 @@ class ArticleController extends Controller
 	 */
 	public function index()
 	{
-		$articles = Article::latest()->unpublished()->get();
+        if (Input::get('status')){
+            $articles = Article::where('status', Input::get('status'))->get();
+        }else{
+            $articles = Article::latest()->unpublished()->get();
+        }
 
         return view('articles.index', compact('articles'));
 	}

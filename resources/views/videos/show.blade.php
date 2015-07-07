@@ -56,76 +56,64 @@
 		
 					</div>
 				</div>
+
 				<hr>
+
 				<div class="row">
-					<?php
-					// it can be improved
-					if ($video->status == VIDEO_STATUS_TRANSCRIPTION)
-					{
-						$back = '';
-						$status = 'Em transcrição';
-						$forward = 'Sincronizar <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($video->status == VIDEO_STATUS_SYNCHRONIZATION)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Transcrever';
-						$status = 'Sincronizando';
-						$forward = 'Traduzir <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($video->status == VIDEO_STATUS_TRANSLATION)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Sincronizar';
-						$status = 'Traduzindo';
-						$forward = 'Revisar <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($video->status == VIDEO_STATUS_PROOFREADING)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Traduzir';
-						$status = 'Revisando';
-						$forward = 'Agendar <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($video->status == VIDEO_STATUS_SCHEDULED)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Revisar';
-						$status = 'Agendado';
-						$forward = 'Publicar <i class="fa fa-arrow-right"></i>';
-					}
-					elseif ($video->status == VIDEO_STATUS_PUBLISHED)
-					{
-						$back = '<i class="fa fa-arrow-left"></i> Agendar';
-						$status = 'Publicado';
-						$forward = '';
-					}
-					?>
+                    <div class="stat-panel">
+                        <div class="stat-row">
+                            <div class="stat-counters no-border text-center">
+                                <div class="stat-cell col-xs-12 padding-sm no-padding-hr">
+                                    Situação atual:
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <div class="stat-counters bordered text-center">
+                                <div class="stat-cell col-xs-2 padding-sm no-padding-hr {{$video->status == VIDEO_STATUS_TRANSCRIPTION ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Transcrição</span>
+                                </div>
+                                <div class="stat-cell col-xs-2 padding-sm no-padding-hr {{$video->status == VIDEO_STATUS_SYNCHRONIZATION ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Sincronização</span>
+                                </div>
+                                <div class="stat-cell col-xs-2 padding-sm no-padding-hr {{$video->status == VIDEO_STATUS_TRANSLATION ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Tradução</span>
+                                </div>
+                                <div class="stat-cell col-xs-2 padding-sm no-padding-hr {{$video->status == VIDEO_STATUS_PROOFREADING ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Revisão</span>
+                                </div>
+                                <div class="stat-cell col-xs-2 padding-sm no-padding-hr {{$video->status == VIDEO_STATUS_SCHEDULED ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Agendado</span>
+                                </div>
+                                <div class="stat-cell col-xs-2 padding-sm no-padding-hr {{$video->status == VIDEO_STATUS_PUBLISHED ? 'bg-info' : ''}}">
+                                    <span class="text-xs">Publicado</span>
+                                </div>
+                            </div> <!-- /.stat-counters -->
+                        </div> <!-- /.stat-row -->
+                    </div> <!-- /.stat-panel -->
+                </div>
 
-                    @if(Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
-					<div class="col-xs-4">
-						@if ($back != '')
-						{!! Form::model($video, ['method' => 'PATCH', 'action' => ['VideoController@update', $video->id]]) !!}				
-							
-								{!! Form::hidden('status', $video->status - 1 ) !!}
-								
-								{!! Html::decode(Form::button($back, array('class' => 'btn btn-sm btn-default btn-labeled btn-block confirm-move', 'type' => 'submit'))) !!}							
+                <div class="row text-center text-xlg">
+                    {!! Form::model($video, ['method' => 'PATCH', 'action' => ['VideoController@update', $video->id]]) !!}
+                        @if ($video->status == VIDEO_STATUS_TRANSCRIPTION)
+                            {!! Form::hidden('status', VIDEO_STATUS_SYNCHRONIZATION ) !!}
+                            {!! Html::decode(Form::button('Avançar para sincronização <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @elseif ($video->status == VIDEO_STATUS_SYNCHRONIZATION)
+                            {!! Form::hidden('status', VIDEO_STATUS_TRANSLATION ) !!}
+                            {!! Html::decode(Form::button('Avançar para tradução <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @elseif ($video->status == VIDEO_STATUS_TRANSLATION)
+                            {!! Form::hidden('status', VIDEO_STATUS_PROOFREADING ) !!}
+                            {!! Html::decode(Form::button('Avançar para revisão <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @elseif ($video->status == VIDEO_STATUS_PROOFREADING)
+                            {!! Form::hidden('status', VIDEO_STATUS_SCHEDULED ) !!}
+                            {!! Html::decode(Form::button('Agendar publicação <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @elseif ($video->status == VIDEO_STATUS_SCHEDULED)
+                            {!! Form::hidden('status', VIDEO_STATUS_PUBLISHED ) !!}
+                            {!! Html::decode(Form::button('Marcar como publicado <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @endif
+                    {!! Form::close() !!}
+                </div>
 
-						{!! Form::close() !!}						
-						@endif
-					</div>
-					<div class="col-xs-4 text-center">
-						<a href="#" class="label label-info">{!! $status !!}</a>
-					</div>
-					<div class="col-xs-4">
-						@if ($forward != '')
-						{!! Form::model($video, ['method' => 'PATCH', 'action' => ['VideoController@update', $video->id]]) !!}				
-							
-								{!! Form::hidden('status', $video->status + 1 ) !!}
-								
-								{!! Html::decode(Form::button($forward, array('class' => 'btn btn-sm btn-default btn-labeled btn-block confirm-move', 'type' => 'submit'))) !!}							
-
-						{!! Form::close() !!}						
-						@endif
-					</div>
-					@endif
-				</div>	
 			</div>
 
 			<div class="panel-footer">
@@ -141,26 +129,21 @@
 
 	<div class="col-md-6">
 
-	    <div class="panel widget-article-comments">
-            <div class="panel-heading">
-                <span class="panel-title"><i class="panel-title-icon fa fa-check-square-o"></i>Revisão</span>
-            </div>
-            <div class="panel-body">
-
-            </div>
-        </div>
-
+	    @if ($video->status != VIDEO_STATUS_TRANSCRIPTION &&
+	         $video->status != VIDEO_STATUS_SYNCHRONIZATION &&
+	         $video->status != VIDEO_STATUS_TRANSLATION)
+            @include('reviews.panel', ['resource' => $video,
+                                       'model' => 'App\Video',
+                                       'reviews' => $video->reviews,
+                                       'items' => unserialize(VIDEO_REVIEW_ITEMS)])
+        @endif
 
         @include('comments.form', ['resource_id' => $video->id, 'model' => 'App\Video', 'comments' => $video->comments])
 	</div>
 
-
-
 </div>
 
-
 @stop
-
 
 @section('script')
 

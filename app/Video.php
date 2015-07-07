@@ -24,6 +24,11 @@ class Video extends Model
         return $this->morphMany('App\Comment', 'commentable');
     }
 
+    public function reviews()
+    {
+        return $this->morphMany('App\Review', 'reviewable');
+    }
+
     public function actions()
     {
         return $this->morphMany('App\Action', 'actionable');

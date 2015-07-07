@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Input;
 use App\User;
 use App\Video;
 use App\Comment;
@@ -7,7 +8,6 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
-use Input;
 
 class VideoController extends Controller {
 
