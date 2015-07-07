@@ -25,6 +25,19 @@
                             <p>{{  $review->body }}</p>
                             <p>Avaliado como: <strong>{{ unserialize(REVIEW_STATUS)[$review->status] }}</strong></p>
                         </div> <!-- / .panel-body -->
+                        <div class="panel-footer">
+                            {!! Form::model($review, ['method' => 'PATCH', 'action' => ['ReviewController@update', $review->id]]) !!}
+
+                                <div class="form-group no-margin-hr">
+                                    {!! Form::label('reply', 'Resposta:', ['class' => 'control-control']) !!}
+                                    {!! Form::textarea('reply', null, ['class' => 'form-control', 'size' => '30x5']) !!}
+                                </div>
+                                <div class="pull-right">
+                                    {!! Form::submit('Responder', ['class' => 'btn btn-xs btn-primary pull-right']) !!}
+                                </div>
+
+                            {!! Form::close() !!}
+                        </div>
                     </div> <!-- / .collapse -->
                 </div> <!-- / .panel -->
                 @endforeach
@@ -32,7 +45,7 @@
         </div>
 
         <!-- Create review -->
-        @if (!Auth::user()->hasReview($reviews))
+        @if (!Auth::user()->hasReview($reviews) && Auth::id() != $resource->user_id)
 
         <div id="reviewModal" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
@@ -44,7 +57,7 @@
 
                     {!! Form::open(['url' => 'reviews', 'id' => 'form-review'] ) !!}
 
-                        @include('reviews.form', ['resource_id' => $resource_id,
+                        @include('reviews.form', ['resource' => $resource,
                                                   'model' => $model,
                                                   'items' => unserialize(ARTICLE_REVIEW_ITEMS)])
                     {!! Form::close() !!}
@@ -73,7 +86,7 @@
 
                         {!! Form::model($review, ['method' => 'PATCH', 'action' => ['ReviewController@update', $review->id]]) !!}
 
-                            @include('reviews.form', ['resource_id' => $resource_id,
+                            @include('reviews.form', ['resource' => $resource,
                                                       'model' => $model,
                                                       'items' => unserialize(ARTICLE_REVIEW_ITEMS)])
 

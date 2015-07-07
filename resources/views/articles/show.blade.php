@@ -64,6 +64,12 @@
                         @if ($article->status == ARTICLE_STATUS_EDITING)
                             {!! Form::hidden('status', 'proofreading' ) !!}
                             {!! Html::decode(Form::button('Revisar <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @elseif ($article->status == ARTICLE_STATUS_PROOFREADING)
+                            {!! Form::hidden('status', 'scheduled' ) !!}
+                            {!! Html::decode(Form::button('Revisar <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+                        @elseif ($article->status == ARTICLE_STATUS_SCHEDULED)
+                            {!! Form::hidden('status', 'published' ) !!}
+                            {!! Html::decode(Form::button('Revisar <i class="fa fa-arrow-right"></i>', array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
                         @endif
                     {!! Form::close() !!}
 				</div>
@@ -82,7 +88,7 @@
 
 	<div class="col-md-6">
 
-        @include('reviews.panel', ['resource_id' => $article->id,
+        @include('reviews.panel', ['resource' => $article,
                                    'model' => 'App\Article',
                                    'reviews' => $article->reviews,
                                    'items' => unserialize(ARTICLE_REVIEW_ITEMS)])
