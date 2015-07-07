@@ -55,7 +55,7 @@
 		});
 
 	})
-	window.PixelAdmin.start(init);
+
 </script>
 
 @endsection

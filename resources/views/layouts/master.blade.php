@@ -191,6 +191,7 @@
 <script>
 	// $('#flash-overlay-modal').modal();
 	 $('div.alert').not('.alert-important').delay(5000).slideUp(500);
+	 window.PixelAdmin.start(init);
 </script>
 
 </body>

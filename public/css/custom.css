@@ -33,6 +33,9 @@ img.user-tiny  {
 img.thumbnail_video {
    width: 120px;
 }
+img.thumbnail_lg_video {
+    width: 180px;
+}
 img.detail_video_img {
    width: 150px;
 }
