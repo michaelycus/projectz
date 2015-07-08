@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewTable extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.

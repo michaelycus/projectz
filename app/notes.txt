@@ -1,13 +1,2 @@
-28/06
- - Implementar avatares
-
- = Comentários
- - Colocar data novamente nos comentários
- - Permitir comentar comentário
-
-27/06
- - Fazer uma página 'about' a partir do logo do sistema
- - FontAwesome deve ficar no diretório local
-
-25/06 - Colocar as permissões certas nos controlles e também nas views.
+08/07 - Criar mais
 

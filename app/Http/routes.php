@@ -52,6 +52,18 @@ Route::get('/login/callback/{provider?}',[
     'as'   => 'auth.getSocialAuthCallback'
 ]);
 
+Route::get('testes', function(){
+    $faker = Faker\Factory::create();
+
+    echo $faker->sentence();
+    for($i=0; $i<100; $i++){
+        echo 'bla '. $faker->name . '<br/>';
+    }
+
+    echo 'ok';
+    //echo $k . '<br/>';
+});
+
 //Route::get('/', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 //{
 //    if (Auth::check())

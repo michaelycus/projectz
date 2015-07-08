@@ -50,6 +50,7 @@
 					<td>
 						<span class="pull-right">
 							<a href="{{ URL::to('articles/' . $article->id . '') }}">
+							    <small>{{ count($article->reviews) }} <span class="btn-label icon fa fa-eye"></small>&nbsp;&nbsp;
 								<small>{{ count($article->comments) }} <span class="btn-label icon fa fa-comment"></small>
 							</a>
 							&nbsp;&nbsp;
