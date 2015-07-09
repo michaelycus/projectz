@@ -19,7 +19,7 @@
 <div class="row">
 @foreach ($videos as $video)
 	<div class="col-lg-6 col-md-12 col-xs-12">
-		<div class="panel colourable">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<span class="panel-title"><a href="{!! URL::to('videos', $video->id) !!}">{{ $video->title }}</a></span>
 				<div class="panel-heading-controls">
@@ -78,12 +78,12 @@
                     </div>
                 </div>
 
-
-
 			</div>
 		</div>
 	</div>
  @endforeach
  </div>
+
+
 
 @endsection
