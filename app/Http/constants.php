@@ -82,6 +82,35 @@ define ('VIDEO_REVIEW_ITEMS', serialize(array(
  *  POSTS CONSTANTS
  */
 
+define('POST_STATUS_SUGGESTED',   	    'suggested');
+define('POST_STATUS_PROOFREADING',  	'proofreading');
+define('POST_STATUS_SCHEDULED',  		'scheduled');
+define('POST_STATUS_PUBLISHED',  		'published');
+
+define ('POST_STATUS', serialize(array(
+    POST_STATUS_SUGGESTED,
+    POST_STATUS_PROOFREADING,
+    POST_STATUS_SCHEDULED,
+    POST_STATUS_PUBLISHED
+)));
+
+define ('POST_STATUS_LABELS', serialize(array(
+    POST_STATUS_SUGGESTED       => "Sugeridos",
+    POST_STATUS_PROOFREADING    => "Em revisão",
+    POST_STATUS_SCHEDULED       => "Agendados",
+    POST_STATUS_PUBLISHED       => "Publicados"
+)));
+
+define ('POST_REVIEW_ITEMS', serialize(array(
+    "Conteúdo dentro do escopo",
+    "Ortografia",
+    "Formatação",
+    "Imagem Destacada (min 1280x720 16:9)",
+    "Categorias",
+    "Open Graph Data",
+    "Links",
+    "Tags",
+)));
 
 /*
  *  PERMISSION CONSTANTS

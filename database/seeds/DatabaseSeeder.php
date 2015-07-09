@@ -8,6 +8,9 @@ use App\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
+// Todo:
+// Fazer classe de comentários e reviews
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -186,7 +189,13 @@ class VideoTableSeeder extends Seeder {
             'https://www.youtube.com/watch?v=s042DGqTAIg', 'https://www.youtube.com/watch?v=rOJNl4d0WiU',
             'https://www.youtube.com/watch?v=Pvy2g3-ZjOw', 'https://www.youtube.com/watch?v=KD6Boy6VJUQ',
             'https://www.youtube.com/watch?v=wrMqGVzEUBQ', 'https://www.youtube.com/watch?v=kNijb0q9CZc',
-            'https://www.youtube.com/watch?v=W85962jHQMM', 'https://www.youtube.com/watch?v=U2Sn7VP22WE'   );
+            'https://www.youtube.com/watch?v=W85962jHQMM', 'https://www.youtube.com/watch?v=U2Sn7VP22WE',
+            'https://www.youtube.com/watch?v=oZAc5t2lkvo', 'https://www.youtube.com/watch?v=Q_h4IoPJXZw',
+            'https://www.youtube.com/watch?v=daZ7IQFqPyA', 'https://www.youtube.com/watch?v=Z5aLeB17tmc',
+            'https://www.youtube.com/watch?v=8lBvC7aFB40', 'https://www.youtube.com/watch?v=9eKc5kgPVrA',
+            'https://www.youtube.com/watch?v=OydqR_7_DjI', 'https://www.youtube.com/watch?v=3MqYE2UuN24',
+            'https://www.youtube.com/watch?v=jN-FfJKgis8', 'https://www.youtube.com/watch?v=p_o4aY7xkXg',
+            'https://www.youtube.com/watch?v=Af0_vWDfJwQ', 'https://www.youtube.com/watch?v=tmNXKqeUtJM');
 
         $faker = Faker\Factory::create();
 
@@ -205,9 +214,9 @@ class PostTableSeeder extends Seeder {
 
     public function run()
     {
-        $states = unserialize(VIDEO_STATUS);
+        $states = unserialize(POST_STATUS);
 
-        $videos = array(
+        $posts = array(
             'https://www.youtube.com/watch?v=1HX5whMauMw',
             'http://blog.movimentozeitgeist.com.br/o-mito-da-democracia/',
             'https://www.youtube.com/watch?v=pHt8QguIQNA',
@@ -242,13 +251,13 @@ class PostTableSeeder extends Seeder {
 
         $faker = Faker\Factory::create();
 
-        foreach ($videos as $video) {
+        foreach ($posts as $post) {
             $k = array_rand($states);
-            Video::create(with(new Video)->handle(array(
-                'source_url' => $video,
+            Post::create(array(
+                'source_url' => $post,
                 'user_id'    => $faker->randomDigitNotNull,
                 'status'     => $states[$k]
-            )));
+            ));
         }
     }
 }
