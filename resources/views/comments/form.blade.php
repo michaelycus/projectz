@@ -1,7 +1,7 @@
 
 <div class="panel widget-article-comments">
     <div class="panel-heading">
-        <span class="panel-title"><i class="panel-title-icon fa fa-comment-o"></i>Comentários</span>
+        <span class="panel-title"><i class="panel-title-icon {{ \App\Comment::ICON }}"></i>Comentários</span>
     </div> <!-- / .panel-heading -->
     <div class="panel-body">
 
@@ -11,8 +11,8 @@
                 {!! Form::open(['url' => 'comments', 'id' => 'leave-comment-form', 'class' => 'comment-text no-padding no-border']) !!}
                     {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '1']) !!}
                     {!! Form::hidden('user_id', Auth::user()->id ) !!}
-                    {!! Form::hidden('commentable_id', $resource_id ) !!}
-                    {!! Form::hidden('commentable_type', $model ) !!}
+                    {!! Form::hidden('commentable_id', $media->id ) !!}
+                    {!! Form::hidden('commentable_type', get_class($media) ) !!}
                     <div class="expanding-input-hidden" style="margin-top: 10px;">
                         {!! Form::submit('Comentar', ['class' => 'btn btn-primary pull-right']) !!}
                     </div>
@@ -22,7 +22,7 @@
 
         <hr class="no-panel-padding-h panel-wide">
 
-        @foreach ($comments as $comment)
+        @foreach ($media->comments as $comment)
 
             @include('comments.reply', ['comment' => $comment])
 

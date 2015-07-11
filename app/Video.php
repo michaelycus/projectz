@@ -1,9 +1,19 @@
 <?php namespace App;
 
+use App\Media;
 use Illuminate\Database\Eloquent\Model;
 
-class Video extends Model
+class Video extends Media
 {
+    const ICON = 'fa fa-film';
+
+    const STATUS_TRANSCRIPTION = 'transcription';
+    const STATUS_SYNCHRONIZATION = 'sync';
+    const STATUS_TRANSLATION = 'translation';
+    const STATUS_PROOFREADING = 'proofreading';
+    const STATUS_SCHEDULED = 'scheduled';
+    const STATUS_PUBLISHED = 'published';
+
     protected $attributes = array(
         'status' => VIDEO_STATUS_TRANSCRIPTION,
     );
@@ -19,24 +29,35 @@ class Video extends Model
         'status'
     );
 
-    public function comments()
+    function getAvailableStatus()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return array(
+            self::STATUS_TRANSCRIPTION,
+            self::STATUS_SYNCHRONIZATION,
+            self::STATUS_TRANSLATION,
+            self::STATUS_PROOFREADING,
+            self::STATUS_SCHEDULED,
+            self::STATUS_PUBLISHED,
+        );
     }
 
-    public function reviews()
+    function getStatusLabels()
     {
-        return $this->morphMany('App\Review', 'reviewable');
+        return array(
+            self::STATUS_TRANSCRIPTION   => 'Em Transcrição',
+            self::STATUS_SYNCHRONIZATION => 'Sincronizando',
+            self::STATUS_TRANSLATION     => 'Tradução',
+            self::STATUS_PROOFREADING    => "Em revisão",
+            self::STATUS_SCHEDULED       => "Agendados",
+            self::STATUS_PUBLISHED       => "Publicados"
+        );
     }
 
-    public function actions()
+    function getReviewItems()
     {
-        return $this->morphMany('App\Action', 'actionable');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\User');
+        return array(
+            "80 caracteres por linha",
+        );
     }
 
     public function scopeUnpublished($query)

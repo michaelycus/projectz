@@ -3,7 +3,7 @@
 @section('content')
 
 
-@if (Auth::user()->hasPermission(PERMISSION_POST_CREATE))
+@if (Auth::user()->hasPermission(\App\Permission::POST_CREATE))
 <div class="page-header">	
 	<h1><span class="text-light-gray">Posts / </span>[EM BREVE]</h1>
 
@@ -19,8 +19,8 @@
 
 <div class="row">
 @foreach ($posts as $post)
-	<div class="col-md-6">
-		<div class="panel colourable">
+	<div class="col-md-4">
+		<div class="panel colourable" style="height: 500px">
 			<div class="panel-heading">
 				<span class="panel-title"><a href="{!! URL::to('posts', $post->id) !!}">{{ $post->title }}</a></span>
 			</div>

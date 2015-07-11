@@ -28,7 +28,7 @@
                 {!! Form::hidden('user_id', Auth::user()->id ) !!}
                 {!! Form::hidden('reply_id', $comment->id ) !!}
                 {!! Form::hidden('commentable_id', 0 ) !!}
-                {!! Form::hidden('commentable_type', $model ) !!}
+                {!! Form::hidden('commentable_type', '' ) !!}
                 {!! Form::submit('Comentar', ['class' => 'btn btn-primary pull-right']) !!}
             {!! Form::close() !!}
         </div>

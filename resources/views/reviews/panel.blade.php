@@ -1,18 +1,15 @@
 <div class="panel">
     <div class="panel-heading">
-        <span class="panel-title"><i class="panel-title-icon fa fa-eye"></i>Revisão</span>
+        <span class="panel-title"><i class="panel-title-icon {{ \App\Review::ICON }}"></i>Revisão</span>
     </div>
     <div class="panel-body">
 
         <div class="panel-group" id="accordion-review">
 
-            @if (count($reviews) == 0)
-                <div class="alert alert-info">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    Não existem revisões para esse item!
-                </div>
+            @if ($media->reviews->isEmpty())
+                Não existem revisões para esse item!
             @else
-                @foreach($reviews as $review)
+                @foreach($media->reviews as $review)
                 <div class="panel panel-{{ $review->status == REVIEW_DANGER ? 'danger' : ($review->status == REVIEW_WARNING ? 'warning' : 'success') }}">
                     <div class="panel-heading">
                         <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-review" href="#collapse_{{ $review->id }}">
@@ -30,7 +27,7 @@
                             <p>{{  $review->reply }}</p>
                         </div> <!-- / .panel-body -->
 
-                        @if (Auth::id() == $resource->user_id)
+                        @if (Auth::id() == $media->user_id)
                         <hr/>
                         <div class="panel-footer">
                             {!! Form::model($review, ['method' => 'PATCH', 'action' => ['ReviewController@update', $review->id]]) !!}
@@ -53,7 +50,7 @@
         </div>
 
         <!-- Create review -->
-        @if (!Auth::user()->hasReview($reviews) && Auth::id() != $resource->user_id)
+        @if (!Auth::user()->hasReview($media->reviews) && Auth::id() != $media->user_id)
 
         <div id="reviewModal" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
@@ -65,9 +62,7 @@
 
                     {!! Form::open(['url' => 'reviews', 'id' => 'form-review'] ) !!}
 
-                        @include('reviews.form', ['resource' => $resource,
-                                                  'model' => $model,
-                                                  'items' => unserialize(ARTICLE_REVIEW_ITEMS)])
+                        @include('reviews.form', ['media' => $media])
                     {!! Form::close() !!}
 
                 </div> <!-- / .modal-content -->
@@ -75,14 +70,14 @@
         </div> <!-- /.modal -->
         <!-- / Modal -->
 
-        <div class="panel-body">
-            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reviewModal">Iniciar revisão <i class="fa fa-check"></i></button>
-        </div>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reviewModal">Revisar <i class="fa fa-check"></i></button>
+
         @endif
+        <!-- /Create review -->
 
         <!-- Edit review -->
-        @foreach($reviews as $review)
-            @if ($review->user_id == Auth::id() )
+        @foreach($media->reviews as $review)
+            @if ($review->user_id == Auth::id())
 
             <div id="reviewModal" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
                 <div class="modal-dialog">
@@ -94,9 +89,7 @@
 
                         {!! Form::model($review, ['method' => 'PATCH', 'action' => ['ReviewController@update', $review->id]]) !!}
 
-                            @include('reviews.form', ['resource' => $resource,
-                                                      'model' => $model,
-                                                      'items' => unserialize(ARTICLE_REVIEW_ITEMS)])
+                            @include('reviews.form', ['media' => $media])
 
                         {!! Form::close() !!}
 
@@ -105,11 +98,12 @@
             </div> <!-- /.modal -->
             <!-- / Modal -->
 
-            <div class="panel-body">
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reviewModal">Editar revisão <i class="fa fa-check"></i></button>
-            </div>
+
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reviewModal">Editar revisão <i class="fa fa-check"></i></button>
+
             @endif
         @endforeach
+        <!-- /Edit review -->
 
 
     </div>

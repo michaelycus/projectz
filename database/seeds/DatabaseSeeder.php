@@ -4,6 +4,7 @@
 use App\Article;
 use App\User;
 use App\Video;
+use App\Post;
 use App\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;

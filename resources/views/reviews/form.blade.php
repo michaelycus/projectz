@@ -1,8 +1,8 @@
 <div class="modal-body">
     <strong>Todos</strong> esses itens foram avaliados?<br><br>
     <ul>
-        @foreach($items as $item)
-        <li>{{ $item }}</li>
+        @foreach($media->getStatusLabels() as $status)
+        <li>{{ $status }}</li>
         @endforeach
     </ul>
 
@@ -16,8 +16,8 @@
         {!! Form::select('status', unserialize(REVIEW_STATUS), Input::old('status'), ['class' => 'form-control form-group-margin']) !!}
     </div>
 
-    {!! Form::hidden('reviewable_id', $resource->id) !!}
-    {!! Form::hidden('reviewable_type', $model) !!}
+    {!! Form::hidden('reviewable_id', $media->id) !!}
+    {!! Form::hidden('reviewable_type', get_class($media)) !!}
     {!! Form::hidden('user_id', Auth::id()) !!}
 
 </div> <!-- / .modal-body -->

@@ -4,10 +4,10 @@
 
 <div class="page-header">
     @if (Input::get('status'))
-	<h1><span class="text-light-gray">Vídeos / </span>{{ unserialize(VIDEO_STATUS_LABELS)[Input::get('status')] }}</h1>
+	<h1><span class="text-light-gray">Vídeos / </span>{{ with(new App\Video)->getStatusLabels()[Input::get('status')] }}</h1>
     @endif
 
-    @if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
+    @if (Auth::user()->hasPermission(\App\Permission::VIDEO_CREATE))
 	<div class="pull-right col-xs-12 col-sm-auto">
 		<a href="videos/create" class="btn btn-primary btn-labeled" style="width: 100%;">
 			<span class="btn-label icon fa fa-plus"></span>Criar video
@@ -23,7 +23,7 @@
 			<div class="panel-heading">
 				<span class="panel-title"><a href="{!! URL::to('videos', $video->id) !!}">{{ $video->title }}</a></span>
 				<div class="panel-heading-controls">
-				@if (Auth::user()->hasPermission(PERMISSION_VIDEO_CREATE))
+				@if (Auth::user()->hasPermission(\App\Permission::VIDEO_CREATE))
                 <a class="btn btn-xs  btn-primary btn-outline" href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i></a>
                 @endif
                 </div>

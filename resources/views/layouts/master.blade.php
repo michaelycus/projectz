@@ -59,7 +59,7 @@
 
 					    <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-film"></i> Vídeos</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Video::ICON }}"></i> Vídeos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ URL::to('videos?status=transcription') }}">Em transcrição</a></li>
                                     <li><a href="{{ URL::to('videos?status=sync') }}">Em sincronização</a></li>
@@ -72,7 +72,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-wordpress"></i> Artigos</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Article::ICON }}"></i> Artigos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ URL::to('articles?status=editing') }}">Em edição</a></li>
                                     <li><a href="{{ URL::to('articles?status=proofreading') }}">Em revisão</a></li>
@@ -83,7 +83,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon fa fa-facebook"></i> Posts</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Post::ICON }}"></i> Posts</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ URL::to('videos?status=editing') }}">Em edição</a></li>
                                     <li><a href="{{ URL::to('videos?status=proofreading') }}">Em revisão</a></li>
@@ -141,15 +141,15 @@
 				<ul class="navigation">
 
 					<li>
-						<a href="{{ URL::to('videos') }}"><i class="menu-icon fa fa-film"></i><span class="mm-text">Vídeos</span></a>
+						<a href="{{ URL::to('videos') }}"><i class="menu-icon {{ App\Video::ICON }}"></i><span class="mm-text">Vídeos</span></a>
 					</li>
 
 					<li>
-						<a href="{{ URL::to('articles') }}"><i class="menu-icon fa fa-wordpress"></i><span class="mm-text">Artigos</span></a>
+						<a href="{{ URL::to('articles') }}"><i class="menu-icon {{ App\Article::ICON }}"></i><span class="mm-text">Artigos</span></a>
 					</li>
 
 					<li>
-                        <a href="{{ URL::to('posts') }}"><i class="menu-icon fa fa-facebook"></i><span class="mm-text">Posts</span></a>
+                        <a href="{{ URL::to('posts') }}"><i class="menu-icon {{ App\Post::ICON }}"></i><span class="mm-text">Posts</span></a>
                     </li>
 
 				</ul> <!-- / .navigation -->

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model {
 
-	//protected $morphClass = 'Comment';
+	const ICON = 'fa fa-comment-o';
 
 	protected $fillable = array('body', 'user_id', 'commentable_id', 'commentable_type', 'reply_id');
 

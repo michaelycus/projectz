@@ -32,36 +32,36 @@
                         &nbsp;&nbsp;<a href="#" title="">{{ $user->name }}</a>
                     </td>
                     <td>{{ $user->email }}</td>
-                    <td>{!! $user->hasPermission(PERMISSION_SYSTEM_MANAGER) ? PERMISSION_YES : PERMISSION_NO !!}</td>
+                    <td>{!! $user->hasPermission(\App\Permission::SYSTEM_MANAGER) ? \App\Permission::PERMISSION_YES : \App\Permission::PERMISSION_NO !!}</td>
 
                     <td>
-                        @if ($user->hasPermission(PERMISSION_VIDEO_MANAGE))
+                        @if ($user->hasPermission(\App\Permission::VIDEO_MANAGE))
                         Gerenciar
-                        @elseif($user->hasPermission(PERMISSION_VIDEO_CREATE))
+                        @elseif($user->hasPermission(\App\Permission::VIDEO_CREATE))
                         Criar
-                        @elseif($user->hasPermission(PERMISSION_VIDEO_EXECUTE))
+                        @elseif($user->hasPermission(\App\Permission::VIDEO_EXECUTE))
                         Executar
                         @else
                         Sem permissão
                         @endif
                     </td>
                     <td>
-                        @if ($user->hasPermission(PERMISSION_ARTICLE_MANAGE))
+                        @if ($user->hasPermission(\App\Permission::ARTICLE_MANAGE))
                         Gerenciar
-                        @elseif($user->hasPermission(PERMISSION_ARTICLE_CREATE))
+                        @elseif($user->hasPermission(\App\Permission::ARTICLE_CREATE))
                         Criar
-                        @elseif($user->hasPermission(PERMISSION_ARTICLE_EXECUTE))
+                        @elseif($user->hasPermission(\App\Permission::ARTICLE_EXECUTE))
                         Executar
                         @else
                         Sem permissão
                         @endif
                     </td>
                     <td>
-                        @if ($user->hasPermission(PERMISSION_POST_MANAGE))
+                        @if ($user->hasPermission(\App\Permission::POST_MANAGE))
                         Gerenciar
-                        @elseif($user->hasPermission(PERMISSION_POST_CREATE))
+                        @elseif($user->hasPermission(\App\Permission::POST_CREATE))
                         Criar
-                        @elseif($user->hasPermission(PERMISSION_POST_EXECUTE))
+                        @elseif($user->hasPermission(\App\Permission::POST_EXECUTE))
                         Executar
                         @else
                         Sem permissão

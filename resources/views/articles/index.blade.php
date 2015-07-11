@@ -6,10 +6,10 @@
 
 <div class="page-header">
     @if (Input::get('status'))
-	<h1><span class="text-light-gray">Artigos /</span> {{ unserialize(ARTICLE_STATUS_LABELS)[Input::get('status')] }}</h1>
+	<h1><span class="text-light-gray">Artigos /</span> {{ with(new App\Article)->getStatusLabels()[Input::get('status')] }}</h1>
 	@endif
 
-    @if (Auth::user()->hasPermission(PERMISSION_ARTICLE_CREATE))
+    @if (Auth::user()->hasPermission(\App\Permission::ARTICLE_CREATE))
 	<div class="pull-right col-xs-12 col-sm-auto">
 		<a href="articles/create" class="btn btn-primary btn-labeled" style="width: 100%;">
 			<span class="btn-label icon fa fa-plus"></span>Criar artigo
@@ -28,7 +28,7 @@
 				    <a href="{!! URL::to('articles', $article->id) !!}">{{ $article->title }}</a>
                 </span>
 				<div class="panel-heading-controls">
-				@if (Auth::user()->hasPermission(PERMISSION_ARTICLE_CREATE))
+				@if (Auth::user()->hasPermission(\App\Permission::ARTICLE_CREATE))
                 <a class="btn btn-xs  btn-primary btn-outline"
                    href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i></a>
                 @endif

@@ -13,6 +13,7 @@ Route::resource('posts', 'PostController');
 Route::resource('comments', 'CommentController');
 Route::resource('profiles', 'ProfileController');
 Route::resource('reviews', 'ReviewController');
+Route::resource('teams', 'TeamController');
 
 
 Route::get('dashboard', 'DashboardController@index');

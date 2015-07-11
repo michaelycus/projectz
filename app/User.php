@@ -1,19 +1,19 @@
 <?php namespace App;
 
+use DB;
+use URL;
+use Auth;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-use Auth;
-use URL;
-use DB;
-
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword;
+	use Authenticatable, CanResetPassword, SoftDeletes;
 
 	/**
 	 * The database table used by the model.
@@ -28,6 +28,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $fillable = ['first_name', 'last_name', 'email', 'password'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -61,6 +68,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /* Reviews */
+
     public function hasReview($reviews)
     {
         foreach($reviews as $review){
@@ -73,7 +81,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
-    /* Permitions */
+    /* Team */
+
+    public function isInTeam($team)
+    {
+        foreach($team as $team_member){
+            $matchThese = ['id' => $team_member->id, 'user_id' => Auth::id()];
+
+            if (DB::table('teams')->where($matchThese)->get()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* Permissions */
 
     public function hasPermission($permission)
     {
