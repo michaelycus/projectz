@@ -15,7 +15,7 @@
 
 		{!! Form::open(['url' => 'videos']) !!}				
 				
-			@include('videos.form', ['submitButtonText' => 'Adicionar Vídeo'])			
+			@include('medias.videos.form', ['submitButtonText' => 'Adicionar Vídeo'])
 
 		{!! Form::close() !!}
 

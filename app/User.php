@@ -105,7 +105,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                     return true;
                 }
             }
-            if ($p->type == PERMISSION_SYSTEM_MANAGER){
+            if ($p->type == \App\Permission::SYSTEM_MANAGER){
                 return true;
             }
         }
@@ -142,16 +142,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isVideoManager()
     {
-        return $this->isAdmin() || $this->hasPermission(PERMISSION_VIDEO_MANAGE);
+        return $this->isAdmin() || $this->hasPermission(\App\Permission::VIDEO_MANAGE);
     }
 
     public function isArticleManager()
     {
-        return $this->isAdmin() || $this->hasPermission(PERMISSION_ARTICLE_MANAGE);
+        return $this->isAdmin() || $this->hasPermission(\App\Permission::ARTICLE_MANAGE);
     }
 
     public function isAdmin()
     {
-        return $this->hasPermission(PERMISSION_SYSTEM_MANAGER);
+        return $this->hasPermission(\App\Permission::SYSTEM_MANAGER);
     }
 }

@@ -83,7 +83,10 @@
 	</div>
  @endforeach
  </div>
-
-
+ <div class="row">
+    <div class="text-center">
+         {!! $videos->appends(['status' => Input::get('status')])->render() !!}
+     </div>
+ </div>
 
 @endsection

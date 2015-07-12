@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Input;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -12,8 +13,8 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkPermission:'.PERMISSION_POST_EXECUTE,['except' => ['index']]);
-        $this->middleware('checkPermission:'.PERMISSION_POST_CREATE,['only' => ['create','store','edit','update']]);
+        $this->middleware('checkPermission:'.\App\Permission::POST_EXECUTE,['except' => ['index']]);
+        $this->middleware('checkPermission:'.\App\Permission::POST_CREATE,['only' => ['create','store','edit','update']]);
     }
 
     /**
@@ -23,9 +24,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        if (Input::get('status')){
+            $posts = Post::where('status', Input::get('status'))->paginate(12);
+        }else {
+            $posts = Post::latest()->unpublished()->get();
+        }
 
-        return view('posts.index', compact('posts'));
+        //$posts = Post::latest()->get();
+
+        return view('medias.posts.index', compact('posts'));
     }
 
     /**
@@ -37,7 +44,7 @@ class PostController extends Controller
     {
         $users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
 
-        return view('posts.create', compact('users'));
+        return view('medias.posts.create', compact('users'));
     }
 
     /**

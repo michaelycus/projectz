@@ -13,10 +13,23 @@ class Post extends Media
     const STATUS_PROOFREADING = 'proofreading';
     const STATUS_SCHEDULED = 'scheduled';
     const STATUS_PUBLISHED = 'published';
+    const STATUS_ARCHIVED = 'archived';
 
-    protected $fillable = array('title', 'description', 'source_url', 'user_id', 'status');
+    protected $attributes = array(
+        'status' => self::STATUS_SUGGESTED,
+    );
 
-    function getAvailableStatus()
+    protected $fillable = array(
+        'title',
+        'description',
+        'source_url',
+        'publish_url',
+        'user_id',
+        'status',
+        'published_at'
+    );
+
+    public function getAvailableStatus()
     {
         return array(
             self::STATUS_SUGGESTED,
@@ -26,7 +39,7 @@ class Post extends Media
         );
     }
 
-    function getStatusLabels()
+    public function getStatusLabels()
     {
         return array(
             self::STATUS_SUGGESTED       => 'Sugeridos',
@@ -36,7 +49,7 @@ class Post extends Media
         );
     }
 
-    function getReviewItems()
+    public function getReviewItems()
     {
         return array(
             "Pontuação",
@@ -46,11 +59,11 @@ class Post extends Media
 
     public function scopeUnpublished($query)
     {
-        //$query->where('status', '!=', VIDEO_STATUS_PUBLISHED);
+        $query->where('status', '!=', self::STATUS_PUBLISHED);
     }
 
     public function scopePublished($query)
     {
-        //$query->where('status', '=', VIDEO_STATUS_PUBLISHED);
+        $query->where('status', '=', self::STATUS_PUBLISHED);
     }
 }

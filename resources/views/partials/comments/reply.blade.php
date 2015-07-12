@@ -36,7 +36,7 @@
 
     @foreach($comment->getReplies($comment->id) as $comment_reply)
 
-        @include('comments.reply', ['comment' => $comment_reply])
+        @include('partials.comments.reply', ['comment' => $comment_reply])
 
     @endforeach
 

@@ -13,8 +13,8 @@ class VideoController extends Controller {
 
     public function __construct()
     {
-        $this->middleware('checkPermission:'.PERMISSION_VIDEO_EXECUTE,['except' => ['index']]);
-        $this->middleware('checkPermission:'.PERMISSION_VIDEO_CREATE,['only' => ['create','store','edit','update']]);
+        $this->middleware('checkPermission:'.\App\Permission::VIDEO_EXECUTE,['except' => ['index']]);
+        $this->middleware('checkPermission:'.\App\Permission::VIDEO_CREATE,['only' => ['create','store','edit','update']]);
     }
 
 	/**
@@ -25,12 +25,12 @@ class VideoController extends Controller {
 	public function index()
 	{
         if (Input::get('status')){
-            $videos = Video::where('status', Input::get('status'))->get();
+            $videos = Video::where('status', Input::get('status'))->paginate(10);
         }else{
             $videos = Video::latest()->unpublished()->get();
         }
 
-        return view('videos.index', compact('videos'));
+        return view('medias.videos.index', compact('videos'));
 	}
 
 	/**
@@ -42,7 +42,7 @@ class VideoController extends Controller {
 	{
 		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
 
-		return view('videos.create', compact('users'));
+		return view('medias.videos.create', compact('users'));
 	}
 
 	/**
@@ -67,7 +67,7 @@ class VideoController extends Controller {
 	 */
 	public function show(Video $video)
 	{
-		return view('videos.show',compact('video'));
+		return view('medias.videos.show',compact('video'));
 	}
 
 	/**
@@ -80,7 +80,7 @@ class VideoController extends Controller {
 	{
 		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
 
-		return view('videos.edit', compact('video', 'users'));
+		return view('medias.videos.edit', compact('video', 'users'));
 	}
 
 	/**
@@ -91,8 +91,6 @@ class VideoController extends Controller {
 	 */
 	public function update(Video $video, VideoRequest $request)
 	{
-		//$videos = Video::latest()->unpublished()->get();
-		//$video->update(Video::handle($request->all()));
 		$video->update(with(new Video)->handle($request->all()));
 
 		flash()->success('O vídeo foi atualizado!');

@@ -7,6 +7,7 @@ class Article extends Media
     const STATUS_PROOFREADING = 'proofreading';
     const STATUS_SCHEDULED = 'scheduled';
     const STATUS_PUBLISHED = 'published';
+    const STATUS_ARCHIVED = 'archived';
 
     const ICON = 'fa fa-wordpress';
 
@@ -14,7 +15,16 @@ class Article extends Media
         'status' => self::STATUS_EDITING,
     );
 
-    protected $fillable = array('title', 'source_url', 'project_url', 'publish_url', 'user_id', 'status');
+    protected $fillable = array(
+        'title',
+        'description',
+        'source_url',
+        'project_url',
+        'publish_url',
+        'user_id',
+        'status',
+        'published_at'
+    );
 
     public function scopeUnpublished($query)
     {
@@ -26,7 +36,7 @@ class Article extends Media
         $query->where('status', '=', self::STATUS_PUBLISHED);
     }
 
-    function getAvailableStatus()
+    public function getAvailableStatus()
     {
         return array(
             self::STATUS_EDITING,
@@ -36,7 +46,7 @@ class Article extends Media
         );
     }
 
-    function getStatusLabels()
+    public function getStatusLabels()
     {
         return array(
             self::STATUS_EDITING      => "Em edição",
@@ -46,7 +56,7 @@ class Article extends Media
         );
     }
 
-    function getReviewItems()
+    public function getReviewItems()
     {
         return array(
             "Conteúdo dentro do escopo",

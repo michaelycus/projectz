@@ -24,7 +24,7 @@
 
         @foreach ($media->comments as $comment)
 
-            @include('comments.reply', ['comment' => $comment])
+            @include('partials.comments.reply', ['comment' => $comment])
 
         @endforeach
 

@@ -39,12 +39,13 @@ class ArticleTableSeeder extends Seeder {
     {
         $faker = Faker\Factory::create();
 
-        $states = unserialize(ARTICLE_STATUS);
+        $states = with(new App\Article)->getAvailableStatus();
 
         for($i=0; $i<100; $i++){
             $k = array_rand($states);
-            $article = Article::create(array(
+            Article::create(array(
                 'title' 		=> $faker->sentence(),
+                'description'   => $faker->paragraph(),
                 'source_url' 	=> $faker->url,
                 'project_url' 	=> $faker->url,
                 'user_id' 		=> $faker->randomDigitNotNull,
@@ -58,7 +59,7 @@ class UserTableSeeder extends Seeder {
 
     public function run()
     {
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '10206432895324665',
             'name' 			=> 'Michael Marques',
             'first_name' 	=> 'Michael',
@@ -66,7 +67,7 @@ class UserTableSeeder extends Seeder {
             'email' 		=> 'michaelycus@gmail.com',
             'password'      => bcrypt('secret')
         ));
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '100000399419035',
             'name' 			=> 'José Roberto Sousa',
             'first_name' 	=> 'José',
@@ -74,7 +75,7 @@ class UserTableSeeder extends Seeder {
             'email' 		=> 'jose@jose.com',
             'password'      => bcrypt('secret')
         ));
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '100000096065425',
             'name' 			=> 'Graciela Kunrath Lima',
             'first_name' 	=> 'Graciela',
@@ -82,57 +83,57 @@ class UserTableSeeder extends Seeder {
             'email' 		=> 'graciela@graciela.com',
             'password'      => bcrypt('secret')
         ));
-        $user = User::create(array(
-            'facebook_user_id' => '100002775557112',
-            'name' 			=> 'Juliana Thiesen Fuchs',
-            'first_name' 	=> 'Juliana',
-            'last_name' 	=> 'Thiesen Fuchs',
-            'email' 		=> 'juliana@juliana.com',
+        User::create(array(
+            'facebook_user_id' => '100000678436814',
+            'name' 			=> 'Fabio Queiroz',
+            'first_name' 	=> 'Fabio',
+            'last_name' 	=> 'Queiroz',
+            'email' 		=> 'fabio@fabio.com',
             'password'      => bcrypt('secret')
         ));
 
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '100000956255058',
             'name' 			=> 'Daniela Madanelo',
             'first_name' 	=> 'Daniela',
             'last_name' 	=> 'Madanelo',
-            'email' 		=> 'd@d.com',
+            'email' 		=> 'daniela@daniela.com',
             'password'      => bcrypt('secret')
         ));
 
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '1207089492',
             'name' 			=> 'Rodrigo Nishino Zeitgeist',
             'first_name' 	=> 'Rodrigo',
             'last_name' 	=> 'Nishino Zeitgeist',
-            'email' 		=> 'r@r.com',
+            'email' 		=> 'rodrigo@rodrigo.com',
             'password'      => bcrypt('secret')
         ));
 
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '1066224340',
             'name' 			=> 'Arthur Helfstein Fragoso',
             'first_name' 	=> 'Arthur',
             'last_name' 	=> 'Helfstein Fragoso',
-            'email' 		=> 'a@a.com',
+            'email' 		=> 'arthur@arthur.com',
             'password'      => bcrypt('secret')
         ));
 
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '826528851',
             'name' 			=> 'Gustavo Canto',
             'first_name' 	=> 'Gustavo',
             'last_name' 	=> 'Canto',
-            'email' 		=> 'g@g.com',
+            'email' 		=> 'gustavo@gustavo.com',
             'password'      => bcrypt('secret')
         ));
 
-        $user = User::create(array(
+        User::create(array(
             'facebook_user_id' => '659120626',
             'name' 			=> 'Bruna Sahão',
             'first_name' 	=> 'Bruna',
             'last_name' 	=> 'Sahão',
-            'email' 		=> 'b@b.com',
+            'email' 		=> 'bruna@bruna.com',
             'password'      => bcrypt('secret')
         ));
 
@@ -169,7 +170,7 @@ class VideoTableSeeder extends Seeder {
 
     public function run()
     {
-        $states = unserialize(VIDEO_STATUS);
+        $states = with(new App\Video)->getAvailableStatus();
 
         $videos = array(
             'https://www.youtube.com/watch?v=6PxtSO-z8cI', 'https://www.youtube.com/watch?v=-c_8h-EqhaY',
@@ -203,9 +204,11 @@ class VideoTableSeeder extends Seeder {
         foreach ($videos as $video) {
             $k = array_rand($states);
             Video::create(with(new Video)->handle(array(
-                'source_url' => $video,
-                'user_id'    => $faker->randomDigitNotNull,
-                'status'     => $states[$k]
+                'description' => $faker->paragraph(),
+                'source_url'  => $video,
+                'project_url' => $faker->url,
+                'user_id'     => $faker->randomDigitNotNull,
+                'status'      => $states[$k]
             )));
         }
     }
@@ -215,7 +218,7 @@ class PostTableSeeder extends Seeder {
 
     public function run()
     {
-        $states = unserialize(POST_STATUS);
+        $states = with(new App\Post)->getAvailableStatus();
 
         $posts = array(
             'https://www.youtube.com/watch?v=1HX5whMauMw',
@@ -255,9 +258,11 @@ class PostTableSeeder extends Seeder {
         foreach ($posts as $post) {
             $k = array_rand($states);
             Post::create(array(
-                'source_url' => $post,
-                'user_id'    => $faker->randomDigitNotNull,
-                'status'     => $states[$k]
+                'source_url'  => $post,
+                'title'       => $faker->sentence(),
+                'description' => $faker->paragraph(),
+                'user_id'     => $faker->randomDigitNotNull,
+                'status'      => $states[$k]
             ));
         }
     }

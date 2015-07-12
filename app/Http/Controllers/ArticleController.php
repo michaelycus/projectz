@@ -17,8 +17,8 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkPermission:'.PERMISSION_ARTICLE_EXECUTE,['except' => ['index']]);
-        $this->middleware('checkPermission:'.PERMISSION_ARTICLE_CREATE,['only' => ['create','store','edit','update']]);
+        $this->middleware('checkPermission:'.\App\Permission::ARTICLE_EXECUTE,['except' => ['index']]);
+        $this->middleware('checkPermission:'.\App\Permission::ARTICLE_CREATE,['only' => ['create','store','edit','update']]);
     }
 
 	/**
@@ -29,12 +29,12 @@ class ArticleController extends Controller
 	public function index()
 	{
         if (Input::get('status')){
-            $articles = Article::where('status', Input::get('status'))->get();
+            $articles = Article::where('status', Input::get('status'))->paginate(10);
         }else{
             $articles = Article::latest()->unpublished()->get();
         }
 
-        return view('articles.index', compact('articles'));
+        return view('medias.articles.index', compact('articles'));
 	}
 
 	/**
@@ -46,7 +46,7 @@ class ArticleController extends Controller
 	{		 
   		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
     	
-    	return view('articles.create', compact('users'));
+    	return view('medias.articles.create', compact('users'));
 	}
 
 	/**
@@ -71,7 +71,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
 	{
-		return view('articles.show',compact('article'));
+		return view('medias.articles.show',compact('article'));
 	}
 
 	/**
@@ -85,7 +85,7 @@ class ArticleController extends Controller
 	{
 		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
 		
-		return view('articles.edit', compact('article', 'users'));
+		return view('medias.articles.edit', compact('article', 'users'));
 	}
 
 	/**
@@ -97,6 +97,8 @@ class ArticleController extends Controller
 	public function update(Article $article, ArticleRequest $request)
 	{
 		$article->update($request->all());
+
+        flash()->success('O artigo foi atualizado!')->important();
 
 		return redirect('articles/'.$article->id);
 	}

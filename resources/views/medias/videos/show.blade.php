@@ -118,8 +118,18 @@
                                 array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
                         @elseif ($video->status == App\Video::STATUS_PROOFREADING)
                             {!! Form::hidden('status', App\Video::STATUS_SCHEDULED ) !!}
-                            {!! Html::decode(Form::button('Agendar publicação <i class="fa fa-arrow-right"></i>',
-                                array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move', 'type' => 'submit'))) !!}
+
+                            @include('partials.scripts.datepaginator')
+
+                            {!! Form::hidden('status', App\Video::STATUS_SCHEDULED ) !!}
+                            {!! Form::hidden('published_at',  Carbon\Carbon::now(), ['id' => 'published_at'] ) !!}
+
+                            {!! Html::decode(Form::button('Agendar lançamento <i class="fa fa-arrow-right"></i>',
+                                                            array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move',
+                                                                   'type' => 'submit'))) !!}
+
+                            <div id="bs-datepaginator" class="panel-padding"></div>
+
                         @elseif ($video->status == App\Video::STATUS_SCHEDULED)
                             {!! Form::hidden('status', App\Video::STATUS_PUBLISHED ) !!}
                             {!! Html::decode(Form::button('Marcar como publicado <i class="fa fa-arrow-right"></i>',
@@ -146,15 +156,15 @@
 
 	<div class="col-md-6">
 
-	    @include('teams.panel', ['media' => $video])
+	    @include('partials.teams.panel', ['media' => $video])
 
 	    @if ($video->status != App\Video::STATUS_TRANSCRIPTION &&
 	         $video->status != App\Video::STATUS_SYNCHRONIZATION &&
 	         $video->status != App\Video::STATUS_TRANSLATION && Auth::user()->isInTeam($video->team))
-            @include('reviews.panel', ['media' => $video])
+            @include('partials.reviews.panel', ['media' => $video])
         @endif
 
-        @include('comments.form', ['media' => $video])
+        @include('partials.comments.form', ['media' => $video])
 	</div>
 
 </div>
@@ -163,7 +173,7 @@
 
 @section('script')
 
-    @include('comments.scripts')
+    @include('partials.comments.scripts')
 
 @stop
 

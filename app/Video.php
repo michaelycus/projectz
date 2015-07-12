@@ -13,23 +13,26 @@ class Video extends Media
     const STATUS_PROOFREADING = 'proofreading';
     const STATUS_SCHEDULED = 'scheduled';
     const STATUS_PUBLISHED = 'published';
+    const STATUS_ARCHIVED = 'archived';
 
     protected $attributes = array(
-        'status' => VIDEO_STATUS_TRANSCRIPTION,
+        'status' => self::STATUS_TRANSCRIPTION,
     );
 
     protected $fillable = array(
         'title',
+        'description',
         'duration',
         'thumbnail',
         'source_url',
         'project_url',
         'publish_url',
+        'published_at',
         'user_id',
         'status'
     );
 
-    function getAvailableStatus()
+    public function getAvailableStatus()
     {
         return array(
             self::STATUS_TRANSCRIPTION,
@@ -41,7 +44,7 @@ class Video extends Media
         );
     }
 
-    function getStatusLabels()
+    public function getStatusLabels()
     {
         return array(
             self::STATUS_TRANSCRIPTION   => 'Em Transcrição',
@@ -53,7 +56,7 @@ class Video extends Media
         );
     }
 
-    function getReviewItems()
+    public function getReviewItems()
     {
         return array(
             "80 caracteres por linha",
@@ -62,12 +65,12 @@ class Video extends Media
 
     public function scopeUnpublished($query)
     {
-        $query->where('status', '!=', VIDEO_STATUS_PUBLISHED);
+        $query->where('status', '!=', self::STATUS_PUBLISHED);
     }
 
     public function scopePublished($query)
     {
-        $query->where('status', '=', VIDEO_STATUS_PUBLISHED);
+        $query->where('status', '=', self::STATUS_PUBLISHED);
     }
 
     public function getByState($state)

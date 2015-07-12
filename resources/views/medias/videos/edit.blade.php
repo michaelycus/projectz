@@ -15,11 +15,11 @@
 		
 		{!! Form::model($video, ['method' => 'PATCH', 'action' => ['VideoController@update', $video->id]]) !!}				
 				
-			@include('videos.form', ['submitButtonText' => 'Atualizar Vídeo'])		
+			@include('medias.videos.form', ['submitButtonText' => 'Atualizar Vídeo'])
 
 		{!! Form::close() !!}
 
-		@include('errors.list')		
+		@include('errors.list')
 	
 	</div>
 </div>

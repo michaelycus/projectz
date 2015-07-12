@@ -67,8 +67,11 @@
                                     <li><a href="{{ URL::to('videos?status=proofreading') }}">Em revisão</a></li>
                                     <li><a href="{{ URL::to('videos?status=scheduled') }}">Agendados</a></li>
                                     <li><a href="{{ URL::to('videos?status=published') }}">Publicados</a></li>
+                                    <li><a href="{{ URL::to('videos?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Estatísticas</a></li>
+                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ url('videos/create') }}"><i class="fa fa-plus"></i> Novo</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -78,19 +81,25 @@
                                     <li><a href="{{ URL::to('articles?status=proofreading') }}">Em revisão</a></li>
                                     <li><a href="{{ URL::to('articles?status=scheduled') }}">Agendados</a></li>
                                     <li><a href="{{ URL::to('articles?status=published') }}">Publicados</a></li>
+                                    <li><a href="{{ URL::to('articles?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Estatísticas</a></li>
+                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ url('articles/create') }}"><i class="fa fa-plus"></i> Novo</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Post::ICON }}"></i> Posts</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('videos?status=editing') }}">Em edição</a></li>
-                                    <li><a href="{{ URL::to('videos?status=proofreading') }}">Em revisão</a></li>
-                                    <li><a href="{{ URL::to('videos?status=scheduled') }}">Agendados</a></li>
-                                    <li><a href="{{ URL::to('videos?status=published') }}">Publicados</a></li>
+                                    <li><a href="{{ URL::to('posts?status=suggested') }}">Sugeridos</a></li>
+                                    <li><a href="{{ URL::to('posts?status=proofreading') }}">Em revisão</a></li>
+                                    <li><a href="{{ URL::to('posts?status=scheduled') }}">Agendados</a></li>
+                                    <li><a href="{{ URL::to('posts?status=published') }}">Publicados</a></li>
+                                    <li><a href="{{ URL::to('posts?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Estatísticas</a></li>
+                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ url('posts/create') }}"><i class="fa fa-plus"></i> Novo</a></li>
                                 </ul>
                             </li>
                         </ul>

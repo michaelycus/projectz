@@ -9,13 +9,13 @@
 
 <div class="panel col-xs-8">
 	<div class="panel-heading">
-		<span class="panel-title">Criar Artigo</span>
+		<span class="panel-title">Editar Artigo</span>
 	</div>
-	<div class="panel-body">		
-
-		{!! Form::open(['url' => 'articles']) !!}				
+	<div class="panel-body">
+		
+		{!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}				
 				
-			@include('articles.form', ['submitButtonText' => 'Adicionar Artigo'])			
+			@include('medias.articles.form', ['submitButtonText' => 'Atualizar Artigo'])
 
 		{!! Form::close() !!}
 

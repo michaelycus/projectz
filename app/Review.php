@@ -18,7 +18,7 @@ class Review extends Model
         return $this->belongsTo('App\User','user_id');
     }
 
-    public function getReviewStatus()
+    public static function getReviewStatus()
     {
         return array(
             self::REVIEW_DANGER  => "Precisa ainda de vários ajustes.",

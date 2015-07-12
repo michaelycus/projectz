@@ -16,6 +16,7 @@ class CreateVideosTable extends Migration
         {
             $table->increments('id');
             $table->string('title');
+            $table->text('description');
             $table->integer('duration');
             $table->string('thumbnail');
             $table->string('source_url', 255);
@@ -23,6 +24,7 @@ class CreateVideosTable extends Migration
             $table->string('publish_url', 255);
             $table->string('status', 32);
             $table->integer('user_id')->unsigned();
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkPermission:'.PERMISSION_SYSTEM_MANAGER);
+        $this->middleware('checkPermission:'.\App\Permission::SYSTEM_MANAGER);
     }
 
     /**

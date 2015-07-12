@@ -90,6 +90,10 @@
 	</div>
  @endforeach
  </div>
-
+ <div class="row">
+    <div class="text-center">
+         {!! $articles->appends(['status' => Input::get('status')])->render() !!}
+     </div>
+ </div>
 
 @endsection
