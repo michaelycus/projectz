@@ -29,12 +29,12 @@ class ArticleController extends Controller
 	public function index()
 	{
         if (Input::get('status')){
-            $articles = Article::where('status', Input::get('status'))->paginate(10);
-        }else{
-            $articles = Article::latest()->unpublished()->get();
-        }
+            $articles = Article::latest()->where('status', Input::get('status'))->paginate(10);
 
-        return view('medias.articles.index', compact('articles'));
+            return view('medias.articles.index', compact('articles'));
+        }else{
+            return view('medias.articles.overview');
+        }
 	}
 
 	/**
@@ -56,11 +56,11 @@ class ArticleController extends Controller
 	 */
 	public function store(ArticleRequest $request)
 	{
-		Article::create($request->all());
+		$article = Article::create($request->all());
 
 		flash()->success('O artigo foi criado!')->important();
 
-		return redirect('articles');
+		return redirect('articles/'.$article->id);
 	}
 
     /**
@@ -80,7 +80,6 @@ class ArticleController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	//public function edit($id)
 	public function edit(Article $article)
 	{
 		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');

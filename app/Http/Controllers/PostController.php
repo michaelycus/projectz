@@ -25,14 +25,14 @@ class PostController extends Controller
     public function index()
     {
         if (Input::get('status')){
-            $posts = Post::where('status', Input::get('status'))->paginate(12);
+            $posts = Post::latest()->where('status', Input::get('status'))->paginate(9);
+
+            return view('medias.posts.index', compact('posts'));
         }else {
             $posts = Post::latest()->unpublished()->get();
+
+            return view('medias.posts.overview', compact('posts'));
         }
-
-        //$posts = Post::latest()->get();
-
-        return view('medias.posts.index', compact('posts'));
     }
 
     /**
@@ -54,11 +54,11 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        Post::create($request->all());
+        $post = Post::create($request->all());
 
         flash()->success('O post foi criado!')->important();
 
-        return redirect('posts');
+        return redirect('posts/'.$post->id);
     }
 
     /**
@@ -67,9 +67,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('medias.posts.show',compact('post'));
     }
 
     /**
@@ -78,9 +78,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+
+        return view('medias.posts.edit', compact('post', 'users'));
     }
 
     /**
@@ -89,9 +91,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Post $post, PostRequest $request)
     {
-        //
+        $post->update($request->all());
+
+        flash()->success('O post foi atualizado!')->important();
+
+        return redirect('posts/'.$post->id);
     }
 
     /**
@@ -100,8 +106,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        flash()->success('O post foi deletado!');
+
+        return redirect('posts');
     }
 }

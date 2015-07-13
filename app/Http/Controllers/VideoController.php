@@ -25,12 +25,14 @@ class VideoController extends Controller {
 	public function index()
 	{
         if (Input::get('status')){
-            $videos = Video::where('status', Input::get('status'))->paginate(10);
+            $videos = Video::latest()->where('status', Input::get('status'))->paginate(10);
+
+            return view('medias.videos.index', compact('videos'));
         }else{
             $videos = Video::latest()->unpublished()->get();
-        }
 
-        return view('medias.videos.index', compact('videos'));
+            return view('medias.videos.overview');
+        }
 	}
 
 	/**
@@ -52,11 +54,11 @@ class VideoController extends Controller {
 	 */
 	public function store(VideoRequest $request)
 	{
-		Video::create(with(new Video)->handle($request->all()));
+		$video = Video::create(with(new Video)->handle($request->all()));
 
 		flash()->success('O vídeo foi criado!')->important();
 
-		return redirect('videos');
+		return redirect('videos/'.$video->id);
 	}
 
 	/**

@@ -144,10 +144,20 @@
 				@if (Auth::user()->isOwner($video->user_id)  || Auth::user()->isVideoManager())
 				<a class="btn btn-xs btn-primary"
 				    href="{{ URL::to('videos/' . $video->id . '/edit') }}"><i class="fa fa-edit"></i>Editar</a>
+
                 {!! Form::open(array('class' => 'pull-right delete',
                                      'method' => 'DELETE', 'route' => array('videos.destroy', $video->id))) !!}
                     {!! Html::decode(Form::button('<i class="fa fa-trash-o"></i> Remover',
                         array('class' => 'btn btn-xs btn-danger', 'type' => 'submit'))) !!}
+                {!! Form::close() !!}
+
+                {!! Form::model($video, ['class' => 'pull-right delete padding-xs-hr',
+                				                    'method' => 'PATCH',
+                				                    'action' => ['VideoController@update', $video->id]]) !!}
+                   {!! Form::hidden('status', App\Video::STATUS_ARCHIVED ) !!}
+                   {!! Html::decode(Form::button('<i class="fa fa-archive"></i> Arquivar',
+                                           array('class' => 'btn btn-xs btn-warning', 'type' => 'submit'))) !!}
+
                 {!! Form::close() !!}
 		        @endif
 			</div>

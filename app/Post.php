@@ -56,7 +56,6 @@ class Post extends Media
         );
     }
 
-
     public function scopeUnpublished($query)
     {
         $query->where('status', '!=', self::STATUS_PUBLISHED);
