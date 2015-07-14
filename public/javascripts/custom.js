@@ -4,6 +4,13 @@
 	}
 });
 
+ $('form.confirm').submit(function(event){
+     if(!confirm("Deseja mesmo fazer isso?")){
+         event.preventDefault();
+     }
+ });
+
+
 
 //  $('.delete').submit(function(event){
 //  	event.preventDefault();

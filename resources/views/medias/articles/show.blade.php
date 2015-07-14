@@ -7,7 +7,7 @@
 	<div class="col-md-6">
 		<div class="panel">
 			<div class="panel-heading">		
-				<span class="panel-title"><i class="{{ App\Article::ICON }}"></i> {{ $article->title }}</span>
+				<span class="panel-title"><i class="{{ App\Article::ICON }}"></i> {{ $article->title }} {{ $article->isArchived() ? ' [Arquivado]' : '' }}</span>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -129,15 +129,24 @@
                         array('class' => 'btn btn-xs btn-danger', 'type' => 'submit'))) !!}
                 {!! Form::close() !!}
 
-				{!! Form::model($article, ['class' => 'pull-right delete padding-xs-hr',
+
+
+
+				{!! Form::model($article, ['class' => 'pull-right confirm padding-xs-hr',
 				                           'method' => 'PATCH',
 				                           'action' => ['ArticleController@update', $article->id]]) !!}
+
+                   @if ($article->status != App\Article::STATUS_ARCHIVED)
                    {!! Form::hidden('status', App\Article::STATUS_ARCHIVED ) !!}
                    {!! Html::decode(Form::button('<i class="fa fa-archive"></i> Arquivar',
                                            array('class' => 'btn btn-xs btn-warning', 'type' => 'submit'))) !!}
+                   @elseif ($article->status == App\Article::STATUS_ARCHIVED)
+                   {!! Form::hidden('status', App\Article::STATUS_EDITING ) !!}
+                   {!! Html::decode(Form::button('<i class="fa fa-archive"></i> Desarquivar',
+                                          array('class' => 'btn btn-xs btn-warning', 'type' => 'submit'))) !!}
+                   @endif
 
                 {!! Form::close() !!}
-
 
 		        @endif
 			</div>

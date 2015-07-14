@@ -61,12 +61,12 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Video::ICON }}"></i> Vídeos</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('videos?status=transcription') }}">Em transcrição</a></li>
-                                    <li><a href="{{ URL::to('videos?status=sync') }}">Em sincronização</a></li>
-                                    <li><a href="{{ URL::to('videos?status=translation') }}">Em tradução</a></li>
-                                    <li><a href="{{ URL::to('videos?status=proofreading') }}">Em revisão</a></li>
-                                    <li><a href="{{ URL::to('videos?status=scheduled') }}">Agendados</a></li>
-                                    <li><a href="{{ URL::to('videos?status=published') }}">Publicados</a></li>
+                                    <li><a href="{{ URL::to('videos?status=transcription') }}"><i class="fa fa-chevron-right"></i> Em transcrição</a></li>
+                                    <li><a href="{{ URL::to('videos?status=sync') }}"><i class="fa fa-chevron-right"></i> Em sincronização</a></li>
+                                    <li><a href="{{ URL::to('videos?status=translation') }}"><i class="fa fa-chevron-right"></i> Em tradução</a></li>
+                                    <li><a href="{{ URL::to('videos?status=proofreading') }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
+                                    <li><a href="{{ URL::to('videos?status=scheduled') }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
+                                    <li><a href="{{ URL::to('videos?status=published') }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
                                     <li><a href="{{ URL::to('videos?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
@@ -77,10 +77,10 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Article::ICON }}"></i> Artigos</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('articles?status=editing') }}">Em edição</a></li>
-                                    <li><a href="{{ URL::to('articles?status=proofreading') }}">Em revisão</a></li>
-                                    <li><a href="{{ URL::to('articles?status=scheduled') }}">Agendados</a></li>
-                                    <li><a href="{{ URL::to('articles?status=published') }}">Publicados</a></li>
+                                    <li><a href="{{ URL::to('articles?status=editing') }}"><i class="fa fa-chevron-right"></i> Em edição</a></li>
+                                    <li><a href="{{ URL::to('articles?status=proofreading') }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
+                                    <li><a href="{{ URL::to('articles?status=scheduled') }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
+                                    <li><a href="{{ URL::to('articles?status=published') }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
                                     <li><a href="{{ URL::to('articles?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
@@ -91,10 +91,10 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Post::ICON }}"></i> Posts</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('posts?status=suggested') }}">Sugeridos</a></li>
-                                    <li><a href="{{ URL::to('posts?status=proofreading') }}">Em revisão</a></li>
-                                    <li><a href="{{ URL::to('posts?status=scheduled') }}">Agendados</a></li>
-                                    <li><a href="{{ URL::to('posts?status=published') }}">Publicados</a></li>
+                                    <li><a href="{{ URL::to('posts?status=suggested') }}"><i class="fa fa-chevron-right"></i> Sugeridos</a></li>
+                                    <li><a href="{{ URL::to('posts?status=proofreading') }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
+                                    <li><a href="{{ URL::to('posts?status=scheduled') }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
+                                    <li><a href="{{ URL::to('posts?status=published') }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
                                     <li><a href="{{ URL::to('posts?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>

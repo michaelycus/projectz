@@ -26,6 +26,11 @@ abstract class Media extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function isArchived()
+    {
+        return $this->status == 'archived';
+    }
+
     abstract function getAvailableStatus();
 
     abstract function getStatusLabels();

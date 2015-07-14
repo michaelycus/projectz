@@ -47,4 +47,16 @@ Route::get('/login/callback/{provider?}',[
 
 Route::get('testes', function(){
 
+    class Teste{
+
+        function imprime(){
+            echo 'testando...';
+        }
+    }
+
+    $str = 'Teste';
+
+    $teste = new $str;
+
+    echo $teste->imprime();
 });
