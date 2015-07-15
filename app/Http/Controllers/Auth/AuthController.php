@@ -78,6 +78,37 @@ class AuthController extends Controller
         return $this->socialite->with($provider)->redirect();
     }
 
+    public function getSocialAuthCallback2($provider=null)
+    {
+        $socialize_user = $this->socialite->with($provider)->user();
+
+        $provider_user_id = $socialize_user->getId(); // unique provider user id
+
+        $profile = Profile::where('provider_user_id', $provider_user_id)->first();
+
+        // register (if no user)
+        if (!$profile) {
+
+            $profile = new Profile;
+            $profile->provider_user_id =  $provider_user_id;
+
+
+
+            $user = new User;
+            $user->facebook_user_id = $provider_user_id;
+            $user->email = $socialize_user->user['email'];
+            $user->first_name = $socialize_user->user['first_name'];
+            $user->last_name = $socialize_user->user['last_name'];
+            $user->name = $socialize_user->user['name'];
+            $user->save();
+        }
+
+        // login
+        Auth::loginUsingId($user->id);
+
+        return redirect('dashboard');
+    }
+
     public function getSocialAuthCallback($provider=null)
     {
         $socialize_user = $this->socialite->with($provider)->user();
