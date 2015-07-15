@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Profile;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -41,44 +42,105 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'last_name'  => 'required|max:255',
+            'email'      => 'required|email|max:255|unique:users',
+            'password'   => 'required|confirmed|min:6',
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
         return User::create([
             'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'name' => $data['first_name'] .' '. $data['last_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'last_name'  => $data['last_name'],
+            'name'       => $data['first_name'] . ' ' . $data['last_name'],
+            'email'      => $data['email'],
+            'password'   => bcrypt($data['password']),
         ]);
     }
 
-    public function getSocialAuth($provider=null)
+    public function getSocialAuth($provider)
     {
-        if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
+        $providerKey = \Config::get('services.' . $provider);
+        if (empty($providerKey)) {
+            return view('login')
+                ->with('error', 'No such provider');
+        }
+
+        //return Socialite::driver($provider)->redirect();
+        return $this->socialite->with($provider)->redirect();
+    }
+
+    public function getSocialAuthCallback($provider)
+    {
+        $user = $this->socialite->with($provider)->user();
+
+        $socialUser = null;
+
+        //Check is this email present
+        $userCheck = User::where('email', '=', $user->email)->first();
+        if (!empty($userCheck)) {
+            $socialUser = $userCheck;
+        } else {
+            $sameSocialId = Profile::where('social_id', '=', $user->id)->where('provider', '=', $provider)->first();
+
+            if (empty($sameSocialId)) {
+                //There is no combination of this social id and provider, so create new one
+                $newSocialUser = new User;
+                $newSocialUser->email = $user->email;
+                $name = explode(' ', $user->name);
+                $newSocialUser->first_name = $name[0];
+                $newSocialUser->last_name = $name[1];
+                $newSocialUser->save();
+
+                $socialData = new Profile;
+                $socialData->social_id = $user->id;
+                $socialData->provider = $provider;
+                $socialData->user_id = $newSocialUser->id;
+                $socialData->save();
+                //$newSocialUser->profiles()->save($socialData);
+
+                $socialUser = $newSocialUser;
+            } else {
+                //Load this existing social user
+                $socialUser = $sameSocialId->user;
+            }
+
+        }
+
+        Auth::loginUsingId($socialUser->id);
+        //$this->auth->login($socialUser, true);
+
+        return redirect('dashboard');
+
+        //return \App::abort(500);
+    }
+
+
+
+    public function getSocialAuth2($provider = null)
+    {
+        if (!config("services.$provider")) {
+            abort('404');
+        } //just to handle providers that doesn't exist
 
         return $this->socialite->with($provider)->redirect();
     }
 
-    public function getSocialAuthCallback2($provider=null)
+    public function getSocialAuthCallback2($provider = null)
     {
         $socialize_user = $this->socialite->with($provider)->user();
 
@@ -90,8 +152,7 @@ class AuthController extends Controller
         if (!$profile) {
 
             $profile = new Profile;
-            $profile->provider_user_id =  $provider_user_id;
-
+            $profile->provider_user_id = $provider_user_id;
 
 
             $user = new User;
@@ -109,7 +170,7 @@ class AuthController extends Controller
         return redirect('dashboard');
     }
 
-    public function getSocialAuthCallback($provider=null)
+    public function getSocialAuthCallback3($provider = null)
     {
         $socialize_user = $this->socialite->with($provider)->user();
 

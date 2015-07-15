@@ -14,9 +14,11 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('provider');
-            $table->integer('provider_user_id');
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('provider', 32);
+            $table->text('social_id');
+            $table->timestamps();
         });
     }
 

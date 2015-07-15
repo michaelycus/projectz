@@ -58,13 +58,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Review');
     }
 
+    public function profiles()
+    {
+        return $this->hasMany('App\Profile');
+    }
+
     public function getAvatar()
     {
-        if ($this->facebook_user_id == 0){
-            return URL::asset('images/avatar.png');
-        }else{
-            return 'http://graph.facebook.com/'. $this->facebook_user_id . '/picture';
+        foreach ($this->profiles as $profile)
+        {
+            if ($profile->provider == 'facebook'){
+                return 'http://graph.facebook.com/'. $profile->social_id . '/picture';
+            }elseif ($profile->provider == 'google'){
+                return 'https://www.googleapis.com/plus/v1/people/115950284...320?fields=image&key={YOUR_API_KEY}';
+            }
         }
+
+        return URL::asset('images/avatar.png');
     }
 
     /* Reviews */

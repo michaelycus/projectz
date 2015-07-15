@@ -30,7 +30,6 @@ class ArticleController extends Controller
 	{
         if (Input::get('status')){
             $articles = Article::latest()->where('status', Input::get('status'))->paginate(10);
-
             return view('medias.articles.index', compact('articles'));
         }else{
             return view('medias.articles.overview');
