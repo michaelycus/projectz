@@ -31,14 +31,14 @@
 
 						<div class="row">
 							<div class="col-xs-12 text-center padding-sm">													
-								<img src="http://graph.facebook.com/{!! $post->user->facebook_user_id !!}/picture"
-								     alt="{{  $post->user->firstname }}" class="user-list">
+								<img src="{{ $post->user->getAvatar() }}"
+								     alt="{{ $post->user->firstname }}" class="user-list">
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-xs-12 text-center">													
-								<span class="panel-title">{{ $post->user->name }}</span>
+								<span class="panel-title">{{ $post->user>getName() }}</span>
 							</div>
 						</div>
 		

@@ -16,7 +16,7 @@
                         <a class="accordion-toggle collapsed"
                             data-toggle="collapse" data-parent="#accordion-review"
                             href="#collapse_{{ $review->id }}">
-                             <img src="http://graph.facebook.com/{{ $review->user->facebook_user_id }}/picture"
+                             <img src="{{ $review->user->getAvatar() }}"
                                  alt="{{  $review->user->first_name }}" class="user-tiny">
                              <i class="fa fa-caret-right"></i> Revisão de {{  $review->user->first_name }}
                         </a>

@@ -72,7 +72,7 @@
 			    <div class="row">
                     <div class="col-md-4 text-center">
                         Sugerido por:
-                            <img src="http://graph.facebook.com/{!! $article->user->facebook_user_id !!}/picture"
+                            <img src="{!! $article->user->getAvatar() !!}"
                                  alt="{!! $article->user->first_name !!}" class="user-list">
                     </div>
                     <div class="col-md-4 text-center">

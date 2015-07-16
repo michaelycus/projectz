@@ -46,14 +46,14 @@
 
 						<div class="row">
 							<div class="col-xs-12 text-center padding-sm">													
-								<img src="http://graph.facebook.com/{!! $video->user->facebook_user_id !!}/picture"
-								     alt="{{  $video->user->firstname }}" class="user-list">
+								<img src="{{ $video->user->getAvatar() }}"
+								     alt="{{ $video->user->firstname }}" class="user-list">
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-xs-12 text-center">													
-								<span class="panel-title">{{ $video->user->name }}</span> 							
+								<span class="panel-title">{{ $video->user->getName() }}</span>
 							</div>
 						</div>
 		

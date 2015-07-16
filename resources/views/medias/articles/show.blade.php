@@ -39,13 +39,13 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 text-center padding-sm">
-                                <img src="http://graph.facebook.com/{{ $article->user->facebook_user_id }}/picture"
+                                <img src="{{ $article->user->getAvatar() }}"
                                       alt="{{  $article->user->first_name }}" class="user-list">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 text-center">
-                                <span class="panel-title">{!! $article->user->name !!}</span>
+                                <span class="panel-title">{!! $article->user->getName() !!}</span>
                             </div>
                         </div>
 					</div>

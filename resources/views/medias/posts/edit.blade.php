@@ -5,22 +5,23 @@
 
 <div class="page-header">	
 	<h1><span class="text-light-gray">Posts</span></h1>
-</div> 
+</div>
 
-<div class="panel col-xs-8">
-	<div class="panel-heading">
-		<span class="panel-title">Editar Post</span>
-	</div>
-	<div class="panel-body">		
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel colourable">
+            <div class="panel-heading">
+                <span class="panel-title">Editar Post</span>
+            </div>
 
-        {!! Form::model($post, ['method' => 'PATCH', 'action' => ['PostController@update', $post->id]]) !!}
-				
-			@include('medias.posts.form', ['submitButtonText' => 'Editar Post'])
+            {!! Form::model($post, ['method' => 'PATCH', 'action' => ['PostController@update', $post->id]]) !!}
 
-		{!! Form::close() !!}
+                @include('medias.posts.form', ['submitButtonText' => 'Editar Post'])
 
-		@include('errors.list')
-	
+            {!! Form::close() !!}
+
+            @include('errors.list')
+	    </div>
 	</div>
 </div>
 

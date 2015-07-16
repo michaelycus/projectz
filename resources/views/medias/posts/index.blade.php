@@ -26,7 +26,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-post" href="#collapse_{{ $post->id }}">
-                                 <img src="http://graph.facebook.com/{{ $post->user->facebook_user_id }}/picture"
+                                 <img src="{{ $post->user->getAvatar() }}"
                                      alt="{{  $post->user->first_name }}" class="user-tiny pull-left">
                                  {{ $post->title }}
                             </a>

@@ -8,8 +8,8 @@
         @else
             Quem está ajudando:
             @foreach($media->team as $person)
-            <img src="http://graph.facebook.com/{{ $person->user->facebook_user_id }}/picture"
-                 alt="{{  $person->user->first_name }}" class="user-tiny">
+            <img src="{{ $person->user->getAvatar() }}"
+                 alt="{{ $person->user->first_name }}" class="user-tiny">
             @endforeach
         @endif
 

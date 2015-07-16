@@ -63,6 +63,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Profile');
     }
 
+    public function teams()
+    {
+        return $this->hasMany('App\Team');
+    }
+
     public function getAvatar()
     {
         foreach ($this->profiles as $profile)
@@ -108,6 +113,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             }
         }
         return false;
+    }
+
+    public function countTeamByMedia($mediaType)
+    {
+        return DB::table('teams')->where('teamable_type', '=', $mediaType)->
+                                   where('user_id', '=', $this->id)->count();
     }
 
     /* Permissions */

@@ -43,7 +43,7 @@ class ArticleController extends Controller
 	 */
 	public function create()
 	{		 
-  		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+  		$users = \DB::table('users')->orderBy('first_name', 'asc')->lists('first_name','id');
     	
     	return view('medias.articles.create', compact('users'));
 	}
@@ -81,7 +81,7 @@ class ArticleController extends Controller
 	 */
 	public function edit(Article $article)
 	{
-		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+		$users = \DB::table('users')->orderBy('name', 'asc')->lists('first_name','id');
 		
 		return view('medias.articles.edit', compact('article', 'users'));
 	}

@@ -6,7 +6,7 @@
     <div class="panel-body">
 
         <div class="comment">
-            <img src="//graph.facebook.com/{{ Auth::user()->facebook_user_id }}/picture" alt="" class="comment-avatar">
+            <img src="{{ Auth::user()->getAvatar() }}" alt="" class="comment-avatar">
             <div class="comment-body">
                 {!! Form::open(['url' => 'comments', 'id' => 'leave-comment-form', 'class' => 'comment-text no-padding no-border']) !!}
                     {!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => '1']) !!}

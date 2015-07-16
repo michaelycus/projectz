@@ -5,7 +5,7 @@
 
 <div class="col-md-12">
 
-    {!! Form::model($user, ['method' => 'PATCH', 'action' => ['ProfileController@update', $user->id]]) !!}
+    {!! Form::model($user, ['method' => 'PATCH', 'action' => ['PermissionController@update', $user->id]]) !!}
 
     {{-- Administration permission --}}
 

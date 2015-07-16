@@ -67,8 +67,8 @@
 			    <div class="row">
                     <div class="col-md-4 text-center">
                         <strong>Sugerido por:</strong>
-                            <img src="http://graph.facebook.com/{!! $video->user->facebook_user_id !!}/picture"
-                                 alt="{!!  $video->user->first_name !!}" class="user-list">
+                            <img src="{{ $video->user->getAvatar() }}"
+                                 alt="{{ $video->user->first_name }}" class="user-list">
                     </div>
                     <div class="col-md-4 text-center">
                         <a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger">Vídeo original</a>

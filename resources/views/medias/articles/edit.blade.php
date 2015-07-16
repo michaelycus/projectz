@@ -1,27 +1,29 @@
-
 @extends('layouts.master')
 
 @section('content')
 
-<div class="page-header">	
-	<h1><span class="text-light-gray">Artigos</span></h1>
-</div> 
+<div class="page-header">
+    <h1><span class="text-light-gray">Artigos</span></h1>
+</div>
 
-<div class="panel col-xs-8">
-	<div class="panel-heading">
-		<span class="panel-title">Editar Artigo</span>
-	</div>
-	<div class="panel-body">
-		
-		{!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}				
-				
-			@include('medias.articles.form', ['submitButtonText' => 'Atualizar Artigo'])
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel colourable">
 
-		{!! Form::close() !!}
+            <div class="panel-heading">
+                <span class="panel-title">Editar Artigo</span>
+            </div>
 
-		@include('errors.list')
-	
-	</div>
+            {!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}
+
+                @include('medias.articles.form', ['submitButtonText' => 'Atualizar Artigo'])
+
+            {!! Form::close() !!}
+
+            @include('errors.list')
+
+        </div>
+    </div>
 </div>
 
 @stop

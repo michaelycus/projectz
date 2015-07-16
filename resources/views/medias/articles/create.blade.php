@@ -1,27 +1,29 @@
-
 @extends('layouts.master')
 
 @section('content')
 
-<div class="page-header">	
-	<h1><span class="text-light-gray">Artigos</span></h1>
-</div> 
+<div class="page-header">
+    <h1><span class="text-light-gray">Artigos</span></h1>
+</div>
 
-<div class="panel col-xs-8">
-	<div class="panel-heading">
-		<span class="panel-title">Criar Artigo</span>
-	</div>
-	<div class="panel-body">		
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel colourable">
 
-		{!! Form::open(['url' => 'articles']) !!}				
-				
-			@include('medias.articles.form', ['submitButtonText' => 'Adicionar Artigo'])
+            <div class="panel-heading">
+                <span class="panel-title">Criar Artigo</span>
+            </div>
 
-		{!! Form::close() !!}
+            {!! Form::open(['url' => 'articles']) !!}
 
-		@include('errors.list')
-	
-	</div>
+                @include('medias.articles.form', ['submitButtonText' => 'Adicionar Artigo'])
+
+            {!! Form::close() !!}
+
+            @include('errors.list')
+
+        </div>
+    </div>
 </div>
 
 @stop

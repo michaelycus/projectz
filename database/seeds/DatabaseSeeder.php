@@ -1,10 +1,10 @@
 <?php
 
-
-use App\Article;
+use App\Post;
 use App\User;
 use App\Video;
-use App\Post;
+use App\Profile;
+use App\Article;
 use App\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -59,84 +59,113 @@ class UserTableSeeder extends Seeder {
 
     public function run()
     {
-        User::create(array(
-            'facebook_user_id' => '10206432895324665',
-            'name' 			=> 'Michael Marques',
+        $user = User::create(array(
             'first_name' 	=> 'Michael',
             'last_name' 	=> 'Marques',
             'email' 		=> 'michaelycus@gmail.com',
             'password'      => bcrypt('secret')
         ));
-        User::create(array(
-            'facebook_user_id' => '100000399419035',
-            'name' 			=> 'José Roberto Sousa',
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '10206432895324665',
+            'provider' => 'facebook',
+        ));
+
+        $user = User::create(array(
             'first_name' 	=> 'José',
             'last_name' 	=> 'Roberto Sousa',
             'email' 		=> 'jose@jose.com',
             'password'      => bcrypt('secret')
         ));
-        User::create(array(
-            'facebook_user_id' => '100000096065425',
-            'name' 			=> 'Graciela Kunrath Lima',
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '100000399419035',
+            'provider' => 'facebook',
+        ));
+
+        $user = User::create(array(
             'first_name' 	=> 'Graciela',
             'last_name' 	=> 'Kunrath Lima',
             'email' 		=> 'graciela@graciela.com',
             'password'      => bcrypt('secret')
         ));
-        User::create(array(
-            'facebook_user_id' => '100000678436814',
-            'name' 			=> 'Fabio Queiroz',
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '100000096065425',
+            'provider' => 'facebook',
+        ));
+
+        $user = User::create(array(
             'first_name' 	=> 'Fabio',
             'last_name' 	=> 'Queiroz',
             'email' 		=> 'fabio@fabio.com',
             'password'      => bcrypt('secret')
         ));
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '100000678436814',
+            'provider' => 'facebook',
+        ));
 
-        User::create(array(
-            'facebook_user_id' => '100000956255058',
-            'name' 			=> 'Daniela Madanelo',
+        $user = User::create(array(
             'first_name' 	=> 'Daniela',
             'last_name' 	=> 'Madanelo',
             'email' 		=> 'daniela@daniela.com',
             'password'      => bcrypt('secret')
         ));
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '100000956255058',
+            'provider' => 'facebook',
+        ));
 
-        User::create(array(
-            'facebook_user_id' => '1207089492',
-            'name' 			=> 'Rodrigo Nishino Zeitgeist',
+        $user = User::create(array(
             'first_name' 	=> 'Rodrigo',
             'last_name' 	=> 'Nishino Zeitgeist',
             'email' 		=> 'rodrigo@rodrigo.com',
             'password'      => bcrypt('secret')
         ));
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '1207089492',
+            'provider' => 'facebook',
+        ));
 
-        User::create(array(
-            'facebook_user_id' => '1066224340',
-            'name' 			=> 'Arthur Helfstein Fragoso',
+        $user = User::create(array(
             'first_name' 	=> 'Arthur',
             'last_name' 	=> 'Helfstein Fragoso',
             'email' 		=> 'arthur@arthur.com',
             'password'      => bcrypt('secret')
         ));
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '1066224340',
+            'provider' => 'facebook',
+        ));
 
-        User::create(array(
-            'facebook_user_id' => '826528851',
-            'name' 			=> 'Gustavo Canto',
+        $user = User::create(array(
             'first_name' 	=> 'Gustavo',
             'last_name' 	=> 'Canto',
             'email' 		=> 'gustavo@gustavo.com',
             'password'      => bcrypt('secret')
         ));
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '826528851',
+            'provider' => 'facebook',
+        ));
 
-        User::create(array(
-            'facebook_user_id' => '659120626',
-            'name' 			=> 'Bruna Sahão',
+        $user = User::create(array(
             'first_name' 	=> 'Bruna',
             'last_name' 	=> 'Sahão',
             'email' 		=> 'bruna@bruna.com',
             'password'      => bcrypt('secret')
         ));
-
+        Profile::create(array(
+            'user_id' => $user->id,
+            'social_id' => '659120626',
+            'provider' => 'facebook',
+        ));
     }
 }
 

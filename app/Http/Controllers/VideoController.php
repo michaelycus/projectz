@@ -42,7 +42,7 @@ class VideoController extends Controller {
 	 */
 	public function create()
 	{
-		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+		$users = \DB::table('users')->orderBy('first_name', 'asc')->lists('first_name','id');
 
 		return view('medias.videos.create', compact('users'));
 	}
@@ -80,7 +80,7 @@ class VideoController extends Controller {
 	 */
 	public function edit(Video $video)
 	{
-		$users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+		$users = \DB::table('users')->orderBy('first_name', 'asc')->lists('first_name','id');
 
 		return view('medias.videos.edit', compact('video', 'users'));
 	}

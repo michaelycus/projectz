@@ -1,9 +1,9 @@
 <div class="comment">
-    <img src="//graph.facebook.com/{{ $comment->user->facebook_user_id }}/picture" alt="" class="comment-avatar">
+    <img src="{{ $comment->user->getAvatar() }}" alt="" class="comment-avatar">
     <div class="comment-body">
         <div class="comment-text">
             <div class="comment-heading">
-                <a href="#" title="">{{ $comment->user->name }}</a> <span>comentou</span>
+                <a href="#" title="">{{ $comment->user->getName() }}</a> <span>comentou</span>
             </div>
             {{ $comment->body }}
         </div>
@@ -21,7 +21,7 @@
     </div> <!-- / .comment-body -->
 
     <div class="comment" id="reply_{{ $comment->id  }}" style="display:none; margin-bottom: 25px">
-        <img src="//graph.facebook.com/{{ Auth::user()->facebook_user_id }}/picture" alt="" class="comment-avatar">
+        <img src="{{ $comment->user->getAvatar() }}" alt="" class="comment-avatar">
         <div class="comment-body">
             {!! Form::open(['url' => 'comments', 'id' => 'reply_form_'.$comment->id, 'class' => 'comment-text no-padding no-border']) !!}
                 {!! Form::textarea('body', null, ['id'=> 'reply_body_'.$comment->id, 'class' => 'form-control', 'rows' => '1']) !!}

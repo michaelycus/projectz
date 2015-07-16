@@ -106,7 +106,7 @@ class Helpers {
 	    return $result;
 	}
 
-    public function getRandomIcon()
+    public static function getRandomIcon()
     {
         $icons = array(
             'fa-paint-brush','fa-puzzle-piece','fa-sun-o',
@@ -119,5 +119,14 @@ class Helpers {
         );
 
         return $icons[array_rand($icons)];
+    }
+
+    public static function getRandomBackground()
+    {
+        $bgs = array(
+            'success','danger','info','warning'
+        );
+
+        return $bgs[array_rand($bgs)];
     }
 }

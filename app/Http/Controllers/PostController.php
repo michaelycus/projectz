@@ -42,7 +42,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+        $users = \DB::table('users')->orderBy('first_name', 'asc')->lists('first_name','id');
 
         return view('medias.posts.create', compact('users'));
     }
@@ -80,7 +80,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $users = \DB::table('users')->orderBy('name', 'asc')->lists('name','id');
+        $users = \DB::table('users')->orderBy('first_name', 'asc')->lists('first_name','id');
 
         return view('medias.posts.edit', compact('post', 'users'));
     }
