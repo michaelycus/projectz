@@ -105,4 +105,19 @@ class Helpers {
 
 	    return $result;
 	}
+
+    public function getRandomIcon()
+    {
+        $icons = array(
+            'fa-paint-brush','fa-puzzle-piece','fa-sun-o',
+            'fa-user-secret','fa-mercury','fa-heartbeat',
+            'fa-flask','fa-gamepad','fa-graduation-cap',
+            'fa-adjust','fa-at','fa-bolt','fa-compass',
+            'fa-sun-o','fa-music','fa-paper-plane-o',
+            'fa-futbol-o','fa-smile-o','fa-recycle',
+            'fa-star','fa-sun-o','fa-smile-o','fa-heart-o'
+        );
+
+        return $icons[array_rand($icons)];
+    }
 }

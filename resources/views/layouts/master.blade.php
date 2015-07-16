@@ -114,8 +114,10 @@
 										<span>{{ Auth::user()->first_name }}</span>
 									</a>
 									<ul class="dropdown-menu">
-										<li><a href="{{ url('profiles') }}"><i class="dropdown-icon fa fa-users"></i>&nbsp;&nbsp;Gerenciar usuários</a></li>
+									    @if (Auth::user()->isManager())
+										<li><a href="{{ url('permissions') }}"><i class="dropdown-icon fa fa-users"></i>&nbsp;&nbsp;Gerenciar usuários</a></li>
 										<li class="divider"></li>
+										@endif
 										<li><a href="logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
 									</ul>
 								</li>

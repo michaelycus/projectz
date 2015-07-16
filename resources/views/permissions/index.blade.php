@@ -29,7 +29,7 @@
                     <td>{{ $user->id }}</td>
                     <td>
                         <img src="{{ $user->getAvatar() }}" alt="" style="width:26px;height:26px;" class="rounded">
-                        &nbsp;&nbsp;<a href="#" title="">{{ $user->name }}</a>
+                        &nbsp;&nbsp;<a href="#" title="">{{ $user->getName() }}</a>
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>{!! $user->hasPermission(\App\Permission::SYSTEM_MANAGER) ? \App\Permission::PERMISSION_YES : \App\Permission::PERMISSION_NO !!}</td>
@@ -67,7 +67,7 @@
                         Sem permissão
                         @endif
                     </td>
-                    <th><a href="{{ url('profiles/'.$user->id.'/edit') }}">Editar permissões</a></th>
+                    <th><a href="{{ url('permissions/'.$user->id.'/edit') }}">Editar permissões</a></th>
                 </tr>
                 @endforeach
 

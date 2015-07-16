@@ -77,6 +77,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return URL::asset('images/avatar.png');
     }
 
+    public function getName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     /* Reviews */
 
     public function hasReview($reviews)
@@ -150,18 +155,30 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return ($this->id == $user_id) || $this->isAdmin();
     }
 
-    public function isVideoManager()
-    {
-        return $this->isAdmin() || $this->hasPermission(\App\Permission::VIDEO_MANAGE);
-    }
-
     public function isArticleManager()
     {
         return $this->isAdmin() || $this->hasPermission(\App\Permission::ARTICLE_MANAGE);
     }
 
+    public function isVideoManager()
+    {
+        return $this->isAdmin() || $this->hasPermission(\App\Permission::VIDEO_MANAGE);
+    }
+
+    public function isPostManager()
+    {
+        return $this->isAdmin() || $this->hasPermission(\App\Permission::POST_MANAGE);
+    }
+
     public function isAdmin()
     {
         return $this->hasPermission(\App\Permission::SYSTEM_MANAGER);
+    }
+
+    public function isManager()
+    {
+        return $this->isAdmin() || $this->hasPermission(\App\Permission::ARTICLE_MANAGE)
+                                || $this->hasPermission(\App\Permission::VIDEO_MANAGE)
+                                || $this->hasPermission(\App\Permission::POST_MANAGE);
     }
 }
