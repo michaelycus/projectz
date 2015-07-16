@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class Media extends Model
 {
+    const ICON = 'fa fa-users';
+
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
