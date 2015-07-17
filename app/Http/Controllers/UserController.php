@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Video;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -49,6 +50,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $videos = Video::where('')
         return view('users.show', compact('user'));
     }
 

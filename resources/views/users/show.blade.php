@@ -78,33 +78,32 @@
 
             <ul id="profile-tabs" class="nav nav-tabs">
                 <li class="active">
-                    <a href="#profile-tabs-board" data-toggle="tab">Board</a>
+                    <a href="#profile-tabs-articles" data-toggle="tab">Artigos</a>
                 </li>
                 <li>
-                    <a href="#profile-tabs-activity" data-toggle="tab">Timeline</a>
+                    <a href="#profile-tabs-videos" data-toggle="tab">Vídeos</a>
                 </li>
                 <li>
-                    <a href="#profile-tabs-followers" data-toggle="tab">Followers</a>
-                </li>
-                <li>
-                    <a href="#profile-tabs-following" data-toggle="tab">Following</a>
+                    <a href="#profile-tabs-posts" data-toggle="tab">Posts</a>
                 </li>
             </ul>
 
             <div class="tab-content tab-content-bordered panel-padding">
-                <div class="widget-article-comments tab-pane panel no-padding no-border fade in active" id="profile-tabs-board">
+                <div class="tab-pane fade in active" id="profile-tabs-articles">
 
                     <hr class="no-panel-padding-h panel-wide">
 
                 </div> <!-- / .tab-pane -->
-                <div class="tab-pane fade" id="profile-tabs-activity">
-                    <div class="timeline">
-                        <!-- Timeline header -->
-                        <div class="tl-header now">Now</div>
-
-
-                    </div> <!-- / .timeline -->
-
+                <div class="widget-support-tickets tab-pane fade" id="profile-tabs-videos">
+                    @foreach($videos as $video)
+                    <div class="ticket">
+                        <span class="label label-success ticket-label">Completed</span>
+                        <a href="#" title="" class="ticket-title">Server unavaible<span>[#201798]</span></a>
+                        <span class="ticket-info">
+                            Criado por <a href="#" title="">Timothy Owens</a> today
+                        </span>
+                    </div>
+                    @endforeach
                 </div> <!-- / .tab-pane -->
             </div> <!-- / .tab-content -->
         </div>
