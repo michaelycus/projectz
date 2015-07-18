@@ -26,16 +26,6 @@ class Article extends Media
         'published_at'
     );
 
-    public function scopeUnpublished($query)
-    {
-        $query->where('status', '!=', self::STATUS_PUBLISHED);
-    }
-
-    public function scopePublished($query)
-    {
-        $query->where('status', '=', self::STATUS_PUBLISHED);
-    }
-
     public function getAvailableStatus()
     {
         return array(
@@ -46,14 +36,17 @@ class Article extends Media
         );
     }
 
-    public function getStatusLabels()
+    public function getStatusLabels($index = null)
     {
-        return array(
+        $labels = array(
             self::STATUS_EDITING      => "Em edição",
             self::STATUS_PROOFREADING => "Em revisão",
-            self::STATUS_SCHEDULED    => "Agendados",
-            self::STATUS_PUBLISHED    => "Publicados"
+            self::STATUS_SCHEDULED    => "Agendado",
+            self::STATUS_PUBLISHED    => "Publicado",
+            self::STATUS_ARCHIVED     => "Arquivado"
         );
+
+        return $index ? $labels[$index] : $labels;
     }
 
     public function getReviewItems()
@@ -68,6 +61,16 @@ class Article extends Media
             "Links",
             "Tags",
         );
+    }
+
+    public function scopeUnpublished($query)
+    {
+        $query->where('status', '!=', self::STATUS_PUBLISHED);
+    }
+
+    public function scopePublished($query)
+    {
+        $query->where('status', '=', self::STATUS_PUBLISHED);
     }
 
 }

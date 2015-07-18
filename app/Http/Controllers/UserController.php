@@ -50,7 +50,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $videos = Video::where('')
         return view('users.show', compact('user'));
     }
 

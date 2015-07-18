@@ -8,8 +8,10 @@
         @else
             Quem está ajudando:
             @foreach($media->team as $person)
-            <img src="{{ $person->user->getAvatar() }}"
-                 alt="{{ $person->user->first_name }}" class="user-tiny">
+            <a href="{{ url('users/'.$person->user->id) }}" target="_blank">
+                <img src="{{ $person->user->getAvatar() }}"
+                     alt="{{ $person->user->first_name }}" class="user-tiny">
+            </a>
             @endforeach
         @endif
 

@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('content')
@@ -45,9 +44,11 @@
 						</div>
 
 						<div class="row">
-							<div class="col-xs-12 text-center padding-sm">													
-								<img src="{{ $video->user->getAvatar() }}"
-								     alt="{{ $video->user->firstname }}" class="user-list">
+							<div class="col-xs-12 text-center padding-sm">
+                                <a href="{{ url('users/'. $video->user->id) }}"  target="_blank">
+								    <img src="{{ $video->user->getAvatar() }}"
+								         alt="{{ $video->user->firstname }}" class="user-list">
+                                 </a>
 							</div>
 						</div>
 

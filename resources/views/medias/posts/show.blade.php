@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('content')
@@ -16,12 +15,12 @@
 			</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-xs-6">		
+					<div class="col-xs-8">
 
 						<a class="embedly-card" href="{{ $post->source_url }}">{{ $post->source_url }}</a>
 						
 					</div>
-					<div class="col-xs-6 center valign-middle">
+					<div class="col-xs-4 center valign-middle">
 
 						<div class="row">
 							<div class="col-xs-12 text-center text-slim">													
@@ -30,20 +29,42 @@
 						</div>
 
 						<div class="row">
-							<div class="col-xs-12 text-center padding-sm">													
-								<img src="{{ $post->user->getAvatar() }}"
-								     alt="{{ $post->user->firstname }}" class="user-list">
+							<div class="col-xs-12 text-center padding-sm">
+                                <a href="{{ url('users/'.$post->user->id) }}">
+								    <img src="{{ $post->user->getAvatar() }}"
+								         alt="{{ $post->user->firstname }}" class="user-list">
+                                </a>
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-xs-12 text-center">													
-								<span class="panel-title">{{ $post->user>getName() }}</span>
+							<div class="col-xs-12 text-center">
+								<span class="panel-title">{{ $post->user->full_name }}</span>
 							</div>
 						</div>
+
+						<div class="row">
+                            <div class="col-xs-12 text-center panel-padding">
+                                <span class="btn-label icon fa fa-calendar"></span>
+                                {{ date("d/m/Y", strtotime($post->created_at)) }}
+                            </div>
+                        </div>
+
+                        @if ($post->published_at)
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <span class="btn-label icon fa fa-rocket"></span>
+                                {{ date("d/m/Y", strtotime($post->published_at)) }}
+                            </div>
+                        </div>
+                        @endif
 		
 					</div>
 				</div>
+
+				<div class="row">
+				    <p>{{ $post->description }}</p>
+                </div>
 
 				<hr>
 
@@ -145,6 +166,8 @@
 	</div>
 
 </div>
+
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
 @stop
 

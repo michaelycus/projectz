@@ -30,6 +30,6 @@
 </div>
 
 <div class="panel-footer text-right">
-    {!! Html::link('articles', 'Cancelar', array('class' => 'btn btn-default')) !!}
+    {!! Html::link(URL::previous(), 'Cancelar', array('class' => 'btn btn-default')) !!}
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

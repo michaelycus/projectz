@@ -55,7 +55,7 @@
                                 {{ date("d/m/Y", strtotime($video->created_at)) }} <i class="fa fa-calendar-o pull-right"></i>
                             </li>
                             <li class="list-group-item no-border padding-xs-hr">
-                                <a href="{!! URL::to('videos', $video->id) !!}" target="_blank"
+                                <a href="{!! URL::to('videos', $video->id) !!}"
                                    class="btn btn-block btn-lg btn-labeled btn-info">Ver</a>
                             </li>
                         </ul>
@@ -67,8 +67,10 @@
 			    <div class="row">
                     <div class="col-md-4 text-center">
                         <strong>Sugerido por:</strong>
-                            <img src="{{ $video->user->getAvatar() }}"
-                                 alt="{{ $video->user->first_name }}" class="user-list">
+                            <a href="{{ url('users/'.$video->user->id) }}" target="_blank">
+                                <img src="{{ $video->user->getAvatar() }}"
+                                     alt="{{ $video->user->first_name }}" class="user-list">
+                            </a>
                     </div>
                     <div class="col-md-4 text-center">
                         <a href="{{ $video->source_url }}" target="_blank" class="btn btn-flat btn-block btn-sm btn-labeled btn-danger">Vídeo original</a>

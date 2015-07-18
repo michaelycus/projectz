@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="col-md-4 text-center">
-                        <a href="{!! URL::to('articles', $article->id) !!}" target="_blank"
+                        <a href="{!! URL::to('articles', $article->id) !!}"
                            class="btn btn-block btn-lg btn-labeled btn-info">Ver</a>
                     </div>
 			    </div>
@@ -72,8 +72,10 @@
 			    <div class="row">
                     <div class="col-md-4 text-center">
                         Sugerido por:
-                            <img src="{!! $article->user->getAvatar() !!}"
-                                 alt="{!! $article->user->first_name !!}" class="user-list">
+                            <a href="{{ url('users/'. $article->user->id) }}" target="_blank">
+                                <img src="{!! $article->user->getAvatar() !!}"
+                                     alt="{!! $article->user->first_name !!}" class="user-list">
+                            </a>
                     </div>
                     <div class="col-md-4 text-center">
                         <a href="{{ $article->source_url }}" target="_blank"

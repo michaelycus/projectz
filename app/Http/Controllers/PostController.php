@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Input;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,7 @@ class PostController extends Controller
     public function index()
     {
         if (Input::get('status')){
-            $posts = Post::latest()->where('status', Input::get('status'))->paginate(9);
+            $posts = Post::latest()->where('status', Input::get('status'))->paginate(6);
 
             return view('medias.posts.index', compact('posts'));
         }else {
@@ -42,7 +43,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $users = \DB::table('users')->orderBy('first_name', 'asc')->lists('first_name','id');
+        $users = User::get()->lists('full_name', 'id');
 
         return view('medias.posts.create', compact('users'));
     }
@@ -80,7 +81,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $users = \DB::table('users')->orderBy('first_name', 'asc')->lists('first_name','id');
+        $users = User::get()->lists('full_name', 'id');
 
         return view('medias.posts.edit', compact('post', 'users'));
     }

@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="page-header">	
-	<h1><span class="text-light-gray">Vídeos</span></h1>
+	<h1><span class="text-light-gray">Vídeo</span></h1>
 </div> 
 
 <div class="row">
