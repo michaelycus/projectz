@@ -16,8 +16,8 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title', 255);
             $table->text('description');
-            $table->string('source_url', 255);
-            $table->string('publish_url', 255);
+            $table->string('source_url', 255)->nullable();
+            $table->string('publish_url', 255)->nullable();
             $table->string('status', 32);
             $table->integer('user_id')->unsigned();
             $table->dateTime('published_at')->nullable();
