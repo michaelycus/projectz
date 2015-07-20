@@ -39,14 +39,17 @@ class Post extends Media
         );
     }
 
-    public function getStatusLabels()
+    public function getStatusLabels($index = null)
     {
-        return array(
-            self::STATUS_SUGGESTED       => 'Sugeridos',
+        $labels = array(
+            self::STATUS_SUGGESTED       => 'Sugerido',
             self::STATUS_PROOFREADING    => "Em revisão",
-            self::STATUS_SCHEDULED       => "Agendados",
-            self::STATUS_PUBLISHED       => "Publicados"
+            self::STATUS_SCHEDULED       => "Agendado",
+            self::STATUS_PUBLISHED       => "Publicado",
+            self::STATUS_ARCHIVED        => "Arquivado",
         );
+
+        return $index ? $labels[$index] : $labels;
     }
 
     public function getReviewItems()

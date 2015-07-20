@@ -3,7 +3,8 @@
     <div class="comment-body">
         <div class="comment-text">
             <div class="comment-heading">
-                <a href="#" title="">{{ $comment->user->getName() }}</a> <span>comentou</span>
+                <a href="{{ url('users/'.$comment->user->id) }}" target="_blank"
+                   title="{{$comment->user->getName()}}">{{ $comment->user->getName() }}</a> <span>comentou</span>
             </div>
             {{ $comment->body }}
         </div>

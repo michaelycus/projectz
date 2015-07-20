@@ -48,16 +48,11 @@ Route::get('/login/callback/{provider?}',[
 
 Route::get('testes', function(){
 
-    class Teste{
+    Mail::send('emails.teste2', ['teste' => 'testando'], function ($message) {
+        $message->from('michaelycus@gmail.com', 'Teste Laravel');
 
-        function imprime(){
-            echo 'testando...';
-        }
-    }
+        $message->to('michaelycus@gmail.com');
+    });
 
-    $str = 'Teste';
-
-    $teste = new $str;
-
-    echo $teste->imprime();
+    echo 'enviado!';
 });

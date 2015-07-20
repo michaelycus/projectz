@@ -48,6 +48,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token','access_token'];
 
+    public function getFullNameAttribute()
+    {
+        return "$this->first_name $this->last_name";
+    }
+
     public function comments()
     {
         return $this->morphOne('App\Comment', 'commentable');
@@ -73,12 +78,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Team');
     }
 
-    public function getAvatar()
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany('App\Video');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+    public function getAvatar($parameters = null)
     {
         foreach ($this->profiles as $profile)
         {
             if ($profile->provider == 'facebook'){
-                return 'http://graph.facebook.com/'. $profile->social_id . '/picture';
+                return 'http://graph.facebook.com/'. $profile->social_id . '/picture'.$parameters;
             }elseif ($profile->provider == 'google'){
                 return 'https://www.googleapis.com/plus/v1/people/115950284...320?fields=image&key={YOUR_API_KEY}';
             }

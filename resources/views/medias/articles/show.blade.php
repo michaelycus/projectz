@@ -1,7 +1,10 @@
-
 @extends('layouts.master')
 
 @section('content')
+
+<div class="page-header">
+	<h1><span class="text-light-gray">Artigo</span></h1>
+</div>
 
 <div class="row">
 	<div class="col-md-6">
@@ -22,12 +25,12 @@
 						@endif
 						<p>
                             <span class="btn-label icon fa fa-calendar"></span>
-                            Iniciado em: {{ date("d/m/Y", strtotime($article->created_at)) }}
+                            {{ date("d/m/Y", strtotime($article->created_at)) }}
                         </p>
 						@if (!empty($article->published_at))
                         <p>
                             <span class="btn-label icon fa fa-rocket"></span>
-                            Agendado para: {{ date("d/m/Y", strtotime($article->published_at)) }}
+                            {{ date("d/m/Y", strtotime($article->published_at)) }}
                         </p>
                         @endif
 					</div>
@@ -39,13 +42,15 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 text-center padding-sm">
-                                <img src="{{ $article->user->getAvatar() }}"
-                                      alt="{{  $article->user->first_name }}" class="user-list">
+                                <a href="{{ url('users/'.$article->user->id) }}" target="_blank">
+                                    <img src="{{ $article->user->getAvatar() }}"
+                                         alt="{{  $article->user->first_name }}" class="user-list">
+                                </a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 text-center">
-                                <span class="panel-title">{!! $article->user->getName() !!}</span>
+                                <span class="panel-title">{!! $article->user->full_name !!}</span>
                             </div>
                         </div>
 					</div>
@@ -84,7 +89,6 @@
 				</div>
 				<div class="row text-center text-xlg">
 
-
                 {!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticleController@update', $article->id]]) !!}
                 @if ($article->status == App\Article::STATUS_EDITING)
 
@@ -103,7 +107,6 @@
                                                     array('class' => 'btn btn-lg btn-success btn-labeled  confirm-move',
                                                            'type' => 'submit'))) !!}
 
-
                     <div id="bs-datepaginator" class="panel-padding"></div>
 
                 @elseif ($article->status == App\Article::STATUS_SCHEDULED)
@@ -117,7 +120,7 @@
 			</div>
 
 			<div class="panel-footer">
-				@if (Auth::user()->isOwner($article->user_id)  || Auth::user()->isArticleManager())
+				@if (Auth::user()->isOwner($article->user_id) || Auth::user()->isArticleManager())
 				<a class="btn btn-xs btn-primary"
 				    href="{{ URL::to('articles/' . $article->id . '/edit') }}"><i class="fa fa-edit"></i>Editar</a>
 
@@ -128,9 +131,6 @@
                     {!! Html::decode(Form::button('<i class="fa fa-trash-o"></i> Remover',
                         array('class' => 'btn btn-xs btn-danger', 'type' => 'submit'))) !!}
                 {!! Form::close() !!}
-
-
-
 
 				{!! Form::model($article, ['class' => 'pull-right confirm padding-xs-hr',
 				                           'method' => 'PATCH',
@@ -171,13 +171,6 @@
 @section('script')
 
     @include('partials.comments.scripts')
-
-    <script>
-    // TODO: remove this
-    $(".alert-info").fadeTo(5000, 500).slideUp(5000, function(){
-        $(".alert-info").alert('close');
-    });
-    </script>
 
 @stop
 

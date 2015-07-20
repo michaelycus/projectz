@@ -44,16 +44,19 @@ class Video extends Media
         );
     }
 
-    public function getStatusLabels()
+    public function getStatusLabels($index = null)
     {
-        return array(
+        $labels = array(
             self::STATUS_TRANSCRIPTION   => 'Em Transcrição',
             self::STATUS_SYNCHRONIZATION => 'Sincronizando',
             self::STATUS_TRANSLATION     => 'Tradução',
             self::STATUS_PROOFREADING    => "Em revisão",
-            self::STATUS_SCHEDULED       => "Agendados",
-            self::STATUS_PUBLISHED       => "Publicados"
+            self::STATUS_SCHEDULED       => "Agendado",
+            self::STATUS_PUBLISHED       => "Publicado",
+            self::STATUS_ARCHIVED        => "Arquivado"
         );
+
+        return $index ? $labels[$index] : $labels;
     }
 
     public function getReviewItems()

@@ -10,7 +10,9 @@
                 <div class="widget-profile-bg-icon"><i class="fa {{ Helpers::getRandomIcon() }}"></i></div>
                 <img src="{{ $user->getAvatar() }}" alt="" class="widget-profile-avatar">
                 <div class="widget-profile-header">
-                    <span>{{ $user->getName() }}</span><br>
+                    <a href="{{ url('users/'.$user->id) }}" target="_blank">
+                        <span>{{ $user->full_name }}</span><br>
+                    </a>
                 </div>
             </div> <!-- / .panel-heading -->
             <div class="list-group">

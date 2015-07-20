@@ -33,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('videos', 'App\Video');
         $router->model('posts', 'App\Post');
         $router->model('teams', 'App\Team');
+        $router->model('users', 'App\User');
     }
 
     /**
