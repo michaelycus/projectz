@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
         {
             $table->increments('id');
             $table->string('title', 255);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('source_url', 255)->nullable();
             $table->string('project_url', 255)->nullable();
             $table->string('publish_url', 255)->nullable();
