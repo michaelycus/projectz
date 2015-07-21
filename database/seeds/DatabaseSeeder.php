@@ -26,8 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call('ArticleTableSeeder');
         $this->call('UserTableSeeder');
         $this->call('PermissionTableSeeder');
-        $this->call('VideoTableSeeder');
+       // $this->call('VideoTableSeeder');
         $this->call('PostTableSeeder');
+        $this->call('ReviewOptionTableSeeder');
 
         Model::reguard();
     }
@@ -292,6 +293,25 @@ class PostTableSeeder extends Seeder {
                 'description' => $faker->paragraph(),
                 'user_id'     => $faker->randomDigitNotNull,
                 'status'      => $states[$k]
+            ));
+        }
+    }
+}
+
+
+class ReviewOptionTableSeeder extends Seeder {
+
+    public function run()
+    {
+        $faker = Faker\Factory::create();
+
+        $types = array('App\Article', 'App\Video', 'App\Post');
+
+        for($i=0; $i<24; $i++){
+            $k = array_rand($types);
+            \App\ReviewOption::create(array(
+                'name' => $faker->sentence(),
+                'type' => $types[$k]
             ));
         }
     }

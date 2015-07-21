@@ -2,7 +2,7 @@
     <strong>Todos</strong> estes itens foram avaliados?<br><br>
     <ul>
         @foreach($media->getReviewItems() as $status)
-        <li>{{ $status }}</li>
+        <input type="checkbox"/> {{ $status }}<br/>
         @endforeach
     </ul>
 
