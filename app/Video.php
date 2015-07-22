@@ -59,7 +59,7 @@ class Video extends Media
         return $index ? $labels[$index] : $labels;
     }
 
-    public function getReviewItems()
+    public function getReviewOptions()
     {
         return array(
             "80 caracteres por linha",

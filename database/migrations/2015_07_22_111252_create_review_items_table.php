@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewOptionsTable extends Migration
+class CreateReviewItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateReviewOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('review_options', function (Blueprint $table) {
+        Schema::create('review_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('type');
-            $table->tinyInteger('order')->nullable();
+            $table->string('title');
+            $table->integer('review_id');
+            $table->boolean('checked');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateReviewOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('review_options');
+        Schema::drop('review_items');
     }
 }

@@ -37,5 +37,5 @@ abstract class Media extends Model
 
     abstract function getStatusLabels();
 
-    abstract function getReviewItems();
+    abstract function getReviewOptions();
 }

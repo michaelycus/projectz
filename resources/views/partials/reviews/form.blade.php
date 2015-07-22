@@ -1,9 +1,9 @@
 <div class="modal-body">
     <strong>Todos</strong> estes itens foram avaliados?<br><br>
     <ul>
-        @foreach($media->getReviewItems() as $status)
-        <input type="checkbox"/> {{ $status }}<br/>
-        @endforeach
+         @foreach($media->getReviewOptions() as $option)
+         {!! Form::checkbox($option->id, $option->id, null, ['class' => 'field']) !!}{{ $option->name }}<br/>
+         @endforeach
     </ul>
 
     <div class="form-group no-margin-hr">

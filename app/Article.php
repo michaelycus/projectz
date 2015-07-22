@@ -1,5 +1,7 @@
 <?php namespace App;
 
+use DB;
+use Log;
 
 class Article extends Media
 {
@@ -49,18 +51,9 @@ class Article extends Media
         return $index ? $labels[$index] : $labels;
     }
 
-    public function getReviewItems()
+    public function getReviewOptions()
     {
-        return array(
-            "Conteúdo dentro do escopo",
-            "Ortografia",
-            "Formatação",
-            "Imagem Destacada (min 1280x720 16:9)",
-            "Categorias",
-            "Open Graph Data",
-            "Links",
-            "Tags",
-        );
+        return DB::table('review_options')->where('type', 'App\Article')->get();
     }
 
     public function scopeUnpublished($query)

@@ -52,7 +52,7 @@ class Post extends Media
         return $index ? $labels[$index] : $labels;
     }
 
-    public function getReviewItems()
+    public function getReviewOptions()
     {
         return array(
             "Pontuação",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Http\Requests\ReviewRequest;
+use App\ReviewItem;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -39,6 +40,7 @@ class ReviewController extends Controller
     public function store(ReviewRequest $request)
     {
         Review::create($request->all());
+        with(new ReviewItem())->handle($request->all());
 
         flash()->success('Sua revisão foi salva!')->important();
 
@@ -76,6 +78,7 @@ class ReviewController extends Controller
     public function update(Review $review, ReviewRequest $request)
     {
         $review->update($request->all());
+        with(new ReviewItem())->handle($review);
 
         flash()->success('A revisão foi editada!');
 
