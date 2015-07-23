@@ -31,7 +31,7 @@
 		<script src="assets/javascripts/ie.min.js"></script>
 	<![endif]-->
 </head>
-<body class="theme-default main-menu-animated {{ $theme or '' }}">
+<body class="theme-default mmc main-menu-animated {{ $theme or '' }}">
 
 	<script>var init = [];</script>
 
@@ -142,9 +142,9 @@
 
 						<img src="{{ Auth::user()->getAvatar() }}">
 						<div class="btn-group">						
-							<a href="" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+							<a href="{{ url('users/'. Auth::id() ) }}" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
 							<!-- <a rhef="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a> -->
-							<a href="logout" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+							<a href="{{ url('logout') }}" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
 						</div>
 						<a href="#" class="close">&times;</a>
 					</div>
