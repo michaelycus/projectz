@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use DB;
 use App\Media;
 use Illuminate\Database\Eloquent\Model;
 
