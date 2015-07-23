@@ -54,9 +54,7 @@ class Post extends Media
 
     public function getReviewOptions()
     {
-        return array(
-            "Pontuação",
-        );
+        return DB::table('review_options')->where('type', 'App\Post')->get();
     }
 
     public function scopeUnpublished($query)

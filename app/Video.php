@@ -61,9 +61,7 @@ class Video extends Media
 
     public function getReviewOptions()
     {
-        return array(
-            "80 caracteres por linha",
-        );
+        return DB::table('review_options')->where('type', 'App\Video')->get();
     }
 
     public function scopeUnpublished($query)
