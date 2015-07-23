@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call('ArticleTableSeeder');
         $this->call('UserTableSeeder');
         $this->call('PermissionTableSeeder');
-       // $this->call('VideoTableSeeder');
+        $this->call('VideoTableSeeder');
         $this->call('PostTableSeeder');
         $this->call('ReviewOptionTableSeeder');
 
@@ -310,7 +310,7 @@ class ReviewOptionTableSeeder extends Seeder {
         for($i=0; $i<24; $i++){
             $k = array_rand($types);
             \App\ReviewOption::create(array(
-                'name' => $faker->sentence(),
+                'title' => $faker->sentence(),
                 'type' => $types[$k]
             ));
         }

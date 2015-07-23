@@ -11,11 +11,16 @@ class Review extends Model
     const REVIEW_WARNING = 2;
     const REVIEW_SUCCESS = 3;
 
-    protected $fillable = array('body', 'reply', 'status', 'user_id', 'reviewable_id', 'reviewable_type');
+    protected $fillable = array('body', 'reply', 'status', 'user_id', 'reviewable_id', 'reviewable_type', 'score');
 
     public function user()
     {
         return $this->belongsTo('App\User','user_id');
+    }
+
+    public function items()
+    {
+        return $this->hasMany('App\ReviewItem');
     }
 
     public static function getReviewStatus()

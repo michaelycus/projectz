@@ -39,8 +39,8 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request)
     {
-        Review::create($request->all());
-        with(new ReviewItem())->handle($request->all());
+        $review = Review::create($request->all());
+        with(new ReviewItem())->handle($review);
 
         flash()->success('Sua revisão foi salva!')->important();
 

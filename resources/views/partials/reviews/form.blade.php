@@ -1,10 +1,13 @@
 <div class="modal-body">
     <strong>Todos</strong> estes itens foram avaliados?<br><br>
-    <ul>
+
          @foreach($media->getReviewOptions() as $option)
-         {!! Form::checkbox($option->id, $option->id, null, ['class' => 'field']) !!}{{ $option->name }}<br/>
+         <div class="checkbox" style="margin: 0;">
+             <label>
+         {!! Form::checkbox($option->id, $option->id, null, ['class' => 'px']) !!}<span class="lbl">{{ $option->title }}</span>
+            </label>
+         </div>
          @endforeach
-    </ul>
 
     <div class="form-group no-margin-hr">
         <label class="control-label">Aponte todos os pontos que precisam de revisão:</label>

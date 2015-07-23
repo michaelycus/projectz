@@ -16,19 +16,41 @@
                         <a class="accordion-toggle collapsed"
                             data-toggle="collapse" data-parent="#accordion-review"
                             href="#collapse_{{ $review->id }}">
-                             <img src="{{ $review->user->getAvatar() }}"
-                                 alt="{{  $review->user->first_name }}" class="user-tiny">
-                             <i class="fa fa-caret-right"></i> Revisão de {{  $review->user->first_name }}
+                            <span class="panel-title">
+                                <img src="{{ $review->user->getAvatar() }}"
+                                     alt="{{ $review->user->first_name }}" class="user-tiny">
+                                <i class="fa fa-caret-right"></i> Revisão de {{ $review->user->first_name }}
+                            </span>
+                            <div class="panel-heading-controls" style="width: 30%">
+                                <div class="progress progress-striped active" style="width: 100%">
+                                    <div class="progress-bar progress-bar-{{ $review->score == 100 ? 'success' : ($review->score > 60 ? 'warning' : 'danger') }}"
+                                         style="width: {{ $review->score }}%;"></div>
+                                </div>
+                            </div>
                         </a>
                     </div> <!-- / .panel-heading -->
                     <div id="collapse_{{ $review->id }}" class="panel-collapse collapse">
                         <div class="panel-body">
+                            @foreach($review->items as $item)
+                            <div class="checkbox" style="margin: 0;">
+                                <label>
+                                    <input type="checkbox" class="px" disabled="disabled" {{ $item->checked ? 'checked="checked"' : '' }} /><span class="lbl">{{ $item->title }}</span>
+                                </label>
+                             </div>
+                            @endforeach
+
                             <h4>Avaliação do revisor:</h4>
-                            <p>{{  $review->body }}</p>
+                            <div class="note note-warning">
+                            {{ $review->body }}
+                            </div>
                             <p>Avaliado como: <strong>{{ \App\Review::getReviewStatus()[$review->status] }}</strong></p>
 
+                            @if ($review->reply)
                             <h4>Resposta do editor:</h4>
-                            <p>{{  $review->reply }}</p>
+                            <div class="note note-success">
+                            {{  $review->reply }}
+                            </div>
+                            @endif
                         </div> <!-- / .panel-body -->
 
                         @if (Auth::id() == $media->user_id)

@@ -14,7 +14,7 @@ class CreateReviewOptionsTable extends Migration
     {
         Schema::create('review_options', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->string('type');
             $table->tinyInteger('order')->nullable();
             $table->timestamps();
