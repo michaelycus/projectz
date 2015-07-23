@@ -174,10 +174,13 @@ class PermissionTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('permissions')->insert([
-            'user_id' => '1',
-            'type'    => 'p_sys_1'
-        ]);
+        $i = 1;
+        for ($i=1; $i<10; $i++){
+            DB::table('permissions')->insert([
+                'user_id' => $i,
+                'type'    => 'p_sys_1'
+            ]);
+        }
 
         DB::table('permissions')->insert([
             'user_id' => '1',
