@@ -1,5 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use App\Post;
+use App\User;
+use App\Video;
+use App\Review;
+use App\Article;
+use App\Comment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -24,7 +30,20 @@ class DashboardController extends Controller {
 	 */
 	public function index()
 	{
-		return view('dashboard');
+        $articles = Article::orderBy('updated_at', 'desc')->take(6)->get();
+        $videos = Video::orderBy('updated_at', 'desc')->take(6)->get();
+        $posts = Post::orderBy('updated_at', 'desc')->take(6)->get();
+
+        $c_articles = Article::count();
+        $c_videos = Video::count();
+        $c_posts = Post::count();
+        $c_users = User::count();
+        $c_reviews = Review::count();
+        $c_comments = Comment::count();
+
+		return view('dashboard', compact('articles', 'videos', 'posts',
+                                         'c_articles', 'c_videos', 'c_posts',
+                                         'c_users', 'c_reviews', 'c_comments'));
 	}
 
 	/**
