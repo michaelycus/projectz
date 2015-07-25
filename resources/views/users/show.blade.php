@@ -8,7 +8,7 @@
     <div class="left-col">
         <div class="profile-block">
             <div class="panel profile-photo">
-                <img src="{{ $user->getAvatar('?type=large') }}" alt="">
+                <img src="{{ $user->photo }}" alt="">
             </div><br>
         </div>
 
@@ -56,17 +56,6 @@
         </div>
         @endif
 
-        {{--<div class="panel panel-transparent">--}}
-            {{--<div class="panel-heading">--}}
-                {{--<span class="panel-title">Sobre:</span>--}}
-            {{--</div>--}}
-            {{--<div class="list-group">--}}
-                {{--<a href="#" class="list-group-item"><i class="profile-list-icon fa fa-twitter" style="color: #4ab6d5"></i> @dsteiner</a>--}}
-                {{--<a href="#" class="list-group-item"><i class="profile-list-icon fa fa-facebook-square" style="color: #1a7ab9"></i> Denise Steiner</a>--}}
-                {{--<a href="#" class="list-group-item"><i class="profile-list-icon fa fa-envelope" style="color: #888"></i> dsteiner@example.com</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-
     </div>
     <div class="right-col">
 
@@ -91,23 +80,8 @@
 
                 @foreach($user->articles as $article)
                 	<div class="ticket">
-                		@if ($article->status == \App\Article::STATUS_PUBLISHED)
-                		<span class="label label-success ticket-label">
+                		<span class="label label-{{ $article->getColorByStatus($article->status) }} ticket-label">
                 			{{ $article->getStatusLabels($article->status) }}</span>
-
-                		@elseif ($article->status == \App\Article::STATUS_SCHEDULED)
-                		<span class="label label-warning ticket-label">
-                			{{ $article->getStatusLabels($article->status) }}</span>
-
-                		@elseif ($article->status == \App\Article::STATUS_EDITING ||
-                				 $article->status == \App\Article::STATUS_PROOFREADING)
-                		<span class="label label-info ticket-label">
-                			{{ $article->getStatusLabels($article->status) }}</span>
-
-                		@elseif ($article->status == \App\Article::STATUS_ARCHIVED)
-                		<span class="label label-danger ticket-label">
-                			{{ $article->getStatusLabels($article->status) }}</span>
-                		@endif
 
                 		<a href="{{ url('articles/'.$article->id) }}" target="_blank"
                 		   title="{{ $article->title }}" class="ticket-title">{{ $article->title }}</a>
@@ -122,25 +96,8 @@
 
                     @foreach($user->videos as $video)
                         <div class="ticket">
-                            @if ($video->status == \App\Video::STATUS_PUBLISHED)
-                            <span class="label label-success ticket-label">
+                            <span class="label label-{{ $video->getColorByStatus($video->status) }} ticket-label">
                                 {{ $video->getStatusLabels($video->status) }}</span>
-
-                            @elseif ($video->status == \App\Video::STATUS_SCHEDULED)
-                            <span class="label label-warning ticket-label">
-                                {{ $video->getStatusLabels($video->status) }}</span>
-
-                            @elseif ($video->status == \App\Video::STATUS_TRANSCRIPTION ||
-                                     $video->status == \App\Video::STATUS_SYNCHRONIZATION ||
-                                     $video->status == \App\Video::STATUS_TRANSLATION ||
-                                     $video->status == \App\Video::STATUS_PROOFREADING)
-                            <span class="label label-info ticket-label">
-                                {{ $video->getStatusLabels($video->status) }}</span>
-
-                            @elseif ($video->status == \App\Video::STATUS_ARCHIVED)
-                            <span class="label label-danger ticket-label">
-                                {{ $video->getStatusLabels($video->status) }}</span>
-                            @endif
 
                             <a href="{{ url('videos/'.$video->id) }}" target="_blank"
                                title="{{ $video->title }}" class="ticket-title">{{ $video->title }}</a>
@@ -155,23 +112,8 @@
 
                     @foreach($user->posts as $post)
                         <div class="ticket">
-                            @if ($post->status == \App\Post::STATUS_PUBLISHED)
-                            <span class="label label-success ticket-label">
+                            <span class="label label-{{ $post->getColorByStatus($post->status) }} ticket-label">
                                 {{ $post->getStatusLabels($post->status) }}</span>
-
-                            @elseif ($post->status == \App\Post::STATUS_SCHEDULED)
-                            <span class="label label-warning ticket-label">
-                                {{ $post->getStatusLabels($post->status) }}</span>
-
-                            @elseif ($post->status == \App\Post::STATUS_SUGGESTED ||
-                                     $post->status == \App\Post::STATUS_PROOFREADING)
-                            <span class="label label-info ticket-label">
-                                {{ $post->getStatusLabels($post->status) }}</span>
-
-                            @elseif ($post->status == \App\Post::STATUS_ARCHIVED)
-                            <span class="label label-danger ticket-label">
-                                {{ $post->getStatusLabels($post->status) }}</span>
-                            @endif
 
                             <a href="{{ url('posts/'.$post->id) }}" target="_blank"
                                title="{{ $post->title }}" class="ticket-title">{{ $post->title }}</a>

@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="row">
-@foreach($users as $user)
+@foreach($users as $key => $user)
 
     <div class="col-md-4">
-        <div class="panel panel-{{ Helpers::getRandomBackground() }} panel-dark widget-profile">
+        <div class="panel panel-{{ Helpers::getOrderBackground($key) }} panel-dark widget-profile">
             <div class="panel-heading">
                 <div class="widget-profile-bg-icon"><i class="fa {{ Helpers::getRandomIcon() }}"></i></div>
-                <img src="{{ $user->getAvatar() }}" alt="" class="widget-profile-avatar">
+                <img src="{{ $user->photo }}" alt="" class="widget-profile-avatar">
                 <div class="widget-profile-header">
                     <a href="{{ url('users/'.$user->id) }}" target="_blank">
                         <span>{{ $user->full_name }}</span><br>

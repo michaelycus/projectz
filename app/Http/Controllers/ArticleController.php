@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use DB;
 use Input;
 use App\Article;
 use App\User;
-use App\Comment;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 
 
@@ -30,9 +29,21 @@ class ArticleController extends Controller
 	{
         if (Input::get('status')){
             $articles = Article::latest()->where('status', Input::get('status'))->paginate(10);
+
             return view('medias.articles.index', compact('articles'));
         }else{
-            return view('medias.articles.overview');
+            $admins = User::admin(\App\Permission::ARTICLE_MANAGE)->orderBy(DB::raw('RAND()'))->get();
+
+            $c_editing = Article::where('status', Article::STATUS_EDITING)->count();
+            $c_proofreading = Article::where('status', Article::STATUS_PROOFREADING)->count();
+            $c_scheduled = Article::where('status', Article::STATUS_SCHEDULED)->count();
+            $c_published = Article::where('status', Article::STATUS_PUBLISHED)->count();
+
+            $articles = Article::latest('updated_at')->take(8)->get();
+
+            return view('medias.articles.overview', compact('admins', 'articles',
+                                                            'c_editing', 'c_proofreading',
+                                                            'c_scheduled', 'c_published'));
         }
 	}
 

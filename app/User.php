@@ -2,6 +2,7 @@
 
 use DB;
 use URL;
+use Log;
 use Auth;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -53,6 +54,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return "$this->first_name $this->last_name";
     }
 
+    public function getAvatarAttribute()
+    {
+        return $this->getImage();
+    }
+
+    public function getPhotoAttribute()
+    {
+        return $this->getImage('?width=200&height=200');
+    }
+
+    public function getImage($parameters = null)
+    {
+        foreach ($this->profiles as $profile)
+        {
+            if ($profile->provider == 'facebook'){
+                return 'http://graph.facebook.com/'. $profile->social_id . '/picture'.$parameters;
+            }elseif ($profile->provider == 'google'){
+                return 'https://www.googleapis.com/plus/v1/people/115950284...320?fields=image&key={YOUR_API_KEY}';
+            }
+        }
+        return URL::asset('images/avatar.png');
+    }
+
     public function comments()
     {
         return $this->morphOne('App\Comment', 'commentable');
@@ -91,6 +115,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function posts()
     {
         return $this->hasMany('App\Post');
+    }
+
+    public function scopeAdmin($query, $permission)
+    {
+        $query->join('permissions', 'users.id', '=', 'permissions.user_id')
+              ->join('profiles', 'users.id', '=', 'profiles.user_id')
+              ->where('permissions.type', '=', $permission)
+              ->orWhere('permissions.type', '=', \App\Permission::SYSTEM_MANAGER);
     }
 
     public function getAvatar($parameters = null)

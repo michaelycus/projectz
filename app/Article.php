@@ -56,6 +56,28 @@ class Article extends Media
         return DB::table('review_options')->where('type', 'App\Article')->get();
     }
 
+    public function getColorByStatus($status)
+    {
+        switch ($status) {
+            case self::STATUS_PUBLISHED:
+                $color = 'success';
+                break;
+            case self::STATUS_SCHEDULED:
+                $color = 'warning';
+                break;
+            case self::STATUS_EDITING:
+            case self::STATUS_PROOFREADING:
+                $color = 'info';
+                break;
+            case self::STATUS_ARCHIVED:
+                $color = 'danger';
+                break;
+            default:
+                $color = 'success';
+        }
+        return $color;
+    }
+
     public function scopeUnpublished($query)
     {
         $query->where('status', '!=', self::STATUS_PUBLISHED);

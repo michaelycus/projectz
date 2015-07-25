@@ -38,4 +38,6 @@ abstract class Media extends Model
     abstract function getStatusLabels();
 
     abstract function getReviewOptions();
+
+    abstract function getColorByStatus($status);
 }

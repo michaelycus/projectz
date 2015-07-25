@@ -39,65 +39,68 @@
 
 		<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
 			<!-- Main menu toggle -->
-			<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+			<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i>
+			    <span class="hide-menu-text">HIDE MENU</span></button>
 			
 			<div class="navbar-inner">
 				<!-- Main navbar header -->
 				<div class="navbar-header">
 
 					<!-- Logo -->
-					<a href="" class="navbar-brand">						
+					<a href="{{ url('dashboard') }}" class="navbar-brand">
 						<img src="{{ URL::asset('images/logo.png') }}" alt="">
 					</a>
 
 					<!-- Main navbar toggle -->
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+					<button type="button" class="navbar-toggle collapsed"
+					        data-toggle="collapse" data-target="#main-navbar-collapse">
+					        <i class="navbar-icon fa fa-bars"></i></button>
 
 				</div> <!-- / .navbar-header -->
 				<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
 					<div>
-
 					    <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Video::ICON }}"></i> Vídeos</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('videos?status=transcription') }}"><i class="fa fa-chevron-right"></i> Em transcrição</a></li>
-                                    <li><a href="{{ URL::to('videos?status=sync') }}"><i class="fa fa-chevron-right"></i> Em sincronização</a></li>
-                                    <li><a href="{{ URL::to('videos?status=translation') }}"><i class="fa fa-chevron-right"></i> Em tradução</a></li>
-                                    <li><a href="{{ URL::to('videos?status=proofreading') }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
-                                    <li><a href="{{ URL::to('videos?status=scheduled') }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
-                                    <li><a href="{{ URL::to('videos?status=published') }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
-                                    <li><a href="{{ URL::to('videos?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{{ url('videos/create') }}"><i class="fa fa-plus"></i> Novo</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
+					        <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Article::ICON }}"></i> Artigos</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('articles?status=editing') }}"><i class="fa fa-chevron-right"></i> Em edição</a></li>
-                                    <li><a href="{{ URL::to('articles?status=proofreading') }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
-                                    <li><a href="{{ URL::to('articles?status=scheduled') }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
-                                    <li><a href="{{ URL::to('articles?status=published') }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
-                                    <li><a href="{{ URL::to('articles?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
+                                    <li><a href="{{ URL::to('articles?status='.App\Article::STATUS_EDITING) }}"><i class="fa fa-chevron-right"></i> Em edição</a></li>
+                                    <li><a href="{{ URL::to('articles?status='.App\Article::STATUS_EDITING) }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
+                                    <li><a href="{{ URL::to('articles?status='.App\Article::STATUS_EDITING) }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
+                                    <li><a href="{{ URL::to('articles?status='.App\Article::STATUS_EDITING) }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
+                                    <li><a href="{{ URL::to('articles?status='.App\Article::STATUS_EDITING) }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
+                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Visão Geral</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{{ url('articles/create') }}"><i class="fa fa-plus"></i> Novo</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Video::ICON }}"></i> Vídeos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ URL::to('videos?status='.App\Video::STATUS_TRANSCRIPTION) }}"><i class="fa fa-chevron-right"></i> Em transcrição</a></li>
+                                    <li><a href="{{ URL::to('videos?status='.App\Video::STATUS_SYNCHRONIZATION) }}"><i class="fa fa-chevron-right"></i> Em sincronização</a></li>
+                                    <li><a href="{{ URL::to('videos?status='.App\Video::STATUS_TRANSLATION) }}"><i class="fa fa-chevron-right"></i> Em tradução</a></li>
+                                    <li><a href="{{ URL::to('videos?status='.App\Video::STATUS_PROOFREADING) }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
+                                    <li><a href="{{ URL::to('videos?status='.App\Video::STATUS_SCHEDULED) }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
+                                    <li><a href="{{ URL::to('videos?status='.App\Video::STATUS_PUBLISHED) }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
+                                    <li><a href="{{ URL::to('videos?status='.App\Video::STATUS_ARCHIVED) }}"><i class="fa fa-archive"></i> Arquivados</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Visão Geral</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ url('videos/create') }}"><i class="fa fa-plus"></i> Novo</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="navbar-icon {{ App\Post::ICON }}"></i> Posts</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('posts?status=suggested') }}"><i class="fa fa-chevron-right"></i> Sugeridos</a></li>
-                                    <li><a href="{{ URL::to('posts?status=proofreading') }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
-                                    <li><a href="{{ URL::to('posts?status=scheduled') }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
-                                    <li><a href="{{ URL::to('posts?status=published') }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
-                                    <li><a href="{{ URL::to('posts?status=archived') }}"><i class="fa fa-archive"></i> Arquivados</a></li>
+                                    <li><a href="{{ URL::to('posts?status='.App\Post::STATUS_SUGGESTED) }}"><i class="fa fa-chevron-right"></i> Sugeridos</a></li>
+                                    <li><a href="{{ URL::to('posts?status='.App\Post::STATUS_PROOFREADING) }}"><i class="fa fa-chevron-right"></i> Em revisão</a></li>
+                                    <li><a href="{{ URL::to('posts?status='.App\Post::STATUS_SCHEDULED) }}"><i class="fa fa-chevron-right"></i> Agendados</a></li>
+                                    <li><a href="{{ URL::to('posts?status='.App\Post::STATUS_PUBLISHED) }}"><i class="fa fa-chevron-right"></i> Publicados</a></li>
+                                    <li><a href="{{ URL::to('posts?status='.App\Post::STATUS_ARCHIVED) }}"><i class="fa fa-archive"></i> Arquivados</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
+                                    <li><a href="#"><i class="fa fa-bar-chart"></i> Visão Geral</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{{ url('posts/create') }}"><i class="fa fa-plus"></i> Novo</a></li>
                                 </ul>
@@ -110,7 +113,7 @@
 
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-										<img src="{{ Auth::user()->getAvatar() }}">
+										<img src="{{ Auth::user()->avatar }}">
 										<span>{{ Auth::user()->first_name }}</span>
 									</a>
 									<ul class="dropdown-menu">
@@ -140,7 +143,7 @@
 						
 						<div class="text-bg"><span class="text-slim">Olá,</span> <span class="text-semibold">{{ Auth::user()->first_name }}</span></div>
 
-						<img src="{{ Auth::user()->getAvatar() }}">
+						<img src="{{ Auth::user()->avatar }}">
 						<div class="btn-group">						
 							<a href="{{ url('users/'. Auth::id() ) }}" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
 							<!-- <a rhef="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a> -->
@@ -150,19 +153,18 @@
 					</div>
 				</div>
 				<ul class="navigation">
-
-					<li>
-						<a href="{{ URL::to('videos') }}"><i class="menu-icon {{ App\Video::ICON }}"></i><span class="mm-text">Vídeos</span></a>
-					</li>
-
-					<li>
-						<a href="{{ URL::to('articles') }}"><i class="menu-icon {{ App\Article::ICON }}"></i><span class="mm-text">Artigos</span></a>
-					</li>
-
-					<li>
-                        <a href="{{ URL::to('posts') }}"><i class="menu-icon {{ App\Post::ICON }}"></i><span class="mm-text">Posts</span></a>
+				    <li>
+                        <a href="{{ URL::to('articles') }}">
+                            <i class="menu-icon {{ App\Article::ICON }}"></i><span class="mm-text">Artigos</span></a>
                     </li>
-
+					<li>
+						<a href="{{ URL::to('videos') }}">
+						    <i class="menu-icon {{ App\Video::ICON }}"></i><span class="mm-text">Vídeos</span></a>
+					</li>
+					<li>
+                        <a href="{{ URL::to('posts') }}">
+                            <i class="menu-icon {{ App\Post::ICON }}"></i><span class="mm-text">Posts</span></a>
+                    </li>
 				</ul> <!-- / .navigation -->
 
 			</div> <!-- / #main-menu-inner -->

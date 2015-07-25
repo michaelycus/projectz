@@ -124,9 +124,18 @@ class Helpers {
     public static function getRandomBackground()
     {
         $bgs = array(
-            'success','danger','info','warning'
+            'success','danger','info','warning','pa-purple'
         );
 
         return $bgs[array_rand($bgs)];
+    }
+
+    public static function getOrderBackground($key)
+    {
+        $bgs = array(
+            'warning','success','danger','info','pa-purple','primary'
+        );
+
+        return $bgs[$key%sizeof($bgs)];
     }
 }

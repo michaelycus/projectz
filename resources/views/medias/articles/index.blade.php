@@ -73,7 +73,7 @@
                     <div class="col-md-4 text-center">
                         Sugerido por:
                             <a href="{{ url('users/'. $article->user->id) }}" target="_blank">
-                                <img src="{!! $article->user->getAvatar() !!}"
+                                <img src="{!! $article->user->avatar !!}"
                                      alt="{!! $article->user->first_name !!}" class="user-list">
                             </a>
                     </div>

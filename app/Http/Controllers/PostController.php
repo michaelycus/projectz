@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Input;
 use App\Post;
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -30,9 +29,18 @@ class PostController extends Controller
 
             return view('medias.posts.index', compact('posts'));
         }else {
-            $posts = Post::latest()->unpublished()->get();
+            $admins = User::admin(\App\Permission::POST_MANAGE)->orderBy(DB::raw('RAND()'))->get();
 
-            return view('medias.posts.overview', compact('posts'));
+            $c_suggested = Post::where('status', Post::STATUS_SUGGESTED)->count();
+            $c_proofreading = Post::where('status', Post::STATUS_PROOFREADING)->count();
+            $c_scheduled = Post::where('status', Post::STATUS_SCHEDULED)->count();
+            $c_published = Post::where('status', Post::STATUS_PUBLISHED)->count();
+
+            $posts = Post::latest('updated_at')->take(8)->get();
+
+            return view('medias.posts.overview', compact('admins', 'posts',
+                'c_suggested', 'c_proofreading',
+                'c_scheduled', 'c_published'));
         }
     }
 

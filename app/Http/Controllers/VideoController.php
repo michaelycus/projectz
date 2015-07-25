@@ -1,12 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use DB;
 use Input;
 use App\User;
 use App\Video;
-use App\Comment;
 use App\Http\Requests;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
 
 class VideoController extends Controller {
@@ -29,9 +27,21 @@ class VideoController extends Controller {
 
             return view('medias.videos.index', compact('videos'));
         }else{
-            $videos = Video::latest()->unpublished()->get();
+            $admins = User::admin(\App\Permission::VIDEO_MANAGE)->orderBy(DB::raw('RAND()'))->get();
 
-            return view('medias.videos.overview');
+            $c_transcription = Video::where('status', Video::STATUS_TRANSCRIPTION)->count();
+            $c_synchronization = Video::where('status', Video::STATUS_SYNCHRONIZATION)->count();
+            $c_translation = Video::where('status', Video::STATUS_TRANSLATION)->count();
+            $c_proofreading = Video::where('status', Video::STATUS_PROOFREADING)->count();
+            $c_scheduled = Video::where('status', Video::STATUS_SCHEDULED)->count();
+            $c_published = Video::where('status', Video::STATUS_PUBLISHED)->count();
+
+            $videos = Video::latest('updated_at')->take(8)->get();
+
+            return view('medias.videos.overview', compact('admins', 'videos',
+                'c_transcription', 'c_synchronization',
+                'c_translation', 'c_proofreading',
+                'c_scheduled', 'c_published'));
         }
 	}
 
