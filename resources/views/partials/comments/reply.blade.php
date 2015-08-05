@@ -4,7 +4,7 @@
         <div class="comment-text">
             <div class="comment-heading">
                 <a href="{{ url('users/'.$comment->user->id) }}" target="_blank"
-                   title="{{$comment->user->getName()}}">{{ $comment->user->getName() }}</a> <span>comentou</span>
+                   title="{{$comment->user->getName()}}">{{ $comment->user->getName() }}</a> <span>{{ $comment->created_at->diffForHumans() }}</span>
             </div>
             {{ $comment->body }}
         </div>
@@ -16,7 +16,6 @@
                 {!! Html::decode(Form::button('<i class="fa fa-times"></i>Remover</a>', array('class' => 'btn btn-xs btn-none', 'type' => 'submit'))) !!}
             {!! Form::close() !!}
             </span>
-            <span class="pull-right"> {{-- Helpers::time_elapsed_string($comment->created_at) --}}</span>
             @endif
         </div>
     </div> <!-- / .comment-body -->
